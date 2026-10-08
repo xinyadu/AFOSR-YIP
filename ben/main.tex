@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{fontspec}
+\IfFileExists{ben/fonts/EBGaramond-Regular.ttf}
+  {\def\benfontpath{ben/fonts/}}
+  {\def\benfontpath{fonts/}}
+\setmainfont{EBGaramond-Regular.ttf}[
+  Path=\benfontpath,
+  BoldFont=EBGaramond-Bold.ttf,
+  ItalicFont=EBGaramond-Italic.ttf,
+  BoldItalicFont=EBGaramond-BoldItalic.ttf
+]
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{needspace}
+
+\onehalfspacing
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.0\baselineskip}{0.35\baselineskip}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{0.7\baselineskip}{0.25\baselineskip}
+\setlength{\bibsep}{0.5\baselineskip}
+\emergencystretch=1em
+\brokenpenalty=10000
+\clubpenalty=10000
+\widowpenalty=10000
+\hypersetup{pageanchor=false}
+\hypersetup{pdftitle={Faithful and Verifiable Reasoning in Language Models},pdfauthor={Xinya Du}}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{0.9in}
+{\Large\bfseries Faithful and Verifiable Reasoning\\in Language Models\par}
+\vspace{0.45in}
+{\large AFOSR FY27 Young Investigator Program White Paper\par}
+\vspace{0.5in}
+\end{center}
+
+\noindent\textbf{NOFO:} FA955026S0003\par
+\noindent\textbf{Research discipline:} Computational Cognition and Machine Intelligence\par
+\noindent\textbf{Program Officer:} Dr. Ben Robinson, AFOSR/RESC\par
+\vspace{0.3in}
+\noindent\textbf{Principal Investigator:} Xinya Du\par
+\noindent Assistant Professor, Department of Computer Science\par
+\noindent The University of Texas at Dallas\par
+\noindent\textbf{Email:} \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu}\par
+\noindent\textbf{Telephone:} +1 (972) 883-2634\par
+\vspace{0.3in}
+\noindent\textbf{Project duration:} 36 months\par
+\noindent\textbf{Estimated funding:} \$450,000 total (\$150,000 per year)\par
+\vfill
+\end{titlepage}
+
+\setcounter{page}{1}
+\hypersetup{pageanchor=true}
+
+\section*{1. Research Problem and Central Idea}
+
+A language model can give the right answer for the wrong reason. It may combine unsupported facts, overlook a condition, or provide an explanation that does not account for its answer \citep{chen2025reasoning}. Consider a report stating that a sensor failed before a power outage. Attributing that failure to the later outage conflicts with the reported order of events. A useful reasoning system should expose the conflict and reconsider its conclusion if the timing is corrected. The timing can rule out an explanation; it cannot by itself establish the cause.
+
+This project asks: \emph{How can a reasoning system justify a conclusion and revise it when its evidence changes?} We will represent an argument as linked premises and inference steps. Each premise will identify its source; each step will identify its rule. The system will derive an accepted answer from this checked argument and produce a readable explanation of the same derivation.
+
+Our central hypothesis is that making dependencies and uncertainty explicit will reduce unsupported conclusions and the cost of revising them, while retaining useful answer coverage under a fixed checking budget. Coverage means the fraction of questions the system answers instead of withholding a conclusion. Natural-language reports provide a demanding setting because their meaning can be incomplete or ambiguous.
+
+\textbf{Research foundation and new contribution.} The PI has developed methods that use extracted relations to guide reasoning \citep{li2023structured}, interpret explanations as logical structures \citep{han2023clore}, identify errors within reasoning steps \citep{li2025fgprm}, and balance accuracy with reasoning length \citep{li2025aalc}. Existing approaches derive answers with symbolic solvers, track which assumptions support a conclusion, or control error by withholding answers \citep{lyu2023faithful,pan2023logiclm,dekleer1986atms,lee2024selective}. We will study how uncertain evidence and shared dependencies change the verification needed to accept or revise a conclusion. We seek principles governing this reliability-cost relationship.
+
+\section*{2. Research Aims and Technical Approach}
+
+\subsection*{Aim 1: Make the basis of a conclusion explicit}
+
+We will construct a representation that separates source statements, assumptions, and derived conclusions. A language model will propose interpretations of evidence and candidate reasoning steps. Semantic checks will compare premises with their source passages in context; deterministic rule checks will assess whether an inference follows from its premises. The initial scope will be finite, rule-based problems involving entity relations, event order, and conditional rules. This scope allows precise definitions of a valid argument while retaining meaningful challenges in interpreting text.
+
+The representation will preserve source passages, entity identities, temporal conditions, and candidate interpretations. Assumptions and missing evidence will remain explicit. Contradictory source statements will remain separate until their conflict is resolved. If retained interpretations produce different conclusions, the system will report that dependence or seek additional evidence. We will measure how often candidate generation omits the correct interpretation. The final answer will be computed from the accepted derivation; its explanation will identify the same premises and steps.
+
+Two questions guide this aim: Which aspects of a source statement must be preserved to prevent an invalid inference? How can a representation remain compact without hiding assumptions or alternative support? We will begin with a fixed rule library and manually validated examples, then extend to evidence extracted from documents. Type checks, temporal consistency checks, and review of source-to-premise mappings will isolate representation errors from inference errors.
+
+For the restricted rule system, we will establish conditions under which checker acceptance implies that a conclusion follows from the recorded premises. A valid derivation can still start from an inaccurate interpretation or an incorrect report. We will therefore evaluate source interpretation separately and define support relative to the supplied evidence. Faithfulness here means that the accepted answer follows its disclosed argument. The argument explains the system's decision without claiming to expose every computation inside the language model.
+
+\subsection*{Aim 2: Determine what can be trusted within a checking budget}
+
+Checking every premise and every possible argument can be expensive. Checking one uncertain event time, for example, may resolve several downstream inferences. We will start with finite argument graphs without cycles, where a premise may support several steps and a conclusion may have several derivations. Checks will range from consistency tests to reading additional source context or testing an alternative interpretation. Each will have a measured cost and return supported, contradicted, or unresolved. We will formalize how to choose checks to maximize answer coverage within a budget and a target error rate among accepted answers.
+
+We will distinguish logical validity from uncertainty in the premises. For a fixed argument, sound inference rules establish the first property. For the second, we will estimate source-interpretation error using held-out, human-validated data and study how it affects the risk of accepting an unsupported conclusion. Shared premises can make errors across steps dependent; adaptive selection of an argument can also bias confidence estimates. Our analysis will account for these effects rather than multiply step scores as though they were independent.
+
+We will derive conservative error bounds under explicit calibration assumptions. Calibration tests whether estimated confidence agrees with observed correctness. Initial statistical bounds will assume independently sampled calibration and test cases from the same distribution, with the checking policy fixed before calibration. Validation will cover the full premise-selection procedure, including omitted interpretations, and group statements from the same source. We will study when validating an existing derivation is more efficient than seeking alternative support. Analysis will identify graph structures that permit efficient check allocation, limits for more general structures, and the validation sample size needed for the bounds.
+
+The resulting policy will choose among premise validation, checking another derivation, and withholding a conclusion. A learned model may estimate the value of a check; acceptance will follow the validity and uncertainty criteria. The main risk is that conservative bounds lead to excessive abstention. We will begin with chains and sparse graphs, then test how branching and shared sources affect the reliability-cost tradeoff. Distribution changes will be tested separately, with guarantees limited to their stated assumptions. An unresolved result will identify the premises or competing interpretations that still need checking.
+
+\subsection*{Aim 3: Repair arguments when their evidence changes}
+
+Evidence may be corrected, withdrawn, or contradicted by a later report. We will track which conclusions depend on each premise and reconsider the affected arguments. A conclusion will be withdrawn when its support fails unless another accepted derivation remains. Repairs will be checked against the current evidence and rule library; the system will not be allowed to make an argument pass by changing its premises without a source or weakening the rule it violated.
+
+The research question is how to combine dependency tracking with uncertainty and limited search. Classical truth maintenance supplies the dependency machinery. We will extend this foundation to source-linked premises whose interpretations may change, and study how to choose between resolving an ambiguity, finding alternative support, and revising the conclusion. Analysis will bound update cost in terms of the affected argument structure and search budget. Local repair requires identifying changed sources and all recorded dependents; we will characterize when broader recomputation is necessary.
+
+We will also train models to propose better repairs using verified examples and deliberately corrupted arguments. Corruptions will include reversed event order, changed entity identities, missing conditions, and unsupported premises. Feedback will identify the failed step and its affected conclusions, extending the PI's fine-grained supervision work to dependency-aware repair. A fixed search budget will ensure termination; success will require a newly checked argument, otherwise the system will return an unresolved result. We will measure whether this supervision improves repair of unfamiliar rule combinations without introducing new unsupported steps.
+
+\section*{3. Evaluation and Measures of Success}
+
+Evaluation will connect controlled problems with real document evidence. We will generate finite rule-based cases with known valid derivations and controlled changes in depth, branching, shared premises, missing evidence, and contradictions. Independent checks will validate the correspondence between generated text and its underlying facts. The PI's MEQA benchmark provides event-centered questions and multi-step explanations for document-based evaluation \citep{li2024meqa}. We will add human-reviewed evidence corrections and ambiguous cases to test revision and abstention.
+
+Baselines will include direct language-model reasoning, FG-PRM step scoring, solver-based reasoning, selective generation, and truth maintenance with complete or uniform checking. Repair will also be compared with complete recomputation. We will match models, evidence access, and total computation, counting candidate generation, checking, and repair. Systems that can withhold answers will be compared at matched coverage. We will measure premise-extraction accuracy and inference validity separately.
+
+The main measurements will be unsupported-conclusion rate, inference validity, answer accuracy and coverage, error-localization accuracy, repair success, errors introduced by repair, and computation required. An unsupported conclusion is one lacking a valid derivation from premises faithful to the supplied evidence. We will remove or alter necessary premises in cases with known dependencies and score cases with alternative valid support separately. This will test whether changing the disclosed evidence changes the accepted answer as required.
+
+Success will mean lower unsupported-conclusion rates at matched coverage and cost, and lower update cost when a small part of the evidence changes. We will report uncertainty intervals and ablations separating the value of dependency tracking, uncertainty estimates, and learned repair. Held-out rule compositions and document sources will assess generalization. Experiments will test the formal bounds and identify where they become too conservative.
+
+\section*{4. Relevance, Team, and Development Plan}
+
+This work addresses the Computational Cognition and Machine Intelligence portfolio's interests in interpretable foundations, formal verification, uncertainty, and time-to-completion bounds for neural and symbolic systems. The Air Force and Space Force must reason from incomplete reports and changing information under resource constraints. Methods that expose supporting premises, revise dependent conclusions, and explain unresolved uncertainty could improve future analysis and autonomous decision support.
+
+PI Xinya Du will lead the project at UT Dallas with graduate and undergraduate research students. No external collaborators or subawards are planned. The three-year budget is estimated at \$450,000, including institutional indirect costs. Support will cover research personnel, computation, evidence annotation, and dissemination.
+
+\textbf{Year 1} will establish the representation and rule library, analyze conditional validity, and build evaluation sets. \textbf{Year 2} will develop budget-aware checking and derive error, computational, and sample-size bounds for the initial graph classes. \textbf{Year 3} will evaluate repair, generalization, and distribution changes. Deliverables include reproducible code, datasets, checker specifications, research publications, and conference presentations.
+
+\clearpage
+\setlength{\bibsep}{0pt}
+\bibliographystyle{abbrvnat}
+\IfFileExists{ben/references.bib}
+  {\bibliography{ben/references}}
+  {\bibliography{references}}
+
+\end{document}
