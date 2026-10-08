@@ -9,6 +9,8 @@ Two research directions are developed in this repository.
 
 Doug's paper remains in the root for the existing Overleaf setup. Ben's paper has its own bibliography and bundled Garamond fonts.
 
+For a plain-language explanation of Ben's three aims, their connection to the PI's prior work, and the scope of the theoretical analysis, see the [research guide](ben/README.md).
+
 ## Compile Ben's paper
 
 From the repository root:
