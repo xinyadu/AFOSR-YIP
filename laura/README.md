@@ -2,7 +2,7 @@
 
 **Interactive Peer Evaluation for Calibrated Trust in AI Advisers**
 
-The paper is in [white_paper.pdf](white_paper.pdf); the editable source and bibliography are [main.tex](main.tex) and [references.bib](references.bib). The [revision response](revision_response.md) explains how the uploaded review was addressed and which author confirmations remain. This guide is supplementary material for the PI, not part of the white-paper narrative.
+The paper is in [white_paper_laura.pdf](white_paper_laura.pdf); the editable source and bibliography are [main.tex](main.tex) and [references.bib](references.bib). The [revision response](revision_response.md) explains how the uploaded review was addressed and which author confirmations remain. This guide is supplementary material for the PI, not part of the white-paper narrative.
 
 ## The idea in plain language
 
@@ -68,6 +68,6 @@ From the repository root:
 latexmk -xelatex -cd -interaction=nonstopmode -halt-on-error -outdir=build laura/main.tex
 ```
 
-The output is `laura/build/main.pdf`; the reviewed distribution copy is `laura/white_paper.pdf`. In Overleaf, select `laura/main.tex` and XeLaTeX. The source reuses the Garamond fonts already bundled in `ben/fonts/`, resolving their path from either the repository root or the `laura/` directory.
+The output is `laura/build/main.pdf`; the reviewed distribution copy is `laura/white_paper_laura.pdf`. In Overleaf, select `laura/main.tex` and XeLaTeX. The source reuses the Garamond fonts already bundled in `ben/fonts/`, resolving their path from either the repository root or the `laura/` directory.
 
 The revised draft has a cover, five narrative pages, and references. It uses 12-point Garamond, 1.5-line spacing, one-inch margins, and US Letter paper, following the [FY27 YIP notice](https://files.simpler.grants.gov/opportunities/c342c01d-4f34-440f-8bb2-4bdd4d763df0/attachments/84ad5127-ad85-4495-8277-01179ad54902/FA955026S0003FY27YIPFINAL.pdf). The estimated budget is subject to institutional confirmation. Attach the PI's current CV for a formal submission. The cover currently acknowledges separate **drafts** for Ben Robinson and Doug Riecken; the PI must confirm the actual submission set and update this disclosure before submission, as the notice requires multiple submissions to acknowledge each other. This repository update does not submit the paper or contact the Program Officer.

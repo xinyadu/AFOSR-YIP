@@ -2,7 +2,7 @@
 
 **Neural-Symbolic Verification and Refinement of LLM-Generated Scientific Claims**
 
-- [PDF](white_paper.pdf)
+- [PDF](white_paper_doug.pdf)
 - [LaTeX source](main.tex)
 - [Bibliography](references.bib)
 - [Review decisions and citation rationale](REVISION_NOTES.md)

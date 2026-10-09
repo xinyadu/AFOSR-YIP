@@ -4,9 +4,9 @@ Three research directions are developed in this repository.
 
 | Program Officer | Research direction | LaTeX source | PDF |
 | --- | --- | --- | --- |
-| Doug Riecken | Neural-symbolic verification and refinement of scientific claims | [doug/main.tex](doug/main.tex) | [Doug white paper](doug/white_paper.pdf) |
-| Ben Robinson | Faithful and verifiable reasoning with uncertain, changing evidence | [ben/main.tex](ben/main.tex) | [Ben white paper](ben/white_paper.pdf) |
-| Laura Steckman | Interactive peer evaluation for calibrated trust in AI advisers | [laura/main.tex](laura/main.tex) | [Laura white paper](laura/white_paper.pdf) |
+| Doug Riecken | Neural-symbolic verification and refinement of scientific claims | [doug/main.tex](doug/main.tex) | [Doug white paper](doug/white_paper_doug.pdf) |
+| Ben Robinson | Faithful and verifiable reasoning with uncertain, changing evidence | [ben/main.tex](ben/main.tex) | [Ben white paper](ben/white_paper_ben.pdf) |
+| Laura Steckman | Interactive peer evaluation for calibrated trust in AI advisers | [laura/main.tex](laura/main.tex) | [Laura white paper](laura/white_paper_laura.pdf) |
 
 Each paper has its own folder and bibliography: `doug/`, `ben/`, and `laura/`. Ben's and Laura's folders also contain reviewed PDFs and research guides. Laura's source reuses the Garamond fonts bundled in `ben/fonts/`.
 
@@ -36,7 +36,7 @@ Laura:
 latexmk -xelatex -cd -interaction=nonstopmode -halt-on-error -outdir=build laura/main.tex
 ```
 
-The compiled files are `doug/build/main.pdf`, `ben/build/main.pdf`, and `laura/build/main.pdf`. The reviewed distribution copies are `doug/white_paper.pdf`, `ben/white_paper.pdf`, and `laura/white_paper.pdf`.
+The compiled files are `doug/build/main.pdf`, `ben/build/main.pdf`, and `laura/build/main.pdf`. The reviewed distribution copies are `doug/white_paper_doug.pdf`, `ben/white_paper_ben.pdf`, and `laura/white_paper_laura.pdf`.
 
 In Overleaf, select **`doug/main.tex` with XeLaTeX**, **`ben/main.tex` with XeLaTeX**, or **`laura/main.tex` with XeLaTeX**. All sources resolve their bibliography when compiled from the repository root or their own folder. Update Overleaf's main-document setting to the desired file after syncing.
 

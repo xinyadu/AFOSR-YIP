@@ -1,6 +1,6 @@
 # Ben Robinson white paper: research guide
 
-This guide explains the research plan for discussion and development. The submission draft is [white_paper.pdf](white_paper.pdf), with editable source in [main.tex](main.tex).
+This guide explains the research plan for discussion and development. The submission draft is [white_paper_ben.pdf](white_paper_ben.pdf), with editable source in [main.tex](main.tex).
 
 ## The central idea
 
