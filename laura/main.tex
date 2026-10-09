@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{fontspec}
+\IfFileExists{ben/fonts/EBGaramond-Regular.ttf}
+  {\def\laurafontpath{ben/fonts/}}
+  {\def\laurafontpath{../ben/fonts/}}
+\setmainfont{EBGaramond-Regular.ttf}[
+  Path=\laurafontpath,
+  BoldFont=EBGaramond-Bold.ttf,
+  ItalicFont=EBGaramond-Italic.ttf,
+  BoldItalicFont=EBGaramond-BoldItalic.ttf
+]
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage{needspace}
+
+\onehalfspacing
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{0.9\baselineskip}{0.3\baselineskip}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{0.6\baselineskip}{0.2\baselineskip}
+\setlength{\bibsep}{0pt}
+\emergencystretch=1em
+\brokenpenalty=10000
+\clubpenalty=10000
+\widowpenalty=10000
+\hypersetup{pageanchor=false}
+\hypersetup{pdftitle={Interactive Peer Evaluation for Calibrated Trust in AI Advisers},pdfauthor={Xinya Du}}
+
+\begin{document}
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{0.9in}
+{\Large\bfseries Interactive Peer Evaluation for\\Calibrated Trust in AI Advisers\par}
+\vspace{0.45in}
+{\large AFOSR FY27 Young Investigator Program White Paper\par}
+\vspace{0.5in}
+\end{center}
+
+\noindent\textbf{NOFO:} FA955026S0003\par
+\noindent\textbf{Research discipline:} Trust and Influence\par
+\noindent\textbf{Program Officer:} Dr. Laura Steckman, AFOSR/RESC\par
+\vspace{0.3in}
+\noindent\textbf{Principal Investigator:} Xinya Du\par
+\noindent Assistant Professor, Department of Computer Science\par
+\noindent The University of Texas at Dallas\par
+\noindent\textbf{Email:} \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu}\par
+\noindent\textbf{Telephone:} +1 (972) 883-2634\par
+\vspace{0.3in}
+\noindent\textbf{Project duration:} 36 months\par
+\noindent\textbf{Estimated funding:} \$450,000 total (\$150,000 per year)\par
+\vfill
+\end{titlepage}
+
+\setcounter{page}{1}
+\hypersetup{pageanchor=true}
+
+\section*{1. Research Problem and Central Idea}
+
+When several AI systems endorse the same answer, a user may reasonably expect more support than one system can provide. Yet those systems may repeat the same mistake. Consider three advisers that report a shipment has arrived. All cite summaries derived from one outdated notice; a revised log records a delay. Three endorsements therefore provide less corroboration than they appear to. Asking each adviser which dated source supports its claim could expose the problem. Whether a person uses that information appropriately is a separate question.
+
+This project asks: \emph{When does agreement among AI evaluators provide useful evidence for human reliance, and when can targeted interaction reveal that the agreement is misleading?} We will develop evaluation methods that account for shared errors, choose diagnostic follow-up questions, and test how people use the resulting assessments. Our central hypothesis is that the value of peer evaluation depends on the additional evidence it supplies beyond agreement, and that making this distinction visible helps users adjust reliance after both successes and failures.
+
+We distinguish three concepts. \textbf{Reliability} is the measured quality of advice on a specified task. \textbf{Trust} is a person's expectation that the adviser will help, measured through reported beliefs. \textbf{Reliance} is the decision to use its advice. Following work on appropriate reliance \citep{schemmer2023appropriate}, we will measure beneficial acceptance of correct advice and resistance to incorrect advice separately. Higher reported trust or more frequent agreement with AI will not by itself establish improvement.
+
+\textbf{Foundation and scientific gap.} The PI's PRD method aggregates peer models' pairwise judgments through iterative ranking and studies discussion between evaluators \citep{li2024prd}. IQA-EVAL generates and assesses multi-turn question-answering interactions, with persona-based evaluation agents validated against human ratings \citep{li2024iqa}. These supply complementary starting points: combining imperfect judgments and testing an adviser through interaction. Neither result establishes that peer scores are probabilities of correctness or that simulated users reproduce human trust.
+
+Related research documents correlated model errors and the limits of evaluation panels \citep{kim2025correlated,kohli2026nine}. Human-AI studies show that explanations and interaction design affect reliance, with persistent errors even in cooperative question answering \citep{bucinca2021trust,gor2026wheel}. Our contribution will be to connect these problems: model the evidence contributed by an evaluation panel, intervene through diagnostic questions, and test whether people distinguish informative corroboration from repeated endorsement. The outcome is a theory and evaluation framework for this distinction, supported by computational and behavioral experiments.
+
+\section*{2. Research Aims and Technical Approach}
+
+\subsection*{Aim 1: Estimate what peer agreement actually tells us}
+
+We will extend PRD from relative model ranking to assessing particular advice. Evaluators will first judge candidate answers independently, with identities hidden and answer order randomized, and record supporting passages and unresolved objections. We will retain these initial judgments before any discussion so that later agreement can be distinguished from initial corroboration.
+
+On independently adjudicated development cases, a regularized statistical model will separate reviewer skill, task difficulty, and shared source effects. A starting method will adjust peer weights using these estimates and group endorsements that rely on the same source. This separates an evaluator's demonstrated judging ability from its rank as an answer generator. Source overlap is observable evidence of dependence; different model names or prompts will not be treated as proof of independence. We will compare these adjustments with unmodified PRD, majority vote, the best single judge selected on development data, and a supervised aggregator given the same labels.
+
+The output will combine an estimated probability that the advice is correct and supported by the supplied documents with its evidence and unresolved concerns. Calibration will use data separate from both method development and final testing. In the shipment example, three references to one notice will be distinguished from support drawn from separately checked records. Controlled source duplication and measured model errors will test when this distinction improves assessment. Without suitable reference judgments, agreement can support a relative comparison but cannot establish absolute correctness. Tests on new topics will assess where calibration fails and additional human checking is needed. The research question is how much independent checking is needed before a panel's agreement becomes a useful reliability signal.
+
+\subsection*{Aim 2: Ask questions that reveal weaknesses in the advice}
+
+We will extend IQA-EVAL's interaction generator to select short diagnostic exchanges. Candidate questions will request a precise supporting passage, challenge an apparent contradiction, or ask whether a newer record changes the answer. In the shipment example, the useful question concerns the date and source of the arrival claim. A request to explain the same answer more fluently may add no evidence.
+
+The system will select up to three follow-up questions using estimated error-detection value and interaction cost. Randomized trials of a finite set of question types on development cases will estimate which checks work for each failure type; fixed scripts and random selection provide baselines. Reference labels will remain hidden during evaluation. We will score the original advice and any revision separately: detecting an error, correcting it, and persuading another evaluator are different outcomes.
+
+We hypothesize that questions seeking new, relevant evidence will expose shared mistakes more effectively than requests for additional agreement. Comparisons will include independent peer judgments, ordinary peer discussion, extra samples from one model, and targeted questions with the same available documents and matched computational budgets. The evaluation record will state what was checked, which answer changed, and what remains unresolved. We will also measure damage from inappropriate challenges, including correct advice changed to an incorrect answer. IQA-EVAL agents will help develop interactions; human experiments in Aim 3 will test their consequences for trust and reliance.
+
+\subsection*{Aim 3: Explain how evaluation evidence changes human reliance}
+
+We will conduct two preregistered online studies using short document-based decisions with independently established answers. Participants will first give their own answer and confidence, then review AI advice and an evaluation record before deciding again. This permits measurement of reliance when the person and adviser initially disagree, rather than inferring reliance from a correct final answer alone.
+
+\textbf{Study 1: Agreement versus corroboration.} We will vary shared versus separately sourced support and randomly assign participants to three displays: an endorsement count, a calibrated reliability estimate, and the same estimate accompanied by checked sources and unresolved objections. Advice content, correctness balance, panel size, and allocated reading time will be matched across display conditions. A targeted contrast will hold the advice, endorsements, and numerical estimate fixed while revealing that endorsements reuse one source. Comprehension checks will test whether participants recognize the dependence. This isolates the behavioral effect of disclosure from improvements in the advice itself. We predict that disclosure will reduce harmful adoption of shared errors without a comparable loss of beneficial adoption of well-supported advice.
+
+\textbf{Study 2: Updating after errors.} Across repeated decisions, participants will receive feedback about outcomes. After a disclosed failure, we will compare a corrected answer alone with the same correction plus the diagnostic evidence that led to it. Subsequent cases will include both recurrence of the failure type and unrelated reliable advice. We will test whether the evidence supports selective adjustment rather than indiscriminate acceptance or rejection of the adviser. An initial planning range is 200--300 participants per study; pilot-based power simulations for the primary contrasts will determine final sample sizes.
+
+A sequential behavioral model will predict reliance from prior outcomes, self-confidence, estimated advice reliability, and perceived independent corroboration. Competing accounts will treat endorsements as separate votes or discount their common sources. Their predictions will be compared on held-out participants and tasks against models based only on agreement counts or past accuracy. The key test is whether dependence and diagnostic evidence explain reliance beyond these simpler accounts. Brief trust ratings and forecasts of adviser accuracy will measure beliefs separately from choices. Randomized displays support causal tests of interventions; associations involving reported beliefs will not alone establish a causal mechanism.
+
+\Needspace{7\baselineskip}
+\section*{3. Evaluation, Feasibility, and Expected Outcomes}
+
+Computational evaluation will start with bounded evidence dossiers for scheduling and report reconciliation, including outdated records, duplicated sources, and unresolved conflicts. Human reviewers will establish answers and evidence support without seeing evaluator identities or conditions. Ambiguous cases will be retained as unresolved rather than assigned artificial ground truth. Held-out documents, topics, and evaluator combinations will test transfer. We will report calibration error, error-detection precision and recall, harmful revisions, abstention, and total cost, including all model calls and checks. Reliability comparisons will match the fraction of cases receiving an assessment. Separate label-budget curves will show the cost of external calibration.
+
+Human evaluation will report beneficial adoption when the initial human answer is wrong and AI advice is correct, and harmful adoption when the human is right and AI advice is wrong. Cases where both are wrong will be analyzed separately. Final accuracy, time, workload, and reported trust will complement these measures. Analyses will account for repeated observations by participant and task, report uncertainty intervals, and preregister primary contrasts. We will distinguish controlled diagnostic cases from tests at the observed error prevalence. Participant studies will undergo institutional review and use informed consent. Failure to improve reliance despite improved automated assessment is an informative result about the limits of communicating evaluation evidence.
+
+PI Xinya Du will lead the work with graduate researchers at UT Dallas. The proposed three-year budget of \$450,000, including indirect costs, supports personnel, computation, annotation, participant compensation, and dissemination. The PI will seek consultation on behavioral study design and power analysis before confirmatory data collection. \textbf{Year 1} will establish the reference cases, dependence measurements, and calibrated peer assessments. \textbf{Year 2} will develop diagnostic interactions and conduct Study 1. \textbf{Year 3} will conduct Study 2 and test transfer of the computational and behavioral models. PeerEval can provide the experimental interface; the research contribution will be the methods and findings rather than the interface itself.
+
+The project addresses the Trust and Influence portfolio's interests in dynamic evaluation of human-agent teams, drivers of trust, and joint performance. For the Air Force and Space Force, the motivating need is to judge AI-assisted interpretations of incomplete or conflicting reports. Expected outcomes are testable accounts of how corroboration affects reliance, algorithms for interactive peer evaluation, and reusable tasks and study protocols. These would help establish when automated evaluation usefully supports human judgment and when additional independent evidence is necessary.
+
+\clearpage
+\bibliographystyle{abbrvnat}
+\IfFileExists{laura/references.bib}
+  {\bibliography{laura/references}}
+  {\bibliography{references}}
+
+\end{document}
