@@ -130,6 +130,8 @@ The project will progress over three years. \textbf{Year 1} will develop the cla
 
 \clearpage
 \bibliographystyle{plainnat}
-\bibliography{references}
+\IfFileExists{doug/references.bib}
+  {\bibliography{doug/references}}
+  {\bibliography{references}}
 
 \end{document}
