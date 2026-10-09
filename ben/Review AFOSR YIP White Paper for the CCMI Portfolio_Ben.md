@@ -1,6 +1,6 @@
 # Review: AFOSR YIP White Paper for the CCMI Portfolio
 
-Oct 9, 2026 · @Xinya Du
+Oct 9, 2026 · @Xinya Du from @Claude
 
 ## Overall assessment
 
