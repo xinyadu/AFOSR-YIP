@@ -25,8 +25,6 @@ latexmk -xelatex -cd -interaction=nonstopmode -halt-on-error -outdir=build doug/
 
 The narrative uses 12-point Garamond, 1.5 spacing, US Letter, and one-inch margins. The reviewed PDF has a cover, five narrative pages, and references. The PDF does not include the PI's CV.
 
-The root README may still describe the older pdfLaTeX setup for Doug; these instructions apply to this revision.
-
 ## Before formal submission
 
 Confirm the institutional budget and contact information, attach the current CV, and ensure the related-white-paper acknowledgment reflects the papers actually submitted. The cover currently describes the other papers as prepared, without asserting completed submission.
