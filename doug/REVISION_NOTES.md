@@ -59,3 +59,34 @@ No invented collaborators or unresolved placeholders appear in the paper. Confir
 
 Added: `riecken1994remembering`, `mccarthy2002diversity`, `chern2023factool`, `dong2025scievent`, `nasaState`, `lu2023scitab`, `li2025fgprm`, `yang2024hypotheses`.
 Corrected: `du2026autoverifier` authors. Full entries are in `references.bib`.
+
+# Final review, round 2 — October 9, 2026
+
+Reviewed `final_comment.md` against the current upstream draft. Changes are confined to Doug's folder.
+
+1. **Distinct from CCMI:** moved the boundary into related work, emphasizing scientific principles, applicability, units, variable bindings, and composition across calculation and constraints. The figure now names typed failures. Paired condition-change cases lead the evaluation. Removed the redundant distinction from impact.
+2. **Prior work:** added compositional modeling, ProgramFC, and SatLM, checked against primary sources. Explicit operating assumptions are not claimed as new. The ProgramFC baseline is explicitly an adaptation using the same scientific tools, not a claim that the original system implemented our scientific checks.
+3. **Evidence and difficulty:** added SciBench and MathTrap, with no numerical claims. Explicitly characterized these as earlier findings motivating contemporary tests, not evidence of current frontier-model error rates. Highlighted conditions in other passages or established by earlier checks. Omitted unsupported pilot results and the optional propulsion-domain change. Did not treat a steel tank as automatically rigid: material alone would not justify that inference.
+4. **Riecken attribution:** separated the 1994 architecture's diversity of reasoning from the 2002 paper's discussion of method suitability.
+5. **PI foundation:** added first-author GTT template-filling work and identified SciEvent as co-authored. Used gender-neutral wording.
+6. **Title and cover:** adopted “When Does a Scientific Calculation Apply? Condition-Aware Verification of LLM-Generated Scientific Claims,” normalized NOFO to FA955026S0003, and left-aligned the acknowledgment. Retained “prepared” because actual submission status has not been supplied; changing this to “submitting” would assert an unconfirmed fact.
+7. **Benchmark:** specifies lower invalid acceptance than the strongest tool-augmented baseline at matched coverage/cost on held-out principles, with target margin and sample size fixed before testing. Year 1 explicitly evaluates the prototype on independent thermodynamic annotations.
+8. **Space and verification:** consolidated related work, removed the sanity baseline and redundant impact sentence, and compressed the Task 2 acceptance-rule discussion. XeLaTeX/BibTeX compilation passes without undefined citations or overfull boxes. Visually checked all pages. Final count: **5 narrative pages, 1 cover, 2 reference pages (8 total)**. Font size and narrative spacing are unchanged; CV is not included.
+
+## Remaining author item
+
+[AUTHOR: Confirm which companion white papers are actually being submitted. If both, replace the cover acknowledgment with: “The PI is also submitting white papers to the Computational Cognition and Machine Intelligence (Dr. Ben Robinson) and Trust and Influence (Dr. Laura Steckman) portfolios.” If fewer, list only those submissions.]
+
+This item is recorded here rather than inserting a placeholder into the otherwise complete PDF. Pilot data and the optional new domain were omitted, so they create no outstanding placeholders.
+
+## Round 2 added BibTeX entries
+
+The complete entries are in `references.bib`: `falkenhainer1991compositional`, `pan2023programfc`, `ye2023satlm`, `wang2024scibench`, `zhao2024trap`, and `du2021gtt`.
+
+Primary-source checks:
+- https://www.qrg.northwestern.edu/papers/Files/QRG_Dist_Files/QRG_1991/FalkenhainerForbus_1991_CompModeling.pdf
+- https://aclanthology.org/2023.acl-long.386/
+- https://proceedings.neurips.cc/paper_files/paper/2023/hash/8e9c7d4a48bdac81a58f983a64aaf42b-Abstract-Conference.html
+- https://proceedings.mlr.press/v235/wang24z.html
+- https://aclanthology.org/2024.emnlp-main.915/
+- https://aclanthology.org/2021.naacl-main.70/

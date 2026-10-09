@@ -40,7 +40,8 @@
 \begin{center}
 \vspace*{1.0in}
 
-{\Large\bfseries Neural-Symbolic Verification and Refinement of\\
+{\Large\bfseries When Does a Scientific Calculation Apply?\\
+Condition-Aware Verification of\\
 LLM-Generated Scientific Claims\par}
 
 \vspace{0.6in}
@@ -50,7 +51,7 @@ LLM-Generated Scientific Claims\par}
 \vspace{0.35in}
 
 \begin{tabular}{rl}
-\textbf{NOFO:} & FA9550-26-S-0003 \\
+\textbf{NOFO:} & FA955026S0003 \\
 \textbf{Research Discipline Area:} & Science of Information, Computation, Learning, and Fusion \\
 \textbf{Program Officer:} & Dr. Richard D. (Doug) Riecken \\
 \textbf{Proposer:} & Xinya Du \\
@@ -62,24 +63,24 @@ LLM-Generated Scientific Claims\par}
 \end{tabular}
 
 \vspace{0.2in}
+\end{center}
 \noindent\textbf{Related white papers:} The PI has also prepared distinct white papers for Computational Cognition and Machine Intelligence (uncertain evidence and argument revision), and Trust and Influence (human reliance on AI evaluation).\par
 \vfill
-\end{center}
 \end{titlepage}
 
 \setcounter{page}{1}
 
 \section*{Proposed Research and Motivation}
 
-A calculation can be correct while the scientific conclusion it supports is wrong. Suppose a language model reads that gas in a sealed, rigid vessel is heated from 300 K to 600 K and concludes that its volume doubles. A calculator confirms the temperature ratio of two. Yet the volume cannot change in a rigid vessel: under the ideal-gas model with fixed gas amount, pressure doubles instead. The volume--temperature relation would require constant pressure \citep{nasaState}. The failure is not arithmetic. It is a failure to establish which scientific relation applies to the described situation.
+A calculation can be correct while the scientific conclusion it supports is wrong. Suppose a language model reads that gas in a sealed, rigid vessel is heated from 300 K to 600 K and concludes that its volume doubles. A calculator confirms the temperature ratio of two. Yet the volume cannot change in a rigid vessel: under the ideal-gas model with fixed gas amount, pressure doubles instead. The volume--temperature relation would require constant pressure \citep{nasaState}. The failure is not arithmetic. It is a failure to establish which scientific relation applies to the described situation. Harder cases place the deciding condition in another passage or establish it only through an earlier check; Task 2 varies these dependencies.
 
 This project asks: \emph{How can a system establish that the conditions needed for a scientific calculation hold, and preserve those conditions as results pass between different reasoning methods?} We will develop a verifier that connects evidence in scientific text to quantitative calculations and logical checks. Each component will return both its result and the conditions under which that result is justified. The system will identify unsupported conditions, seek relevant evidence, and revise a claim only when the revised reasoning is supported.
 
-Our hypothesis is that making these conditions explicit and checking them across component boundaries will reduce false acceptance of scientific claims compared with tool execution plus a learned correctness score. The benefit may disappear if extracting conditions introduces more errors than it detects, or if conservative checks reject too many valid claims. We will test both possibilities at matched computational cost and coverage. The initial scope is quantitative claims about elementary thermodynamic and mechanical systems, expressed in short scientific passages and tables. These offer diverse reasoning needs within a manageable set of documented principles.
+Our hypothesis is that making these conditions explicit and checking them across component boundaries will reduce false acceptance of scientific claims compared with tool execution plus a learned correctness score. The benefit may disappear if extracting conditions introduces more errors than it detects, or if conservative checks reject too many valid claims. We will test both possibilities at matched computational cost and coverage. The initial scope is quantitative claims about elementary thermodynamic and mechanical systems, expressed in short scientific passages and tables. SciBench identifies assumption identification as a source of scientific reasoning errors, and MathTrap finds failures to combine known facts with conditions that invalidate standard solutions \citep{wang2024scibench,zhao2024trap}. These earlier findings motivate testing contemporary models; they do not establish their error rates.
 
-The project connects to a longstanding architectural idea: intelligence requires coordination among different representations and reasoning methods. Riecken's integrated-agent work and the architecture of diversity developed by McCarthy, Minsky, Riecken, and colleagues emphasize both this diversity and knowledge of when each method is appropriate \citep{riecken1994remembering,mccarthy2002diversity}. Our proposed contribution is a way to make the conditions for using and combining these methods explicit and testable when those conditions must be recovered from scientific sources.
+The project connects to a longstanding architectural idea: intelligence requires coordination among different representations and reasoning methods. Riecken's agent architecture combined spatial, structural, functional, temporal, and causal reasoning \citep{riecken1994remembering}; McCarthy, Minsky, Riecken, and colleagues further argued that each technique must determine whether it suits a task \citep{mccarthy2002diversity}. Our proposed contribution is a way to make the conditions for using and combining these methods explicit and testable when those conditions must be recovered from scientific sources.
 
-\textbf{Relation to current work.} FacTool uses external tools for factuality checking across tasks \citep{chern2023factool}; Logic-LM combines language interpretation with symbolic solving \citep{pan2023logiclm}. AutoVerifier organizes technical claims and cross-source evidence \citep{du2026autoverifier}. Neuro-symbolic PRM already distinguishes symbolic validity from semantic grounding and uses a learned scorer for verifier-passing steps \citep{zi2026nsprm}. We build on that distinction. The research question here concerns extracting the conditions of scientific principles, connecting them to the case being checked, and carrying unresolved conditions through a composed verification plan. Neither heterogeneous tools nor separating execution from grounding is claimed as new.
+\textbf{Relation to current work.} Classical compositional modeling represented operating assumptions and checked model behavior against them using hand-encoded domain theories \citep{falkenhainer1991compositional}. FacTool and AutoVerifier organize tool-based checking and technical evidence \citep{chern2023factool,du2026autoverifier}; ProgramFC decomposes claims into programs of specialized checks \citep{pan2023programfc}. Logic-LM and SatLM connect language-generated specifications to symbolic solvers \citep{pan2023logiclm,ye2023satlm}. Neuro-symbolic PRM already distinguishes symbolic validity from semantic grounding and scores verifier-passing steps \citep{zi2026nsprm}. Our question is how to recover conditions from scientific text, measure omitted conditions and invented restrictions, and preserve conditions across component boundaries. A companion CCMI white paper studies uncertain document evidence and argument revision; this project studies scientific principles, their applicability conditions, units, and variable bindings across calculation and constraint solving.
 
 \section*{Research Hypothesis and Technical Approach}
 
@@ -95,14 +96,14 @@ The three tasks share one object: a scientific claim linked to the evidence, pri
 \node[box] (claim) {Claim and\\source evidence};
 \node[box, right=of claim] (repr) {Principles, quantities,\\and conditions};
 \node[box, right=of repr] (verify) {Evidence, calculation,\\and constraint checks};
-\node[box, right=of verify] (refine) {Supported, contradicted,\\or unresolved};
+\node[box, right=of verify] (refine) {Source, applicability,\\binding, or execution\\failure};
 \draw[arrow] (claim) -- (repr);
 \draw[arrow] (repr) -- (verify);
 \draw[arrow] (verify) -- (refine);
 \draw[arrow] (refine.south) -- ++(0,-0.4) -| node[pos=0.25,below,font=\small]{diagnose, revise, and recheck} (repr.south);
 \end{tikzpicture}
 \vspace{2mm}
-\caption{Verification preserves the conditions behind each result. A failed or unresolved condition guides further evidence retrieval or revision.}
+\caption{Checks preserve conditions and diagnose source, applicability, binding, or execution failures to guide retrieval and correction.}
 \end{figure}
 
 \subsection*{Task 1: Recover Scientific Principles and Their Conditions}
@@ -111,7 +112,7 @@ A useful representation must preserve more than an equation. We will construct a
 
 Starting from a claim, the system will retrieve a small set of relevant scientific sources and extract only the principles needed for verification. A language model will propose the records. Type and unit checks will detect structural errors, while evidence checks will assess whether the extracted conditions and quantity bindings preserve the source's meaning. A missing condition will remain unknown rather than be silently assumed true. Conflicting sources will retain their separate conditions instead of being merged into one apparently supported rule.
 
-This extends the PI's work on structured scientific information extraction in SciEvent \citep{dong2025scievent}. The new challenge is recovering the restrictions under which extracted knowledge can be used. We will compare extracting equations alone, extracting equations with nearby qualifiers, and retrieving additional context to resolve missing conditions. Independent annotations will measure both omitted conditions and invented restrictions. Fully specified records supplied by annotators will isolate failures of extraction from failures of subsequent reasoning.
+This builds on the PI's document-level template filling \citep{du2021gtt} and co-authored scientific event extraction benchmark SciEvent \citep{dong2025scievent}. The new challenge is recovering the restrictions under which extracted knowledge can be used. We will compare extracting equations alone, extracting equations with nearby qualifiers, and retrieving additional context to resolve missing conditions. Independent annotations will measure both omitted conditions and invented restrictions. Fully specified records supplied by annotators will isolate failures of extraction from failures of subsequent reasoning.
 
 \textbf{Research question.} Which source information is necessary for a reusable principle record, and when does recovering additional context improve verification enough to justify its cost?
 
@@ -125,7 +126,7 @@ Each component will return a \emph{verification receipt}: its principle, source,
 
 The central experiment will test whether explicit exchange of conditions improves decisions beyond giving the same evidence and tools to a neural planner or a verifier-first process reward model. We will vary whether a relevant condition appears beside its equation, in another passage, or only as the conclusion of an earlier check. This tests a specific difficulty of composition: individually acceptable intermediate results may depend on incompatible operating conditions or refer to different objects or times.
 
-For finite plans, we will specify acceptance rules that preserve required conditions and prevent unresolved conditions from becoming supported during composition. Their conditional correctness is a design requirement, not a claim of scientific truth. The research will examine which source and context information must accompany intermediate results, and how failures of that interface affect end-to-end false acceptance. We will analyze restricted compositions and test the limits experimentally, without promising formal guarantees for unrestricted scientific text.
+For finite plans, we will specify acceptance rules that preserve required conditions and prevent unresolved conditions from becoming supported during composition. Conditional correctness is a design requirement; the research examines which source and context information must accompany intermediate results and how interface failures affect end-to-end false acceptance. We will analyze restricted compositions and test the limits experimentally, without promising formal guarantees for unrestricted scientific text.
 
 \textbf{Research question.} What information must specialized checkers exchange so that locally valid results support a coherent scientific conclusion?
 
@@ -141,15 +142,15 @@ The PI's FaithScore decomposes outputs for factual assessment, and FG-PRM detect
 
 \section*{Evaluation and Measures of Success}
 
-Evaluation will combine controlled cases with document-based claims. Annotators with relevant scientific training will independently construct cases from public scientific sources, including held-out principles and compositions, with valid claims and matched applicability or binding violations. The source documents will be available to every system; reference encodings and labels will remain hidden. Splits will separate principles and source documents, not merely paraphrases. Human-authored and automatically perturbed results will be reported separately. SciFact and SCITAB provide complementary tests of textual evidence and numerical table reasoning \citep{wadden2020scifact,lu2023scitab}; neither alone measures the proposed applicability problem.
+The first comparison uses paired cases that change one applicability condition while preserving the numerical calculation. Evaluation will combine controlled cases with document-based claims. Annotators with relevant scientific training will independently construct cases from public scientific sources, including held-out principles and compositions, with valid claims and matched applicability or binding violations. The source documents will be available to every system; reference encodings and labels will remain hidden. Splits will separate principles and source documents, not merely paraphrases. Human-authored and automatically perturbed results will be reported separately. SciFact and SCITAB provide complementary tests of textual evidence and numerical table reasoning \citep{wadden2020scifact,lu2023scitab}; neither alone measures the proposed applicability problem.
 
 The primary outcome is the fraction of accepted claims that are invalid, at matched coverage (the fraction accepted) and total cost, including retrieval, model calls, execution, and retries. We will also report rejection of valid claims, unresolved cases, condition-extraction accuracy, error localization, and scope-preserving correction without regression. Labels will come from independent evidence and step annotations, not the system's own judgments. Cases without sufficient information will have an unresolved reference outcome. This prevents higher abstention from masquerading as better verification.
 
-Baselines will include retrieval plus an LLM judge, tool-augmented verification without explicit conditions, verifier-first process scoring, and symbolic checking supplied with human-validated records. Self-refinement without external feedback will be a sanity baseline. Ablations will remove condition extraction, condition exchange between components, or typed repair feedback. Paired tests will change one applicability condition while preserving the numerical calculation. Success requires improved discrimination and transfer to held-out principles. We will report uncertainty intervals and failures from extraction or overly restrictive checking.
+Baselines will include retrieval plus an LLM judge, a ProgramFC-style planner adapted to the same scientific tools without explicit condition exchange \citep{pan2023programfc}, verifier-first process scoring, and symbolic checking supplied with human-validated records. Ablations will remove condition extraction, condition exchange between components, or typed repair feedback. The primary benchmark is a lower rate of invalid accepted claims than the strongest tool-augmented baseline at matched coverage and cost on held-out principles, with the target margin and sample size fixed before testing. We will report uncertainty intervals and failures from extraction or overly restrictive checking.
 
 \section*{Potential Impact on DAF and DoW Capabilities}
 
-The Science of Information, Computation, Learning, and Fusion portfolio calls for connecting data-driven extraction with knowledge-driven reasoning and integrating diverse reasoning components. The proposed work addresses these objectives by studying what makes their combined conclusions defensible. Its scope is automated scientific verification; it is distinct from the PI's CCMI concept on revising arguments from changing reports and the Trust and Influence concept on human reliance.
+The Science of Information, Computation, Learning, and Fusion portfolio calls for connecting data-driven extraction with knowledge-driven reasoning and integrating diverse reasoning components. The proposed work addresses these objectives by studying what makes their combined conclusions defensible.
 
 Motivating settings include reviewing AI-generated engineering analyses and checking whether measurements support claims under documented operating conditions. An analyst would receive the relevant source, calculation, conditions, and a specific explanation of any unsupported step. This could reduce repeated manual checking and make incorrect uses of otherwise valid principles easier to detect. The project will use public sources and unclassified document tasks; it requires neither an operational deployment nor access to restricted mission data.
 
@@ -157,7 +158,7 @@ Motivating settings include reviewing AI-generated engineering analyses and chec
 
 PI Xinya Du will lead the work at UT Dallas with graduate and undergraduate researchers. The PI's research in scientific information extraction, logical reasoning, fine-grained evaluation, and scientific hypothesis discovery provides the foundation \citep{dong2025scievent,han2023clore,li2025fgprm,yang2024hypotheses}. No external collaborators or subawards are planned. The estimated three-year budget is \$450,000 including indirect costs, supporting personnel, computation, independent annotation, and dissemination.
 
-\textbf{Year 1} will establish a small end-to-end prototype and independently annotated cases for thermodynamic relations. \textbf{Year 2} will study condition extraction and composition, using controlled failures to refine the interfaces and acceptance rules. \textbf{Year 3} will evaluate correction and transfer to held-out mechanical relations, retaining the same core representation. Deliverables include annotated test cases, principle and receipt specifications, reproducible implementations, and research publications. Expansion to additional domains or repair-model training will depend on the results of the core studies.
+\textbf{Year 1} will deliver an end-to-end prototype evaluated on independently annotated thermodynamic cases. \textbf{Year 2} will study condition extraction and composition, using controlled failures to refine the interfaces and acceptance rules. \textbf{Year 3} will evaluate correction and transfer to held-out mechanical relations, retaining the same core representation. Deliverables include annotated test cases, principle and receipt specifications, reproducible implementations, and research publications. Expansion to additional domains or repair-model training will depend on the results of the core studies.
 
 \clearpage
 \singlespacing

@@ -1,6 +1,6 @@
 # Doug Riecken white paper
 
-**Neural-Symbolic Verification and Refinement of LLM-Generated Scientific Claims**
+**When Does a Scientific Calculation Apply? Condition-Aware Verification of LLM-Generated Scientific Claims**
 
 - [PDF](white_paper_doug.pdf)
 - [LaTeX source](main.tex)
