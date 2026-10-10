@@ -94,3 +94,7 @@ Primary-source checks:
 ## Author-approved title update
 
 Restored the technical approach in the title: **Neural-Symbolic Verification of LLM-Generated Scientific Claims: When Does a Calculation Apply?** Updated the cover, README, and compiled PDF; the narrative is unchanged.
+
+## Citation framing update
+
+Removed the introductory paragraph organized around Riecken and the historical architecture connection. Task 2 now briefly mentions Minsky and colleagues (2002) to motivate method suitability and exchange of partial results, then states this project's specific problem. The 1994 Riecken paper is no longer cited in the narrative or printed bibliography; its unused BibTeX entry remains available.
