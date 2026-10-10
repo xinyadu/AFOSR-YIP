@@ -14,7 +14,7 @@
 \usepackage{setspace}
 \usepackage{microtype}
 \usepackage{titlesec}
-\usepackage[numbers,sort&compress]{natbib}
+\usepackage[authoryear,round]{natbib}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{needspace}
@@ -113,6 +113,7 @@ Baselines will include direct language-model reasoning, FG-PRM step scoring, sol
 
 Our main measure is the fraction of accepted answers supported by an invalid inference or a premise that the evidence does not justify. We will also report this fraction among \emph{correct} accepted answers, using cases where an invalid step can accidentally yield the right answer. Other measures are answer accuracy and coverage, interpretation accuracy, omission of correct readings, and repair success and cost. We will change necessary evidence and test whether conclusions change accordingly, scoring cases with other valid support separately. Success requires fewer unsupported answers at comparable coverage and cost, and cheaper correct updates than full recomputation. We will report cases where shared-source checking adds cost without improving reliability.
 
+\clearpage
 \section*{4. Potential Impact, Team, and Development Plan}
 
 \textbf{Potential impact on DAF and DoW capabilities.} Maintenance and anomaly investigations require combining reports that may be incomplete, ambiguous, or later corrected. These methods could help analysts distinguish supported explanations from possibilities, locate supporting reports and assumptions, and identify the next check needed. When a timestamp or equipment identifier is corrected, the system would show which conclusions changed and why, with links to the evidence. This basic research would establish when such updates can safely reuse earlier work and when broader review is necessary. It directly addresses the Computational Cognition and Machine Intelligence portfolio's interests in interpretable foundations, uncertainty, verification, and repair of faulty arguments.
