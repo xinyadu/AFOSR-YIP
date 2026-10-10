@@ -92,17 +92,17 @@ The three tasks use a common record linking each scientific claim to its evidenc
     box/.style={draw, rounded corners, align=center, minimum height=13mm, text width=0.20\textwidth, font=\small},
     arrow/.style={-{Latex[length=2mm]}, thick}
 ]
-\node[box] (claim) {Claim and\\source evidence};
-\node[box, right=of claim] (repr) {Principles, quantities,\\and conditions};
-\node[box, right=of repr] (verify) {Evidence, calculation,\\and constraint checks};
-\node[box, right=of verify] (refine) {Source, applicability,\\binding, or execution\\failure};
+\node[box] (claim) {Claim};
+\node[box, right=of claim] (repr) {Conditions};
+\node[box, right=of repr] (verify) {Verification};
+\node[box, right=of verify] (refine) {Diagnosis};
 \draw[arrow] (claim) -- (repr);
 \draw[arrow] (repr) -- (verify);
 \draw[arrow] (verify) -- (refine);
-\draw[arrow] (refine.south) -- ++(0,-0.4) -| node[pos=0.25,below,font=\small]{diagnose, revise, and recheck} (repr.south);
+\draw[arrow] (refine.south) -- ++(0,-0.4) -| node[pos=0.25,below,font=\small]{Revise} (repr.south);
 \end{tikzpicture}
 \vspace{2mm}
-\caption{The system records the conditions needed for each check and uses failed checks to guide further retrieval and correction.}
+\caption{Conditions guide verification; diagnosed failures guide revision.}
 \end{figure}
 
 \subsection*{Task 1: Recover Scientific Principles and Their Conditions}
