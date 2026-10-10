@@ -1,6 +1,6 @@
 # Doug Riecken white paper
 
-**When Does a Scientific Calculation Apply? Condition-Aware Verification of LLM-Generated Scientific Claims**
+**Neural-Symbolic Verification of LLM-Generated Scientific Claims: When Does a Calculation Apply?**
 
 - [PDF](white_paper_doug.pdf)
 - [LaTeX source](main.tex)

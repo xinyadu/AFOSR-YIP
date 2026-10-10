@@ -90,3 +90,7 @@ Primary-source checks:
 - https://proceedings.mlr.press/v235/wang24z.html
 - https://aclanthology.org/2024.emnlp-main.915/
 - https://aclanthology.org/2021.naacl-main.70/
+
+## Author-approved title update
+
+Restored the technical approach in the title: **Neural-Symbolic Verification of LLM-Generated Scientific Claims: When Does a Calculation Apply?** Updated the cover, README, and compiled PDF; the narrative is unchanged.
