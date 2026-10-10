@@ -27,4 +27,4 @@ The narrative uses 12-point Garamond, 1.5 spacing, US Letter, and one-inch margi
 
 ## Before formal submission
 
-Confirm the institutional budget and contact information, attach the current CV, and ensure the related-white-paper acknowledgment reflects the papers actually submitted. The cover currently describes the other papers as prepared, without asserting completed submission.
+Confirm the institutional budget and contact information and attach the current CV. The related-white-paper cover paragraph was removed at the author's request.
