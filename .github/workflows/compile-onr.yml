@@ -34,19 +34,19 @@ jobs:
             pdflatex -interaction=nonstopmode -halt-on-error main.tex
             pdflatex -interaction=nonstopmode -halt-on-error main.tex
             pdfinfo main.pdf | grep -q 'Pages: *1' || { echo "$d must fit one page"; exit 1; }
+            mv main.pdf "white_paper_${d}.pdf"
             cd ../..
           done
-      - name: Commit PDFs to main
+      - name: Commit descriptive PDFs to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ONR/predrag/main.pdf ONR/behzad/main.pdf ONR/morrison/main.pdf ONR/goolsby/main.pdf
+          git fetch origin main
+          git reset --mixed origin/main
+          for d in predrag behzad morrison goolsby; do
+            git add -A -- "ONR/$d/main.pdf" "ONR/$d/white_paper_${d}.pdf"
+          done
           if ! git diff --cached --quiet; then
-            git fetch origin main
-            git reset --mixed origin/main
-            git add ONR/predrag/main.pdf ONR/behzad/main.pdf ONR/morrison/main.pdf ONR/goolsby/main.pdf
-            if ! git diff --cached --quiet; then
-              git commit -m "Compile ONR YIP one-page PDFs"
-              git push origin HEAD:main
-            fi
+            git commit -m "Build named ONR YIP one-page PDFs"
+            git push origin HEAD:main
           fi
