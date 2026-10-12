@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage[numbers,square,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \definecolor{accent}{HTML}{233D57}
@@ -14,6 +15,7 @@
 \setlength{\parskip}{2.3pt}
 \setlist[itemize]{leftmargin=1.13em,topsep=1.5pt,itemsep=1.5pt,parsep=0pt}
 \emergencystretch=1.5em
+\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Rebecca Goolsby, Code 341 --- Analytics, Modeling and Simulation (Local and Regional)}
 \newcommand{\FocusArea}{Human and Biological Systems --- Warfighter Decision Superiority and Readiness}
@@ -38,5 +40,10 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} We will use GDELT event streams and public disaster timelines, supplemented with synthetic report sets containing known planted deception. We will measure claim-level support, timeline currency, deception susceptibility, and detection of source dependence. Baselines will include standard RAG and iterative RAG with LLM self-critique.
 \par\head{Naval relevance.} For humanitarian assistance and disaster relief in a contested littoral region, a Navy or Marine Corps staff needs an up-to-date picture of which roads, ports, and public services are functioning, even as rumors and manipulated reporting spread. This project targets the program's AI-enhanced RAG, regional situation awareness, decision tools for operations in the information environment, and exercise-supporting information reservoirs.
-\par\head{Prior work and PI qualifications.} QA-based event extraction (EMNLP 2020), FaithScore (Findings of EMNLP 2024), and FGAIF (TMLR 2025) provide foundations for event representation and fine-grained feedback. The PI received a 2024 NSF CAREER award and, as a postdoc, led system integration for the RESIN team's DARPA KAIROS delivery system, which achieved top performance among participating teams.
+\par\head{Prior work and PI qualifications.} Our QA-based event extraction \citep{du2020event}, FaithScore \citep{jing2024faithscore}, and FGAIF \citep{jing2025fgaif} provide foundations for event representation and fine-grained grounding feedback. The PI holds a 2024 NSF CAREER award and led integration of the RESIN team's DARPA KAIROS delivery system as a postdoc; the team achieved top performance among participants.
+\vspace{-2pt}
+{\footnotesize\noindent\textbf{References}\par\vspace{-5pt}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+}
 \end{document}
