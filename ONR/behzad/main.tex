@@ -1,21 +1,19 @@
 % FY27 ONR YIP informal brief topic description. Compile using pdflatex.
 % Scientific framing tailored for behzad. Morrison PO line deliberately configurable.
 \documentclass[11pt,letterpaper]{article}
-\usepackage[letterpaper,top=0.47in,bottom=0.43in,left=0.67in,right=0.67in]{geometry}
+\usepackage[letterpaper,top=0.60in,bottom=0.58in,left=0.72in,right=0.72in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
-\usepackage[authoryear,round]{natbib}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=black,urlcolor=blue]{hyperref}
 \definecolor{accent}{HTML}{233D57}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{1.3pt}
-\setlist[itemize]{leftmargin=1.13em,topsep=0.5pt,itemsep=0.5pt,parsep=0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.13em,topsep=2pt,itemsep=2pt,parsep=0pt}
 \emergencystretch=1.5em
-\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Behzad Kamgar-Parsi, Code 311 --- Artificial Intelligence / Machine Learning, Reasoning and Intelligence}
 \newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Intelligent and Collaborative Agents}
@@ -40,10 +38,6 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} MEQA and MuSiQue will test text/knowledge composition, while ScienceQA and a tool-use testbed with controlled argument errors will test multimodal grounding and corrective actions. We will measure typed-error localization, calibrated self-assessment, repair success, and task success per tool call against outcome-only training and untyped PRMs.
 \par\head{Naval relevance.} A maritime support agent combining chart imagery, arrival notices, and a tide calculation must be able to notice a wrong image reference or time conversion before recommending an action. Typed self-assessment can trigger the particular recheck required instead of either trusting a bad plan or restarting everything. The work matches this portfolio's explicit interests in reasoning under uncertainty, self-assessment, visual understanding, and integration of knowledge with planning.
-\par\head{Prior work and PI qualifications.} Our FG-PRM \citep{li2025fgprm} and HiPRAG \citep{wu2026hiprag} develop process-level feedback for reasoning and retrieval; FaithScore \citep{jing2024faithscore} and FGAIF \citep{jing2025fgaif} address visual-language grounding. The PI holds a 2024 NSF CAREER award and led integration of the RESIN team's high-performing DARPA KAIROS delivery system as a postdoc.
-\vspace{-2pt}
-{\fontsize{7.1}{7.5}\selectfont\noindent\textbf{References}\par\vspace{-8pt}
-\bibliographystyle{abbrvnat}
-\bibliography{references}
-}
+\par\head{Prior work and PI qualifications.} Our FG-PRM (\href{https://doi.org/10.18653/v1/2025.findings-emnlp.228}{\textcolor{blue}{Li et al., 2025}}) and HiPRAG (\href{https://arxiv.org/abs/2510.07794}{\textcolor{blue}{Wu et al., 2026}}) develop process-level feedback for reasoning and retrieval; FaithScore (\href{https://aclanthology.org/2024.findings-emnlp.287/}{\textcolor{blue}{Jing et al., 2024}}) and FGAIF (\href{https://openreview.net/forum?id=QhJw5CUVd7}{\textcolor{blue}{Jing and Du, 2025}}) address visual-language grounding. The PI holds a 2024 NSF CAREER award and led integration of the RESIN team's high-performing DARPA KAIROS delivery system as a postdoc.
+
 \end{document}
