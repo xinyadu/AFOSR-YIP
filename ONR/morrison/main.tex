@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage[numbers,square,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \definecolor{accent}{HTML}{233D57}
@@ -14,6 +15,7 @@
 \setlength{\parskip}{2.3pt}
 \setlist[itemize]{leftmargin=1.13em,topsep=1.5pt,itemsep=1.5pt,parsep=0pt}
 \emergencystretch=1.5em
+\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Jeffrey Morrison, Code 341 (assignment unconfirmed) --- Command Decision Making}
 \newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Intelligent and Collaborative Agents}
@@ -38,5 +40,10 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} Multi-document event corpora built from KAIROS-style scenarios and MAVEN-ERE, plus MEQA questions, will be partitioned across simulated nodes with message delay, duplication, loss, and reordering. We will compare graph agreement, query accuracy, delivery latency, and bandwidth against centralized extraction and last-writer-wins fusion.
 \par\head{Naval relevance.} During distributed maritime operations, an afloat unit and a shore command may have different reports of a port closure or a changing local security incident. Updating the shared event picture using small, question-relevant messages would support a common tactical picture even across intermittent links. The framing aligns with the Command and Control portfolio's interests in uncertain, out-of-sequence information and automated integration across information stores.
-\par\head{Prior work and PI qualifications.} QA-based event extraction (EMNLP 2020) and MEQA (NeurIPS 2024) provide foundations for converting reports into events and questions. The PI holds a 2024 NSF CAREER award on consistent event graphs and, as a postdoc, led the RESIN team's DARPA KAIROS delivery-system integration, which achieved top performance among participating teams.
+\par\head{Prior work and PI qualifications.} Our QA-based event extraction \citep{du2020event} and MEQA benchmark \citep{li2024meqa} support the text-to-event foundation. The PI holds a 2024 NSF CAREER award on consistent event graphs and led the RESIN team's DARPA KAIROS delivery-system integration as a postdoc; the team achieved top performance among participants.
+\vspace{-2pt}
+{\footnotesize\noindent\textbf{References}\par\vspace{-5pt}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+}
 \end{document}
