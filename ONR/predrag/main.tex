@@ -1,0 +1,32 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.83in]{geometry}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\pagestyle{empty}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.25em,topsep=2pt,itemsep=3pt,parsep=0pt}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\begin{document}
+\begin{center}
+{\large\bfseries Reliable Collective Reasoning and Evaluation for AI Agents\par}
+\vspace{2pt}
+{\small Xinya Du, University of Texas at Dallas \quad | \quad ONR FY27 YIP Brief Topic Description\par}
+{\small Prospective Program Officer: Dr. Predrag Neskovic}
+\end{center}
+\section*{Overview}
+AI agents increasingly solve knowledge-intensive problems through collaboration, multiple language-model evaluators, and shared reasoning. Yet apparent consensus is not equivalent to correctness: agents can rely on the same obsolete report, reproduce a common misconception, or endorse an invalid intermediate inference. Voting and unconstrained discussion can therefore amplify rather than correct a shared error.
+\par\noindent\textbf{Central research question:} How can a collection of imperfect AI agents infer reliable conclusions while distinguishing independent corroboration from correlated mistakes?
+\par We propose three connected research thrusts:
+\begin{itemize}
+\item \textbf{Evidence-grounded assessment of reasoning.} We will decompose agent outputs into checkable claims and intermediate steps, connect each claim to retrieved evidence and structured relations, and localize factual, contextual, and logical failures. We will study calibration of step-level assessments and differences in agent expertise across tasks and domains.
+\item \textbf{Dependence-aware collective inference.} We will design aggregation methods that consider evaluator expertise, task difficulty, shared sources, and correlated errors instead of treating endorsements as independent votes. Our Peer Rank and Discussion work provides a starting point, while the proposed research targets uncertainty-aware inference from evidence-bearing judgments.
+\item \textbf{Active verification and adaptive deliberation.} When agents disagree or appear spuriously unanimous, the system will select informative follow-up checks, including independent retrieval, challenges to disputed reasoning steps, and specialized tool execution. The goal is to decide when new verification changes the evidence rather than merely increasing the number of agreeing agents.
+\end{itemize}
+\noindent\textbf{Evaluation.} We will test conclusion accuracy, calibration, robustness to correlated failures, and cost on multi-document reasoning with varying source overlap, conflicting evidence, and unfamiliar tasks. We will compare against individual judges, majority voting, learned weighting, and multi-agent discussion at matched information and computation budgets.
+\par\noindent\textbf{Naval relevance and potential impact.} The underlying mathematical and computational questions concern combining heterogeneous information under uncertainty. They may support future Naval intelligence synthesis and decision support, where repeated reporting should not be mistaken for independent corroboration.
+\end{document}
