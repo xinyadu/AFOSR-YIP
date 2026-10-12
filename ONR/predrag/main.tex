@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage[numbers,square,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \definecolor{accent}{HTML}{233D57}
@@ -14,6 +15,7 @@
 \setlength{\parskip}{2.3pt}
 \setlist[itemize]{leftmargin=1.13em,topsep=1.5pt,itemsep=1.5pt,parsep=0pt}
 \emergencystretch=1.5em
+\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Predrag Neskovic, Code 311 --- Mathematical Data Science}
 \newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Machine Learning}
@@ -38,5 +40,10 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} MEQA (NeurIPS 2024), MuSiQue, and MATH will test multihop and quantitative reasoning; synthetic shared-prefix and shared-source perturbations will reveal known dependencies. We will report risk--coverage and accuracy--compute curves, calibration, and error control under held-out domains. Baselines include self-consistency and fixed-budget PRM best-of-N search.
 \par\head{Naval relevance.} On a bandwidth-limited shipboard planning assistant, a question about safe passage may be answerable after one verified check or may need escalation because every candidate draws from the same stale source. The system will decide whether another local computation or external evidence request is worth its power, time, and connectivity cost. This addresses Mathematical Data Science priorities in principled information integration and the inference--computation trade-off.
-\par\head{Prior work and PI qualifications.} FG-PRM (Findings of EMNLP 2025) supplies fine-grained synthetic-error supervision; PRD (TMLR 2024) supplies experience with imperfect model judgments; HiPRAG (ICLR 2026) studies process rewards for agentic retrieval. The PI received a 2024 NSF CAREER award and, as a postdoc, led integration of the RESIN team's DARPA KAIROS delivery system, which achieved top performance among participating teams.
+\par\head{Prior work and PI qualifications.} Our synthetic-error verifier FG-PRM \citep{li2025fgprm}, peer-judgment framework PRD \citep{li2024prd}, and hierarchical process rewards for retrieval, HiPRAG \citep{wu2026hiprag}, provide the starting point. The PI holds a 2024 NSF CAREER award and led RESIN's DARPA KAIROS delivery-system integration as a postdoc; the team achieved top performance among participants.
+\vspace{-2pt}
+{\footnotesize\noindent\textbf{References}\par\vspace{-5pt}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+}
 \end{document}
