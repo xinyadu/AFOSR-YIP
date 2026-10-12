@@ -6,6 +6,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
+\usepackage[numbers,square,sort&compress]{natbib}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \definecolor{accent}{HTML}{233D57}
@@ -14,6 +15,7 @@
 \setlength{\parskip}{2.3pt}
 \setlist[itemize]{leftmargin=1.13em,topsep=1.5pt,itemsep=1.5pt,parsep=0pt}
 \emergencystretch=1.5em
+\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Behzad Kamgar-Parsi, Code 311 --- Artificial Intelligence / Machine Learning, Reasoning and Intelligence}
 \newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Intelligent and Collaborative Agents}
@@ -38,5 +40,10 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} MEQA and MuSiQue will test text/knowledge composition, while ScienceQA and a tool-use testbed with controlled argument errors will test multimodal grounding and corrective actions. We will measure typed-error localization, calibrated self-assessment, repair success, and task success per tool call against outcome-only training and untyped PRMs.
 \par\head{Naval relevance.} A maritime support agent combining chart imagery, arrival notices, and a tide calculation must be able to notice a wrong image reference or time conversion before recommending an action. Typed self-assessment can trigger the particular recheck required instead of either trusting a bad plan or restarting everything. The work matches this portfolio's explicit interests in reasoning under uncertainty, self-assessment, visual understanding, and integration of knowledge with planning.
-\par\head{Prior work and PI qualifications.} FG-PRM (Findings of EMNLP 2025) develops synthetic process errors; HiPRAG (ICLR 2026) studies process rewards in agentic retrieval; FaithScore (Findings of EMNLP 2024) and FGAIF (TMLR 2025) study visual-language grounding and feedback. The PI holds a 2024 NSF CAREER award and led system integration for the RESIN team's high-performing DARPA KAIROS delivery system as a postdoc.
+\par\head{Prior work and PI qualifications.} Our FG-PRM \citep{li2025fgprm} and HiPRAG \citep{wu2026hiprag} develop process-level feedback for reasoning and retrieval; FaithScore \citep{jing2024faithscore} and FGAIF \citep{jing2025fgaif} address visual-language grounding. The PI holds a 2024 NSF CAREER award and led integration of the RESIN team's high-performing DARPA KAIROS delivery system as a postdoc.
+\vspace{-2pt}
+{\footnotesize\noindent\textbf{References}\par\vspace{-5pt}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+}
 \end{document}
