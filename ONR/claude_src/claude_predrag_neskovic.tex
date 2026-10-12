@@ -1,5 +1,5 @@
-% One-page brief topic description for ONR Program Officer discussion (FY27 ONR YIP).
-% Compile with XeLaTeX from this folder or the repository root:
+% Brief topic description for ONR Program Officer discussion (FY27 ONR YIP, N0001426SF004).
+% Compile with XeLaTeX from the repository root:
 %   latexmk -xelatex -cd -interaction=nonstopmode ONR/claude_src/claude_predrag_neskovic.tex
 \documentclass[11pt]{article}
 \usepackage[letterpaper,top=0.55in,bottom=0.5in,left=0.72in,right=0.72in]{geometry}
@@ -10,15 +10,15 @@
   ItalicFont=EBGaramond-Italic.ttf,BoldItalicFont=EBGaramond-BoldItalic.ttf,Numbers=Lining]
 \usepackage{microtype}
 \usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
 \definecolor{navy}{HTML}{1F3A5F}
+\usepackage[colorlinks=true,urlcolor=navy,linkcolor=navy]{hyperref}
+\usepackage{enumitem}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{3.5pt}
 \emergencystretch=2em
 \newcommand{\head}[1]{{\color{navy}\textbf{#1}}\enspace}
-\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,topsep=1pt,parsep=0pt}
+\setlist[itemize]{leftmargin=1.1em,itemsep=2pt,topsep=1.5pt,parsep=0pt}
 \hypersetup{pdftitle={When Is More Computation Worth It?},pdfauthor={Xinya Du}}
 
 % ---- Edit the Program Officer block here --------------------------------------
@@ -28,7 +28,7 @@
 
 \begin{document}
 \begin{center}
-{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} When Is More Computation Worth It? Statistical Foundations\\[1pt] for Verifier-Guided AI Reasoning under Limited Compute\par}
+{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} When Is More Computation Worth It? Statistical Foundations\\[1pt] for Aggregating Dependent AI Reasoning Traces\par}
 \vspace{3pt}
 {\small\itshape Brief topic description for Program Officer discussion \,·\, FY27 ONR Young Investigator Program (N0001426SF004)\par}
 \end{center}
@@ -40,23 +40,23 @@
 \vspace{-3pt}
 {\color{navy}\rule{\linewidth}{0.6pt}}
 
-\head{Problem.} AI reasoning systems now buy accuracy with inference-time computation: they sample many solution paths, score each step with a learned verifier (a process reward model, PRM), retrieve more evidence, or simply think longer. The decisions that matter---how to combine these signals and when to stop computing---are made by heuristics: majority vote, best-of-$N$ with a fixed $N$, the minimum or product of step scores, a fixed search depth. These rules implicitly treat samples and verifier scores as independent and calibrated. They are neither. Samples from one model repeat the same mistakes, paths conditioned on the same retrieved passage inherit its errors, and verifiers trained on one distribution are miscalibrated on another. The result is confident wrong answers or wasted computation, with no guarantee on either.
+\head{Problem.} Large language models (LLMs) answer hard questions better when they spend more computation at inference time: they sample many reasoning traces, score intermediate steps with learned verifiers, and keep the majority answer or the best-scoring trace. These rules are heuristics. They treat samples as independent, yet traces from one model share prefixes, retrieved documents, and systematic misreadings, and the verifier's mistakes are often correlated with the generator's. Suppose an onboard assistant estimates whether a ship can complete a transit on its remaining fuel, and 15 of 20 sampled traces reuse the same misread consumption rate. The vote is confidently wrong, and twenty times the computation bought little information. Current voting and stopping rules largely ignore this dependence, so they cannot say how many samples a question needs or when more computation cannot help.
 
-\head{Central question.} Given noisy, \emph{dependent}, step-level evidence about candidate reasoning processes, how should a system aggregate that evidence into a decision, and when should it stop computing---with finite-sample control of the error rate among the answers it accepts?
+\head{Central hypothesis.} Treating sampled traces and verifier scores as dependent, noisy measurements of the latent validity of shared reasoning steps will (i) make the \emph{effective number of independent traces} estimable from few labels; (ii) yield sampling, checking, and stopping rules that reach a target error rate with less computation than voting or fixed-budget best-of-\textit{N} selection; and (iii) identify when further samples cannot reduce error and an outside check is required.
 
 \head{Research thrusts.}
 \begin{itemize}
-\item \textbf{A measurement model for reasoning traces.} Model a trace as a sequence of latent step validities and each verifier score as a noisy measurement of one step. Sampled traces share prefixes, models, and retrieved evidence, so their errors are dependent; we represent this tree- and source-structured dependence explicitly. Derive likelihood-based aggregation rules that contain majority vote and best-of-$N$ as special cases, quantify how much new evidence each additional trace contributes, and characterize identifiability from a small labeled set plus many unlabeled traces.
-\item \textbf{Computation allocation with guarantees.} Formulate inference as a sequential decision problem: sample another path, verify a specific step, retrieve, or stop and answer or abstain. Develop stopping and allocation rules from sequential testing and distribution-free risk control that bound the error among accepted answers while minimizing expected computation, and characterize the accuracy--computation frontier, including regimes where further sampling cannot help because errors are shared.
-\item \textbf{Verifiers designed as measurement instruments.} Train PRMs whose errors are calibrated and minimally correlated, using our synthetic error injection to control error types, and fuse heterogeneous verifiers (logical, factual, and evidence-grounded checks) through the measurement model rather than by ad hoc score averaging.
+\item \textbf{A measurement model for dependent reasoning.} Represent a set of traces as paths through shared intermediate claims, each with a latent validity, and model verifier scores as biased, noisy observations whose errors may correlate with the generator's. Study what is identifiable from a small labeled calibration set and many unlabeled traces, estimate the effective sample size, and bound what cannot be identified.
+\item \textbf{Sequential allocation and stopping.} Cast drawing another trace, verifying a step, retrieving a source, and stopping or abstaining as a sequential decision with costs in tokens, latency, and energy. Derive value-of-information rules, determine which sequential-testing and distribution-free risk-control guarantees survive dependent samples and distribution shift, and characterize computation--accuracy frontiers.
+\item \textbf{Integrating heterogeneous checks.} Combine process verifiers, agreement among retrieved sources, and tool-executed checks, whose errors are correlated in different ways. Estimate their dependence, favor checks that add independent information, and identify regimes where more of the same computation raises cost but not accuracy.
 \end{itemize}
 
-\head{What is new.} Inference-time scaling has been studied largely empirically. Existing guarantees, such as conformal language modeling, control risk but do not model the shared errors that determine when extra computation helps. We provide a statistical treatment in which dependence among traces and verifiers is explicit, computation is allocated against a stated error target, and verifier training is aligned with the aggregation rule it serves.
+\head{What is new.} Inference-time scaling is studied mostly empirically, assuming independent votes or fixed best-of-\textit{N} budgets. We model dependence among a system's own traces and checks and turn it into allocation and stopping rules. Our verifiers (FG-PRM) and efficient-reasoning methods (HiPRAG, AALC) supply the instruments; modeling their dependence is new.
 
-\head{Evaluation.} Mathematical reasoning (GSM8K, MATH), multi-hop question answering (MEQA, MuSiQue), and agentic retrieval tasks. Measures: accuracy--computation curves, selective risk at fixed coverage, calibration, and empirical validity of the stated guarantees, including under distribution shift. Baselines: self-consistency, verifier-weighted best-of-$N$, adaptive-sampling heuristics, and fixed-budget search.
+\head{Evaluation.} Step-level error identification (ProcessBench), mathematical reasoning (MATH), and multi-hop question answering (MuSiQue), plus controlled shared-error injection that plants a common faulty premise in a chosen fraction of traces so that the true dependence is known. Measures: accuracy--computation curves, selective error at fixed coverage, calibration, and error in the estimated effective sample size. Baselines: majority vote (self-consistency), best-of-\textit{N} with a process reward model, and adaptive stopping rules that assume independent samples.
 
-\head{Naval relevance.} Shipboard and edge deployments run under hard limits on computation, power, latency, and connectivity. Principled accuracy--computation trade-offs let a system report how reliable an answer is for the computation spent, stop early on easy queries, and escalate hard or ambiguous ones to an operator instead of guessing. The project addresses the program's calls for rigorous answers to computation--accuracy trade-offs, principled information integration, and decision making under uncertainty.
+\head{Naval relevance.} Shipboard and edge systems run AI within fixed power, latency, and bandwidth budgets, often without reliable reach-back. A principled rule tells such a system when one more local sample is worth its cost, when to request an outside check, and when to abstain. The topic answers the program's call to replace heuristics with rigorous mathematical answers, and its interests in balancing limited computation against accuracy and in decision making under uncertainty.
 
-\head{PI foundation.} FG-PRM, step-level verifiers trained on synthetic errors (EMNLP Findings 2025); AALC, which cuts reasoning length by over 50\% while maintaining accuracy (arXiv 2025); HiPRAG, process rewards that curb unnecessary retrieval in agentic search (ICLR 2026); Search Wisely, uncertainty-aware agentic search (EMNLP 2025); and PRD, iterative aggregation of peer LLM judgments (TMLR 2024). The PI holds a 2024 NSF CAREER award and received an Amazon Research Award for process-guided fine-tuning.
+\head{PI foundation.} \href{https://doi.org/10.18653/v1/2025.findings-emnlp.228}{FG-PRM}, process reward models trained on synthetic hallucinations (EMNLP Findings 2025); \href{https://arxiv.org/abs/2510.07794}{HiPRAG}, hierarchical process rewards for efficient agentic retrieval (ICLR 2026); \href{https://arxiv.org/abs/2506.20160}{AALC}, accuracy--length control for efficient reasoning (arXiv 2025); \href{https://doi.org/10.18653/v1/2025.emnlp-main.998}{Search Wisely}, reducing sub-optimal agentic search (EMNLP 2025); \href{https://arxiv.org/abs/2307.02762}{PRD}, aggregating LLM evaluators (TMLR 2024). \href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=2340435}{NSF CAREER} award (2024); \href{https://www.amazon.science/research-awards/recipients/xinya-du}{Amazon Research Award} (2023) for process-guided fine-tuning. As a postdoc, the PI led system integration for the RESIN team in DARPA KAIROS (\href{https://doi.org/10.18653/v1/2022.naacl-demo.7}{\mbox{RESIN-11}}, NAACL 2022 Demo, first author).
 
 \end{document}

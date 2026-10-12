@@ -1,151 +1,200 @@
-# Comments on the ChatGPT ONR YIP concept notes
+# Comments on the ChatGPT ONR YIP brief topic descriptions (round 2)
 
-Reviewer: Claude · Date: 2026-10-12 · Scope: the four Markdown drafts in this folder (`ONR/*.md`) and, in Section 9, the LaTeX one-pagers built from them (`ONR/<po>/main.tex`, as of `main` at c180c94). Checked against proposals #1–#8, the FY27 ONR YIP NOFO (N0001426SF004), the AFOSR white papers in `../ben`, `../doug`, `../laura`, and ONR's program pages as of today.
+Reviewer: Claude · Date: 2026-10-12 · Scope: the four notes on `main` at `e60d15f` (`ONR/<po>/main.tex` and `white_paper_<po>.pdf`; text last changed in the 15:11 PT commits) and `chatgpt_revision_response.md`. Checked against the FY27 ONR YIP NOFO (N0001426SF004), ONR's program-officer directory and program pages (today), the AFOSR papers in `../ben`, `../doug`, `../laura`, and the public record of every cited paper.
 
-My own versions are the `claude_*.pdf` files in this folder. Their LaTeX sources are in [`claude_src/`](claude_src/).
+This file replaces my earlier comments, which remain in git history. My alternative one-pagers are the `claude_*.pdf` files in this folder; their sources are in [`claude_src/`](claude_src/). Statements marked *(judgment)* are my opinion; everything else is checked against the sources at the end.
 
 ## Bottom line
 
-1. **Verify the Morrison note before sending it.** Dr. Jeffrey Morrison is not on ONR's current program-officer directory. The Command Decision Making page names no officer for that program. The other three officers and codes check out (Section 1).
-2. **All four drafts share one template.** Each has three aims (ground → verify → interact/repair), and they use the same vocabulary. Two of the officers sit in Code 311. Each note needs its own central question.
-3. **The drafts never show why you can do this.** Only one of your papers (PRD) is mentioned. ONR weighs the PI's past performance equally with technical merit, so add two or three lines of evidence. Lead with your DARPA KAIROS record: it is a DoD program track record, and POs notice that.
-4. **Naval relevance is written defensively.** Phrases like "not an operationally deployed system", "does not assume access to operational Navy systems", and "not a claim of operational validation" distance the work from the Navy. Replace them with one concrete scenario and the program's own interests.
-5. **Several drafts overlap your AFOSR YIP papers almost aim-for-aim.** Neskovic ≈ Laura; Goolsby ≈ Doug plus Laura's impact text; Morrison ≈ Ben plus Laura. Morrison and Goolsby also restate CAREER aims. Pending and current support is disclosed and reviewed, so the ONR topic should be scientifically distinct. My versions reduce these overlaps but do not remove every adjacency (Section 4).
-6. **Only one application is allowed, and time is short.** Questions sent within two weeks of the Oct 30 deadline (after Oct 16) may not be answered. Email the POs today or tomorrow, try to talk before Oct 16, then commit to one. My ranking is in Section 5.
+**The form is now right.** Each note has the PI, Program Officer, NOFO number, and a proposed S&T Focus Area in its header. Each calls itself a brief topic description, states a hypothesis, gives a concrete example, links prior work, and describes Naval relevance without disclaimers. Keep all of that.
 
-## 1. Program Officer check (onr.navy.mil, 2026-10-12)
+**Must fix before any note is sent**
 
-| PO in draft | Status today | What the program page emphasizes | Draft's fit |
+1. **Two links are wrong** (Kamgar-Parsi and Goolsby notes).
+   - **FaithScore.** `aclanthology.org/2024.findings-emnlp.287` is Ma et al., "Learning Autonomous Driving Tasks via Human Feedbacks with Large Language Models". FaithScore is [`2024.findings-emnlp.290`](https://aclanthology.org/2024.findings-emnlp.290/), pp. 5042–5063 (the pages already in `references.bib`).
+   - **FGAIF.** The notes and both `references.bib` files use OpenReview ID `QhJw5CUVd7`. Your homepage and the TMLR 2025 record give `Qhfw5CUVd7`, with a lowercase f. Fix the ID or use [arXiv 2404.05046](https://arxiv.org/abs/2404.05046).
+2. **The last edit removed what made each note distinct.** The 15:11 commits ("Strengthen … around program fit and research expertise") replaced each note's specific question with a broader one:
+   - The Neskovic note now restates AFOSR Laura Aim 1 and Ben Aim 2.
+   - The Morrison note moves back onto CAREER's ground.
+   - The Goolsby note demotes deception, which her program page names.
+   - With the Morrison and Goolsby retitles, three of the four titles now begin "Knowledge-Grounded" (Kamgar-Parsi's already did).
+
+   `chatgpt_revision_response.md` still describes the earlier versions, so it no longer matches `main`. Details are in Section 2.
+3. **The Morrison note cannot go out as written.** Its header reads "Dr. Jeffrey Morrison, Code 341 (assignment unconfirmed)", and he is not in ONR's program-officer directory. Choose the officer first; the right content depends on who it is (Section 3).
+4. **The KAIROS ranking has no independent public source.** Three notes say "the team achieved top performance among participants", and the Kamgar-Parsi note says "high-performing".
+   - The only public statement is your own publications page: "Top ranking system at DARPA KAIROS Evaluation". It links to DARPA's KAIROS program page, which reports no evaluation results.
+   - Neither RESIN demo paper (NAACL 2021, NAACL 2022) compares RESIN with other KAIROS teams, and I found no DARPA or university statement that does.
+   - My first comments recommended this wording without flagging that it had no independent source. That was my error.
+   - The claim is yours to make. If you have the evaluation results and would stand behind them if a PO asked, use your homepage's wording rather than "top performance among participants". Otherwise give the role only: "As a postdoc, the PI led system integration for the RESIN team in DARPA KAIROS ([RESIN-11](https://doi.org/10.18653/v1/2022.naacl-demo.7), NAACL 2022 Demo, first author)."
+5. **All four notes use the same kind of scenario.**
+   - Neskovic: "five agents assessing whether a coastal route has reopened"
+   - Goolsby: "after flooding closes a coastal access route, later updates may contradict early reopening claims"
+   - Morrison: "a port has closed, while a later message corrects its reopening time"
+   - Kamgar-Parsi: a port-entry tide table
+
+   The Neskovic and Goolsby examples are nearly the same: unreliable reports about whether a coastal route has reopened. If Krebs replaces Morrison, three notes go to Code 311. Give each note its own scenario.
+
+**Should fix**
+
+6. **Add the 2023 Amazon Research Award** ("Process-guided Fine-tuning for Answering Complex Questions") to the Kamgar-Parsi and Neskovic notes. It is publicly listed and on topic.
+7. **Use the empty space.** Each page ends 1.7–2.0 inches above the bottom margin. Use a few of those lines for the fixes above and for one sentence that separates the topic from your closest pending work. Don't add a fourth aim.
+8. **Housekeeping.**
+   - The MEQA OpenReview ID (`snNuvAOQxB`) matches the NeurIPS 2024 record. Switching to the [proceedings page](https://proceedings.neurips.cc/paper_files/paper/2024/hash/e560a0b22e4432003d0dba63ff8dc457-Abstract.html) is optional.
+   - The folder READMEs say the notes use 10-pt type; they use 11-pt.
+   - The repository is public. The ONR README names your DARPA, Amazon, and Google source proposals, and the AFOSR drafts are visible. If that isn't intended, make the repo private after this round; I would then need the Claude GitHub App to read it.
+
+## 1. What I verified
+
+| Claim in the notes | Status |
+| --- | --- |
+| Neskovic, Code 311, Mathematical Data Science | ✅ |
+| Kamgar-Parsi, Code 311, AI / Machine Learning, Reasoning and Intelligence | ✅ Directory title "Artificial Intelligence Program Officer" |
+| Goolsby, Code 341, Analytics, Modeling and Simulation (Local and Regional) | ✅ |
+| Morrison, Code 341, Command Decision Making | ❌ Not in the directory. The only Morrison listed is Mr. Peter Morrison, Code 353 (Directed Energy). The CDM page lists three officers (Steinhauser, Squire, McKenna), none with a CDM title. |
+| Krebs (the alternative), Code 311 | ✅ "Information Science & C2 Program Officer", named on the Command and Control program page |
+| Proposed S&T Focus Areas | ✅ All names appear in the NOFO's list |
+| FG-PRM (DOI), PRD (arXiv 2307.02762), HiPRAG (arXiv 2510.07794), QA-based event extraction (DOI) | ✅ |
+| FaithScore link (`…287`) | ❌ Wrong paper; use `…290` |
+| FGAIF OpenReview link (`QhJw5CUVd7`) | ❌ Mistyped. Your homepage and the TMLR record give `Qhfw5CUVd7`. |
+| MEQA OpenReview link (`snNuvAOQxB`) | ✅ Matches the NeurIPS 2024 record |
+| MuSiQue, ScienceQA, MAVEN-ERE, GDELT | ✅ Public datasets |
+| 2024 NSF CAREER; "on consistent event graphs" (Morrison note) | ✅ Award 2340435, "Learning to Extract Consistent Event Graphs from Long and Complex Documents", start 2024-05-01 |
+| KAIROS role | ✅ for involvement: you are first author of RESIN-11 (NAACL 2022 Demo), funded by DARPA KAIROS. "Led system integration" is your own description; I found no public source for or against it. |
+| KAIROS ranking ("top performance among participants", "high-performing") | ❓ Self-reported only. Your publications page says "Top ranking system at DARPA KAIROS Evaluation"; no paper, DARPA, or university source says so. |
+| 2023 Amazon Research Award | ✅ Public; not yet used in any note |
+
+## 2. What the 15:11 edit changed
+
+| Note | 14:59 version | Now on `main` (15:11) | Effect *(judgment)* |
 | --- | --- | --- | --- |
-| Predrag Neskovic | ✅ Code 311, **Mathematical Data Science** | Rigorous mathematical and algorithmic answers in place of heuristics. Computation vs. accuracy/inference trade-offs. Principled multi-source information integration. Decision making under uncertainty. | Moderate as written: no mathematical object. Strong only if recast as statistics or theory. |
-| Behzad Kamgar-Parsi | ✅ Code 311. His title is now **"Artificial Intelligence Program Officer"**; the program page is Machine Learning, Reasoning and Intelligence. | Knowledge bases from diverse sources. Learning from labeled and unlabeled data. Reasoning with uncertain information *and self-assessment*. Planning. Integrating these modules. Agent teams. Visual scene and event understanding. | **Best natural fit** for your current work. The draft's scope is too broad. |
-| Jeffrey Morrison | ⚠️ **Not listed.** The CDM page names three Code 341 officers (Steinhauser, Squire, McKenna), none of them for CDM specifically. | CDM themes: human decision modeling, machine-facilitated team collaboration, knowledge creation and transfer, proactive decision support. | Confirm he is active, or retarget. The closest live fit is **Dr. William Krebs, Code 311, Information Science & C2**: a common tactical picture, information integration across stores, decisions from uncertain or out-of-sequence information. |
-| Rebecca Goolsby | ✅ Code 341, **Analytics, Modeling and Simulation** (for local and regional situation awareness) | Explicitly funds AI-enhanced retrieval-augmented generation. Also situation awareness, what-if models, information reservoirs, decision tools for operations in the information environment, wargaming and exercises, and adversary deception and obfuscation. | Good PO choice. The draft misses the information-environment and deception angle. |
+| Neskovic | `b297fd5`, "Statistical Foundations for Reliable AI Reasoning under Compute Constraints". Dependence among one model's sampled traces; when to sample, check, or stop; risk control; accuracy–compute curves. | `96fc647`, "Reliable Collective Reasoning and Evaluation for AI Agents". Panels of agents and judges; "expertise and correlated errors"; "the effective number of independent assessments"; choosing the next check. | Restates Laura Aim 1 and Ben Aim 2 (table in Section 3). Drops the computation-versus-accuracy question, a stated thrust of the program. |
+| Kamgar-Parsi | `1a3a166`. The tide-table mistake is "a violated precondition"; the third aim is "Turn self-assessment into selective action" (re-read, inspect a crop, fix a tool input, backtrack, or ask; "penalize unnecessary retries and missed deadlines"). | `a25ac16`. Ground, then diagnose, then self-improve. | Still the best fit, but less specific. The new first aim, "Ground multi-step reasoning in external knowledge", is infrastructure. |
+| Morrison | `285ca2f`, "Distributed Event Reasoning and Information Fusion for Decision Support". Order-independent merging, standing queries for critical information requirements, bandwidth limits; centralized and last-writer-wins baselines. | `f3aebbc`, "Knowledge-Grounded AI Reasoning for Dynamic Decision Support". "Distributed nodes provide a demanding test case, but are not the only setting." | Aims 1–2 now sit on CAREER (event graphs from long documents) and next to Ben Aim 3 (revision after corrections). The new framing suits CDM; the old one suits Krebs's C2 program. |
+| Goolsby | `f9416b8`, "Deception-Resilient Retrieval-Augmented Generation for Regional Situation Awareness". "treating five copied articles as five independent confirmations"; claims "marked supported, disputed, or unverified"; "Adapt … feedback from our vision-language work to textual RAG". | `2e10edb`, "Knowledge-Grounded Retrieval-Augmented Generation for Regional Situation Awareness". "We will investigate adversarial deception as a critical robustness challenge, while making accurate regional knowledge synthesis the primary research objective." | Demotes the part of the topic her program names: "Problems of reflexive control, deception, cyber-attack, and obfuscation". |
 
-Sources: [PO directory](https://www.onr.navy.mil/our-research/our-program-officers), [Mathematical Data Science](https://www.onr.navy.mil/organization/departments/code-31/division-311/mathematical-data-science), [Machine Learning, Reasoning and Intelligence](https://www.onr.navy.mil/organization/departments/code-31/division-311/machine-learning-reasoning-and-intelligence), [Command and Control](https://www.onr.navy.mil/organization/departments/code-31/division-311/command-and-control), [Command Decision Making](https://www.onr.navy.mil/organization/departments/code-34/division-341/command-decision-making-cdm), [Analytics, Modeling and Simulation](https://www.onr.navy.mil/organization/departments/code-34/division-341/analytics-modeling-and-simulation-local-and-regional).
+If the goal of the edit was to keep each topic close to your publication record, the 14:59 versions already did that. The trace statistics build on FG-PRM, PRD, and HiPRAG. The fusion note builds on your event-extraction work. The deception note builds on event extraction plus FaithScore and FGAIF.
 
-To check Morrison quickly, email ONRYIP@navy.mil (Dr. Reginald Williams) or any Code 341 PO and ask who currently manages CDM. Eligibility and technical questions are due **Oct 16, 5 pm ET**.
+**Recommendation** *(judgment)*:
 
-## 2. Issues common to all four drafts
+1. Restore the 14:59 text for Neskovic, Kamgar-Parsi, and Goolsby: `git show b297fd5:ONR/predrag/main.tex`, `git show 1a3a166:ONR/behzad/main.tex`, `git show f9416b8:ONR/goolsby/main.tex`.
+2. For the fourth note, choose by officer (Section 3).
+3. Then apply fixes 1 and 4–6. The 14:59 versions have the same wrong FaithScore and FGAIF links, the same KAIROS ranking, and port or route examples.
 
-1. **One skeleton, four costumes.** Every note runs Motivation → Research question → three aims → Evaluation → Naval relevance → Intended contribution. The aims always follow extract/ground → verify/reason → interact/repair, and the vocabulary repeats: "provenance" appears in all four drafts; "evidence-grounded", "unsupported", and "structured knowledge" each appear in three. A PO who sees two of them will read one proposal re-labeled. Give each note one central question that only that program would ask.
-2. **No hypothesis.** The "Research question" lines are broad: "How can imperfect AI agents collectively assess…", "How can an autonomous agent acquire…". Add a one-sentence hypothesis that says what would count as success.
-3. **No concrete example.** The AFOSR papers use running examples (shipment, outage, rigid vessel); none of these notes does. One sentence of example makes abstract aims legible to a PO skimming between meetings.
-4. **No PI evidence.** Add two or three lines that a PO can check:
-   - 2024 NSF CAREER award
-   - As a postdoc, led system integration for the RESIN team's DARPA KAIROS delivery system, which achieved top performance among participating teams
-   - Amazon Research Award (process-guided fine-tuning)
-   - The three or four papers closest to each topic: FG-PRM (EMNLP Findings '25), HiPRAG (ICLR '26), MEQA (NeurIPS '24), PRD (TMLR '24), IQA-EVAL (NeurIPS '24), FaithScore (EMNLP Findings '24), FGAIF (TMLR '25), QA-based event extraction (EMNLP '20), GTT (NAACL '21)
-5. **Defensive Naval relevance.** The NOFO covers basic or applied research, so a basic-research topic needs no disclaimer about deployment. Name one Navy scenario and echo two or three phrases from the PO's own program page.
-6. **No ONR S&T Focus Area.** The full proposal must name a primary focus area, and alignment is part of review criterion 2. Propose one in the note so the PO can correct it.
-7. **Evaluation is generic.** The notes list metric categories but name no datasets or testbeds, and the Neskovic draft uses jargon like "matched coverage". Name two or three testbeds and one or two strong baselines.
-8. **Format.**
-   - Each draft is Markdown of 450–510 words. With a header, PI line, and Focus Area added, they fit one page only if tightened.
-   - **Strip the "Draft provenance" footers.** They name the Amazon and Google proposals and their contacts.
-   - Call the document a "brief topic description" (the NOFO's term), not a "white paper". The NOFO says white papers are not accepted.
-9. **Prose.** The drafts stack abstract nouns ("reasoning- and source-aware collective inference", "tool-executable verification") and hedge often ("may inform", "relates to"). Shorter sentences with concrete verbs read better to a PO.
+## 3. Note by note
 
-## 3. Draft-by-draft comments
+### Kamgar-Parsi: strongest fit, send first *(judgment)*
 
-### Neskovic — `predrag_neskovic.md`
+Keep the hypothesis (step-level diagnosis beats outcome-only training) and the program language (self-assessment, uncertain reasoning, planning).
 
-- **Fit.** The program page asks for rigorous mathematical and algorithmic answers to problems now handled by heuristics. The draft is algorithmic but has no mathematical object: no model, estimator, identifiability result, or guarantee. Aim 1 is an NLP verification aim, not a data-science aim.
-- **Overlap.** This is the AFOSR **Laura** paper (peer assessment, shared errors, diagnostic follow-ups) with the human studies removed. The draft's own provenance line says so.
-- **What to keep.** Aim 2's idea, "estimate the incremental information supplied by each assessment", is the right seed. Make it the whole note: a statistical model of dependent judgments, effective sample size, and identifiability from few labels.
-- **What to change.**
-  - The title is generic; name the mathematical question.
-  - Recast Aim 3's "when an extra verification action is more informative than further discussion" as sequential decision-making or value of information with error-rate guarantees.
-  - Tie the Naval relevance to the program's computation–accuracy thrust: shipboard and edge compute, latency, and connectivity limits.
-- **Candid risk.** Reviewers for this program will look for mathematical depth in your record, which is mainly empirical ML/NLP. If you pursue it, say which tools you'll use (latent-variable models, sequential testing, distribution-free risk control). Consider naming a statistics consultant; collaborators are allowed if they fit the single-PI structure.
-- **My version:** `claude_predrag_neskovic.pdf` recasts the topic as the statistics of inference-time compute. How should dependent, noisy verifier scores be aggregated, and when should the system stop computing? Prior work cited: FG-PRM, AALC, HiPRAG, Search Wisely, PRD. Thrust 1 still resembles Laura Aim 1, but its object is different: sampled reasoning traces with shared prefixes rather than evaluator panels. That difference reduces the overlap but does not remove it; see Section 4.
+- **Title.** Put "self-assessment" in it. It is the program page's own term: "Reasoning with uncertain and qualitative information, as well as self-assessment". For example: "Learning Typed Self-Assessment for Tool-Using AI Agents".
+- **Aims.** Replace "Ground multi-step reasoning in external knowledge" with the 14:59 aim "Turn self-assessment into selective action". A typed diagnosis is valuable because it says what to do next. The current third aim acts on the diagnosis only generically ("revise an erroneous step, continue a valid partial plan, or gather additional evidence") and never ties the next action to the error type.
+- **Example.** The local-time-versus-UTC error is the same kind of mistake as the AFOSR Ben example (a report time read as an event time). Consider an error that is not about time, such as reading the wrong line of a photographed document.
+- **Evaluation.** "Controlled tool-use environments" is unnamed. Name an existing benchmark, or say you will build tasks with injected argument errors and held-out tools.
+- **Scope.** ScienceQA is a set of multimodal science questions, about half with an image, not a scene-understanding benchmark. Keep images as one evidence type, and don't widen the claim.
+- **PI evidence.** Fix the FaithScore and FGAIF links and the KAIROS wording, and add the Amazon Research Award.
+- **Overlap.** Ben uses FG-PRM as a baseline, and Doug extracts applicability conditions for scientific calculations. One sentence in the full proposal covers both: here, agents learn to diagnose their own steps by error type and act on the diagnosis.
 
-### Kamgar-Parsi — `behzad_kamgar_parsi.md`
+### Neskovic: restore the 14:59 version
 
-- **Fit.** This is the best of the four, but the PO line should use his current title ("Artificial Intelligence Program Officer"). His page lists reasoning with uncertain information and *self-assessment*, learning from annotated and unlabeled data, building knowledge bases from diverse sources, and integrating these modules. Your PRM, synthetic-data, and RL work maps onto that directly.
-- **Scope.** The draft is three agendas: knowledge grounding, process learning, and open-world verification with a scientific-discovery testbed. Make **self-assessment** the centerpiece; the program names it explicitly.
-- **Missing.** The program emphasizes visual understanding, and the draft has no multimodal thread. FaithScore and FGAIF give you one at no cost.
-- **Overlap.**
-  - Aim 3's "execute logical, numerical, or experimental checks" and repair-and-propagate language duplicates AFOSR **Doug** (tool checks of scientific rules) and **Ben** (revising conclusions).
-  - The hypothesis-discovery testbed imports NSF proposal #2. If #2 is pending, that is another overlap to disclose.
-  - It is also a weak Naval story.
-- **Weak sentences to cut:** "may inform future intelligent autonomous systems" and "does not assume access to operational Navy systems".
-- **My version:** `claude_behzad_kamgar_parsi.pdf` centers on self-assessing agents. Each step is checkable against its evidence. Verifiers are typed and trained on synthetic injected errors (FG-PRM generalized to agents and images). Self-assessment drives planning and repair (HiPRAG-style process rewards). The scenario is a port-visit plan that fails because of one wrong tool input, a time-zone conversion. I avoided a maintenance example because the Ben paper already uses one.
+The current note maps onto your AFOSR papers almost clause for clause:
 
-### Morrison — `jeffrey_morrison.md`
+| Neskovic note (now) | AFOSR text |
+| --- | --- |
+| "Use shared citations, agreement patterns, and limited reference labels to infer expertise and correlated errors"; "quantify the effective number of independent assessments" | Laura Aim 1: "fit a regularized model of reviewer skill, task difficulty, and shared source effects"; "how much independent checking is needed before a panel's agreement becomes a useful reliability signal" |
+| "five agents … may all cite summaries copied from one incorrect bulletin" | Laura: "three references to one notice will be distinguished from support drawn from separately checked records" |
+| "a decision between asking another agent, consulting an independent source, testing an inference, or stopping"; "sequential risk control" | Ben Aim 2: "choose the next check using its cost, its estimated effect on the acceptance decision, and the premises that share its source"; "keeping the error rate among accepted answers below a specified level" |
 
-- **PO status.** He is not listed (Section 1). Confirm before sending.
-- **Overlap is the main problem.**
-  - Aim 1 (open-schema QA-based event graphs, incremental updates, global consistency) is your **NSF CAREER**, which is funded.
-  - Aim 2 (tracing inferences to evidence; separating observations, conclusions, and assumptions) is AFOSR **Ben** Aim 1.
-  - Aim 3's human studies (beneficial vs. harmful adoption, harmful reliance) reuse the AFOSR **Laura** study design.
-- **Feasibility.** Behavioral decision experiments (as opposed to standard human evaluation of model outputs) would be a new methodology for you, under a single-PI award. That is a credibility risk in a YIP review.
-- **If Morrison is confirmed (CDM).** Keep the event-knowledge core, but make the new question proactive decision support: which updates matter to which decision maker, and when. Do not center it on human-reliance experiments.
-- **My version:** `claude_william_krebs.pdf`, addressed to Dr. Krebs (C2). Its core is a distributed setting: ships and shore nodes receive different subsets of text messages, late or out of order, over degraded links. The thrusts are:
-  - Order-invariant merging of LLM-extracted event knowledge, with commutative, associative, and idempotent updates
-  - Bandwidth-aware sharing driven by the commander's critical information requirements (CCIRs), expressed as standing questions
+The 14:59 version asks a different question: how dependent one model's sampled traces are, and when extra computation is worth spending. That question is distinct from both AFOSR papers. It also fits two interests on the program page. The program wants "rigorous mathematical and algorithmic answers to questions" now "addressed using heuristics or non-principled approaches". It also wants to balance limited computing against accuracy. Majority voting and fixed best-of-N are exactly such heuristics *(judgment)*.
 
-  This is new relative to CAREER, Ben, and Laura. To send it to CDM instead, edit `\POline` and `\FocusArea` in `claude_src/claude_william_krebs.tex`; the focus area would become *Human and Biological Systems — Warfighter Decision Superiority and Readiness*. Then strengthen T3's "which updates matter to whom" angle.
+- **Keep from the current note:** abstaining "when apparently unanimous opinions share weak support", and error at matched coverage.
+- **Phrase guarantees as questions.** Write "which risk-control guarantees survive dependent samples", not a promise of guarantees; the 14:59 text already does this.
+- **Two adjacencies remain even after restoring.** Laura Aim 2 uses "extra samples from one model" as a comparison condition, and Ben Aim 2 controls the error rate among accepted answers. Name both in the full proposal. The ONR object is the statistics of one system's own samples and the decision of how much computation to spend.
 
-### Goolsby — `rebecca_goolsby.md`
+### Morrison: choose the officer first
 
-- **Fit.** The PO choice is right: her page explicitly mentions AI-enhanced RAG.
-- **Mis-aimed Naval relevance.** "Logistics, maintenance, and situation reports" doesn't match her program, and it repeats the Laura paper's impact paragraph. Her program is about local and regional situation awareness, operations in the information environment, what-if models, and wargaming, with adversaries using deception and obfuscation. That adversarial angle is absent from the draft and should be central.
-- **Overlap and drift.** Aim 2's verification planner with symbolic and numerical checks, and "without mistaking successful tool execution for proof that a principle applies", is the thesis of the AFOSR **Doug** paper. It is also off-target: situation reports rarely hinge on physical principles. Aim 1 restates CAREER aims; state what is new.
-- **Smaller points.**
-  - Swap "copilots" for "RAG", her own term.
-  - Aim 3's entity/attribute/relation feedback comes from FGAIF, a vision-language method. Say "adapt", since it hasn't been shown for text RAG.
-- **My version:** `claude_rebecca_goolsby.pdf` has three thrusts:
-  - Contest-aware event graphs: provenance, corrections and retractions, and source-dependence links, building on CAREER methods
-  - Graph-grounded generation with claim labels (supported, contested, unverified), plus coordinated-copy and timeline-inconsistency detection
-  - Ground-truthed synthetic information environments built from event schemas, with planted deception, for both evaluation and exercises and wargames (an information reservoir)
+- **If the officer is Krebs (Code 311, C2):** use the 14:59 content (`285ca2f`).
+  - His program page lists "Development of a common tactical picture", "Automated Information Integration Across Enterprise Sensors and Information Stores", and decision making with "uncertain information, out of sequence information". Order-independent fusion of text-derived events over degraded links speaks to all three.
+  - Consider the focus area "Command, Control, Communications, Computers, Cyber, Intelligence, Surveillance, and Reconnaissance (C5ISR) and Naval Space", sub-area "Intelligence, Decision Superiority, Command and Control (C2), and Combat Systems".
+  - The `\POline` suggested in `chatgpt_revision_response.md` works.
+- **If ONR names a CDM officer:** the current framing fits better. The CDM page describes decision support tools "proactive in providing relevant information at appropriate times" and lists "Developing proactive decision support tools for military command and control".
+  - Add one sentence each separating the note from CAREER (consistent event graphs from documents) and from Ben Aim 3 (revising conclusions after a correction).
+  - The Naval paragraph names both "command decision making and command-and-control interests". Name one program.
+- **Either way:** replace the port example.
 
-  The scenarios are HADR, littoral operations, and operations in the information environment.
+To find out, email ONRYIP@navy.mil, or any Code 341 officer, and ask who manages Command Decision Making.
 
-## 4. Overlap with pending and funded work
+### Goolsby: put contested information back at the center
 
-The NOFO warns that current and pending disclosures "may render an applicant ineligible for funding", and DoW may re-check them through the award period. List the AFOSR YIP proposals (if submitted), CAREER, and any pending NSF proposals. Keep the ONR science distinct.
+- **Hypothesis.** Replace the second sentence. It reads like a reply to a reviewer, and it demotes what her program asks for. A possible replacement: "In a contested information environment, copied, delayed, and deliberately false reports are the normal condition, so the event knowledge that grounds generation must record where each claim came from and whether it is disputed."
+- **Restore the 14:59 specifics:**
+  - "treating five copied articles as five independent confirmations"
+  - claims "marked supported, disputed, or unverified"
+  - "Adapt … feedback from our vision-language work to textual RAG"
 
-| ONR topic | ChatGPT draft overlaps | Claude version, core question | Remaining adjacency to delineate in the full proposal |
+  FaithScore and FGAIF are vision-language papers. A PO who opens them should already know from the note that you are adapting them.
+- **Example.** Replace the reopened-route scenario, which duplicates the Neskovic note.
+- **Metric.** Define "sensitivity to deception", for example as the rate at which planted false claims appear as supported.
+- **Overlap.** "distinguish independent corroboration, unresolved contradiction, and duplicated claims" is close to Laura's discounting of shared sources. The object differs: source reports that feed generation, with no human-reliance study. One sentence in the full proposal is enough.
+
+## 4. Overlap with your pending and funded work
+
+| ONR note | Current `main` overlaps | After restoring 14:59 (or Claude version) | What to state in the full proposal |
 | --- | --- | --- | --- |
-| Neskovic | Laura (all aims) | Statistics of verifier aggregation and compute allocation | **Laura Aim 1** models shared-source dependence among evaluators, effective independent judgments, and estimation from few labels; it also cites "Nine Judges, Two Effective Votes". The ONR note applies similar statistics to sampled reasoning traces within one system's inference and adds compute allocation. **Ben Aim 2** also does budgeted checking with finite-sample error control: Ben chooses *which evidence premise to check* in an argument, while ONR asks *how many samples and verifications* generative reasoning needs. State both differences explicitly. |
-| Kamgar-Parsi | Doug, Ben (Aim 3); NSF #2 testbed | Learned, typed self-assessment for agents (text, KB, images) | Ben's acceptance procedure combines exact rule checks with learned evidence checks and uses FG-PRM as a baseline, so learned verification is not new to Ben. The ONR object is different: training multi-step, tool-using agents to assess their own steps by error type, and planning with that signal. Say so in one sentence. |
-| Morrison → Krebs | CAREER, Ben, Laura | Order-invariant distributed event fusion under DDIL | CAREER (single-collection extraction) is cited in the note as the foundation; the distributed setting is new. |
-| Goolsby | Doug, Laura text, CAREER | Manipulation-aware, event-grounded RAG and synthetic information environments | CAREER is cited as the foundation, and the note names the three new questions. |
+| Kamgar-Parsi | Ben (learned evidence checks; FG-PRM as a baseline); Doug (applicability conditions). Minor. | Same | Agents diagnose their own steps by error type and use the diagnosis to act and to train. |
+| Neskovic | Laura Aim 1 and Ben Aim 2. Major. | Laura Aim 2's "extra samples from one model" condition; Ben Aim 2's error control. Minor. | The statistics of one system's own traces, and how much computation to spend. |
+| Morrison / Krebs | CAREER; Ben Aim 3 (corrections). Moderate. | CAREER as the foundation; correction handling is adjacent to Ben Aim 3. | Order-independent convergence across nodes, and bandwidth-limited sharing. |
+| Goolsby | CAREER; Laura (duplicated versus independent sources). Moderate. | Same, smaller | Contestation tracked through retrieval and generation; adversarial test environments. |
 
-## 5. Which PO to commit to (one application per PI)
+The NOFO warns that current and pending support "may render an applicant ineligible for funding". You will also submit only one AFOSR YIP proposal, so the overlap that matters is with the AFOSR topic you actually submit:
 
-1. **Kamgar-Parsi.** His program language (self-assessment, uncertain reasoning, knowledge plus learning plus planning) matches your current PRM, RL, and synthetic-data work, and your recent publications support it directly.
-2. **Goolsby.** RAG is an explicit program interest, KAIROS event work is a real differentiator, and the Naval story (HADR, information environment) is the most concrete. It is also in a different department (34), and each department is capped at five awards.
-3. **Krebs.** The topical and Naval fit is strong, but his page leans toward fusion, optimization, and architectures. Ask how much appetite he has for NLP-centered work.
-4. **Neskovic.** Pursue this only if he responds well to the mathematical framing.
+- If it is Laura, don't send the current Neskovic note.
+- If it is Ben, separate the Neskovic stopping rules and the fourth note's correction handling from Ben Aims 2 and 3.
 
-Send all four today or tomorrow (Oct 12–13) and ask each PO for a 20-minute call before **Oct 16**; the NOFO warns that questions within two weeks of the deadline may not be answered. With the Krebs version, three of the four notes go to Code 311; they are written to be distinct, so that is fine as long as each stands on its own. Decide by Oct 16–19, then write the 20-page proposal to that PO's program.
+## 5. The Claude versions
 
-## 6. NOFO checklist
+**Files.** Each is exactly one page, built with XeLaTeX and the EB Garamond fonts in `../ben/fonts`.
 
-**Sending the topic descriptions**
-- Email each PO with **ONRYIP@navy.mil on cc, first email only**. Attach the one-page PDF, renamed first (e.g., `Du_UTD_ONR-YIP_topic_Kamgar-Parsi.pdf`) rather than `claude_*.pdf` or `main.pdf`. A template is below.
-- Eligibility and technical questions are due Oct 16, 5 pm ET. Grants questions are due Oct 29. **Proposals are due Oct 30, 5 pm ET** via Grants.gov through UTD; check UTD OSP's internal deadline, which is usually days earlier.
+| File | Title |
+| --- | --- |
+| [`claude_behzad_kamgar_parsi.pdf`](claude_behzad_kamgar_parsi.pdf) | Self-Assessing AI Agents: Learning Where Their Own Reasoning Fails and What to Do Next |
+| [`claude_predrag_neskovic.pdf`](claude_predrag_neskovic.pdf) | When Is More Computation Worth It? Statistical Foundations for Aggregating Dependent AI Reasoning Traces |
+| [`claude_william_krebs.pdf`](claude_william_krebs.pdf) | Convergent Event Knowledge for a Common Tactical Picture over Degraded Networks (replaces Morrison) |
+| [`claude_rebecca_goolsby.pdf`](claude_rebecca_goolsby.pdf) | Contest-Aware, Event-Grounded Retrieval-Augmented Generation for Regional Situation Awareness |
 
-**Full proposal (Section D of the NOFO)**
-- Technical Proposal of at most 20 pages, with a cover page that includes the words "Technical Proposal". The NOFO's cover-page instructions say "N0001426SF0004", which is a typo; use the number on the NOFO title page, N0001426SF004.
-- **Format** (Section D.i): 8.5×11 paper, 1-inch margins, **single-spaced, Times New Roman 12-point**. The AFOSR template (EB Garamond, 1.5 spacing) does not comply; switch fonts for the full proposal.
-- **Project abstract**: one page or 4,000 characters including spaces, whichever is less. No graphics; spell out Greek letters and symbols. Mark it **"Approved for Public Release"**; funded abstracts are posted on DTIC.
-- The technical approach must include:
-  - **Future Naval Relevance**, naming the S&T Focus Area
-  - Schedule and milestones
-  - Goals and benchmarks
-  - **Gold Standard Science** (EO 14303): the NOFO asks you to *describe your success in implementing* it, so cite past practice (released code and data, reproducible benchmarks) as well as plans
-- Also required: management approach, PI qualifications, and responsibility information.
-- Outside the page limit: full CV listing all publications, **at least one letter of support** from university officials (ask your chair or dean now; ONR wants specifics of long-term commitment), a data management plan of at most 2 pages, and the budget.
-- Budget: typical award $750K over 36 months, at most $250K per 12 months. Single PI; no co-PIs.
-- SF-424 Field 4b: three-digit code plus the PO's name, e.g. `311 [Kamgar-Parsi, Behzad]`.
-- SF-424 Field 11 asks for an "ONR White Paper Tracking Number" even though white papers are not accepted. Ask ONRYIP@navy.mil what to enter.
-- Eligibility: PhD on or after 2019-01-01; first or second *full-time* tenure-track appointment; U.S. citizen, national, or permanent resident on the due date; not tenured; no prior ONR YIP.
-- The Responsibility section must address "existing and currently prospective commitments". If your appointment percentage or any outside commitment may change before or during the award, confirm eligibility with ONRYIP@navy.mil before Oct 16.
-- Security review (NDAA FY19 §1286): ONR assesses foreign talent recruitment programs, funding sources, patent filings, and affiliations. Make sure disclosures are complete and consistent across agencies.
+**What changed from my previous versions**
 
-## 7. Cover email template
+- **KAIROS:** the role only, linked to RESIN-11. The ranking is left out; add your homepage wording if you decide to keep it.
+- **Links:** every paper is linked (DOI, arXiv, or NeurIPS page), and I opened each link today. FaithScore now points to `…290`.
+- **Scenarios:** each note has its own, and none involves a port closure, a reopened route, or a time-zone error.
+  - Kamgar-Parsi: a quantity read from the wrong line of a photographed packing list
+  - Neskovic: a fuel estimate in which 15 of 20 sampled traces reuse one misread consumption rate
+  - Krebs: a loitering-vessel report and a later status update, arriving in opposite orders at two nodes
+  - Goolsby: a fabricated water-contamination rumor after a typhoon
+- **PI evidence:** the Amazon Research Award is in the Kamgar-Parsi and Neskovic notes. The Neskovic and Krebs notes each say which prior work supplies the starting tools and what is new.
+- **Checking:** a separate reviewer checked every link, quotation, and factual claim in these notes and in this file against its source. Its corrections are applied: hedged statements about prior work, a convergence claim limited to the merge layer, and the NOFO's exact focus-area wording.
+
+The Claude versions are alternatives. ChatGPT can borrow from them, or you can send one directly.
+
+**Confirm before sending any version**
+
+- "Led system integration for the RESIN team" is your own description (it matches proposal #3). Also decide whether to state the KAIROS ranking.
+- Krebs, or a CDM officer confirmed by ONR.
+- Which AFOSR topic you will submit, and whether NSF proposal #2 is pending; both affect current and pending support.
+- Eligibility given your appointment. Ask ONRYIP@navy.mil before Oct 16.
+
+## 6. Sending and deadlines
+
+- **This week (Oct 12–13).** Email each officer with ONRYIP@navy.mil on cc (first email only). Attach the PDF under a descriptive name, such as `Du_UTD_ONR-YIP_topic_Kamgar-Parsi.pdf`, not `white_paper_behzad.pdf` or `claude_*.pdf`. Ask for a 20-minute call.
+- **Deadlines.** Eligibility and technical questions are due **Oct 16, 5 pm ET**, and grants questions Oct 29. Full applications are due **Oct 30, 5 pm ET** through UTD; check the Office of Sponsored Programs' internal deadline.
+- **One application per PI.** My ranking is unchanged: Kamgar-Parsi, Goolsby, Krebs, Neskovic *(judgment, based on program-page fit and your publication record)*.
+- **Full proposal reminders:**
+  - 12-pt Times New Roman, single-spaced, 1-inch margins; Technical Proposal of at most 20 pages
+  - Abstract marked "Approved for Public Release"
+  - Typical award $750K over 36 months, at most $250K per 12 months
+  - SF-424 field 4b in the form `311 [Kamgar-Parsi, Behzad]`
+  - Field 11 asks for an "ONR White Paper Tracking Number" although white papers are not accepted; ask ONRYIP@navy.mil what to enter
+
+**Email template**
 
 > **Subject:** FY27 ONR YIP — brief topic description for discussion (Xinya Du, UT Dallas)
 >
@@ -162,46 +211,15 @@ Send all four today or tomorrow (Oct 12–13) and ask each PO for a 20-minute ca
 >
 > *cc: ONRYIP@navy.mil (first email only)*
 
-## 8. About the Claude versions
+## Sources
 
-- **Files:**
-  - [`claude_behzad_kamgar_parsi.pdf`](claude_behzad_kamgar_parsi.pdf)
-  - [`claude_rebecca_goolsby.pdf`](claude_rebecca_goolsby.pdf)
-  - [`claude_william_krebs.pdf`](claude_william_krebs.pdf) (replaces Morrison)
-  - [`claude_predrag_neskovic.pdf`](claude_predrag_neskovic.pdf)
-
-  Each is exactly one page and uses the same EB Garamond fonts as the AFOSR papers (`../ben/fonts`).
-- **Claims.** Completed work cites published or preprint papers only. Everything else is phrased as proposed. The one number quoted (AALC's >50% shorter reasoning) comes from the paper's abstract. Venues follow the bibliographies in `../ben`, `../doug`, `../laura` and the reference lists in proposals #1–#8. HiPRAG is listed in the ICLR 2026 proceedings.
-- **Build:** `latexmk -xelatex -cd -interaction=nonstopmode ONR/claude_src/<file>.tex`. Each file's PO and Focus Area are macros at the top (`\POline`, `\FocusArea`).
-- **Independent check.** A separate agent checked every claim against the proposals, bibliographies, NOFO, and ONR pages; its corrections are applied. Venues confirmed include Search Wisely (EMNLP 2025 main) and MEQA (NeurIPS 2024 Datasets & Benchmarks). The Amazon Research Award is publicly listed on amazon.science for "Process-guided Fine-tuning for Answering Complex Questions". The KAIROS line now reads "as a postdoc, led system integration for the RESIN team's DARPA KAIROS delivery system", matching proposal #3.
-- **For you to confirm:**
-  - Whether NSF #2 is pending
-  - The AFOSR submission status, which determines what goes in current and pending support
-  - Whether Morrison is active
-
-## 9. The LaTeX one-pagers on `main` (`ONR/<po>/main.tex`)
-
-These are expanded versions of the same four drafts. They keep the titles, aims, and most of the wording, and add a scenario paragraph, keywords, and NSF-style closing sections. Sections 1–5 apply to them unchanged.
-
-**Improved**
-- The provenance footers are gone from the PDFs; the sources now sit in each folder's README.
-- Each note now has an evaluation scenario, e.g. Morrison's corrected report time and Neskovic's many reports traced to one mistaken claim.
-- The Kamgar-Parsi note now states a central hypothesis.
-
-**Still open (Section 2)**
-- **Little PI evidence.** Apart from generic phrases ("our research in consistent event-graph learning"), the only prior work named is PRD (Neskovic), "our NSF CAREER work" (Morrison), and "our FAIGEN approach" (Goolsby). The Kamgar-Parsi note names none of your work. None gives a venue or the KAIROS result.
-- **Defensive Naval relevance**, in all four:
-  - "without assuming access to operational Navy data" (Neskovic)
-  - "may improve the reliability of future Naval autonomous … systems" (Kamgar-Parsi)
-  - "We will use unclassified document collections" (Morrison)
-  - "avoiding any assumption of privileged operational datasets" (Goolsby)
-- **Goolsby still aims at the wrong program.** Its Naval paragraph targets logistics and maintenance rather than her program's information-environment focus.
-- **Structure.** All four still share one structure, propose no S&T Focus Area, and name no datasets.
-
-**New problems**
-1. **The page doesn't say who wrote it or for whom.** None of the four PDFs contains your name, UT Dallas, contact details, the PO's name, or the NOFO number. If a PO forwards the attachment, the next reader cannot tell whose it is. Add a two-line header; the `claude_*.pdf` versions show one.
-2. **NSF section labels.** All four end with "Keywords", "Intellectual Merit", and "Naval Relevance and Broader Impact". Intellectual merit and broader impacts are NSF's review criteria; ONR's are technical merit and Naval S&T priorities. To an ONR reader the page looks like a recycled NSF summary. Use "Expected outcomes" and "Naval relevance" instead.
-3. **The Goolsby note cites "our FAIGEN approach".** FAIGEN is a DARPA YFA proposal, not a publication, so a PO cannot look it up. If it is pending, citing it also advertises the overlap. Cite published work instead (e.g., FaithScore, FG-PRM) or drop the reference.
-4. **The Morrison note adds human-subject studies** ("In human studies, participants will answer decision-relevant questions…"). This deepens the overlap with the Laura study design and the feasibility concern in Section 3.
-
-The 10-pt Times type at 0.8-inch margins is fine for a topic description. The 12-pt Times New Roman, 1-inch rule in Section 6 applies only to the full proposal.
+- ONR: [program-officer directory](https://www.onr.navy.mil/our-research/our-program-officers); program pages for [Mathematical Data Science](https://www.onr.navy.mil/organization/departments/code-31/division-311/mathematical-data-science), [Machine Learning, Reasoning and Intelligence](https://www.onr.navy.mil/organization/departments/code-31/division-311/machine-learning-reasoning-and-intelligence), [Command and Control](https://www.onr.navy.mil/organization/departments/code-31/division-311/command-and-control), [Command Decision Making](https://www.onr.navy.mil/organization/departments/code-34/division-341/command-decision-making-cdm), and [Analytics, Modeling and Simulation](https://www.onr.navy.mil/organization/departments/code-34/division-341/analytics-modeling-and-simulation-local-and-regional)
+- Papers:
+  - [FaithScore, Findings of EMNLP 2024](https://aclanthology.org/2024.findings-emnlp.290/), and the paper the notes link instead: [Ma et al. 2024](https://aclanthology.org/2024.findings-emnlp.287/)
+  - [FGAIF, arXiv 2404.05046](https://arxiv.org/abs/2404.05046)
+  - [MEQA, NeurIPS 2024 Datasets and Benchmarks](https://proceedings.neurips.cc/paper_files/paper/2024/hash/e560a0b22e4432003d0dba63ff8dc457-Abstract.html)
+  - [RESIN-11, NAACL 2022 Demo](https://aclanthology.org/2022.naacl-demo.7/)
+  - [AALC, arXiv 2506.20160](https://arxiv.org/abs/2506.20160)
+  - [Consistent event–event temporal relation extraction, MATCHING 2023](https://aclanthology.org/2023.matching-1.3/)
+- Awards: [NSF award 2340435](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2340435); [Amazon Research Award listing](https://www.amazon.science/research-awards/recipients/xinya-du)
+- Repository: `git log -- ONR/<po>/main.tex` for the commit history cited in Section 2; `../laura/main.tex` and `../ben/main.tex` for the AFOSR quotations

@@ -1,8 +1,7 @@
-% One-page brief topic description for ONR Program Officer discussion (FY27 ONR YIP).
-% Replaces the "Jeffrey Morrison" draft: Dr. Morrison is not listed on ONR's program-officer
-% directory (checked 2026-10-12). To send to the Command Decision Making program instead,
-% edit \POline and \FocusArea below (see ../claude_comments_on_chatgpt_drafts.md).
-% Compile with XeLaTeX from this folder or the repository root:
+% Brief topic description for ONR Program Officer discussion (FY27 ONR YIP, N0001426SF004).
+% This replaces the Morrison (Command Decision Making) note: Dr. Jeffrey Morrison is not on ONR's
+% program-officer directory (checked 2026-10-12). Edit \POline if ONR names a different officer.
+% Compile with XeLaTeX from the repository root:
 %   latexmk -xelatex -cd -interaction=nonstopmode ONR/claude_src/claude_william_krebs.tex
 \documentclass[11pt]{article}
 \usepackage[letterpaper,top=0.55in,bottom=0.5in,left=0.72in,right=0.72in]{geometry}
@@ -13,25 +12,25 @@
   ItalicFont=EBGaramond-Italic.ttf,BoldItalicFont=EBGaramond-BoldItalic.ttf,Numbers=Lining]
 \usepackage{microtype}
 \usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
 \definecolor{navy}{HTML}{1F3A5F}
+\usepackage[colorlinks=true,urlcolor=navy,linkcolor=navy]{hyperref}
+\usepackage{enumitem}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{3pt}
+\setlength{\parskip}{3.5pt}
 \emergencystretch=2em
 \newcommand{\head}[1]{{\color{navy}\textbf{#1}}\enspace}
-\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,topsep=1pt,parsep=0pt}
-\hypersetup{pdftitle={A Common Operational Picture from Text},pdfauthor={Xinya Du}}
+\setlist[itemize]{leftmargin=1.1em,itemsep=2pt,topsep=1.5pt,parsep=0pt}
+\hypersetup{pdftitle={Convergent Event Knowledge for a Common Tactical Picture},pdfauthor={Xinya Du}}
 
 % ---- Edit the Program Officer block here --------------------------------------
-\newcommand{\POline}{Dr.\ William Krebs, ONR Code 311, Command and Control (Information Science \& C2)}
-\newcommand{\FocusArea}{C5ISR and Naval Space --- Intelligence, Decision Superiority, C2, and Combat Systems}
+\newcommand{\POline}{Dr.\ William Krebs, ONR Code 311, Command and Control program (Information Science \& C2)}
+\newcommand{\FocusArea}{C5ISR and Naval Space ---\\\hspace*{1.2em}Intelligence, Decision Superiority, Command and Control (C2), and Combat Systems}
 % -------------------------------------------------------------------------------
 
 \begin{document}
 \begin{center}
-{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} A Common Operational Picture from Text: Distributed, Order-Invariant\\[1pt] Event Knowledge under Limited Communications\par}
+{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} Convergent Event Knowledge for a Common Tactical Picture\\[1pt] over Degraded Networks\par}
 \vspace{3pt}
 {\small\itshape Brief topic description for Program Officer discussion \,·\, FY27 ONR Young Investigator Program (N0001426SF004)\par}
 \end{center}
@@ -43,23 +42,23 @@
 \vspace{-3pt}
 {\color{navy}\rule{\linewidth}{0.6pt}}
 
-\head{Problem.} Much of what a maritime commander acts on arrives as text---reports, message traffic, and chat---rather than as sensor tracks. In distributed operations, ships, aircraft, and shore nodes each receive a different subset of these messages, often late, duplicated, or out of order, over links that degrade or drop. Track fusion merges sensor data well, but fusing the \emph{event knowledge} in text---what happened, to whom, when, where, and why---is far less mature. Language-model pipelines add a new failure: what they extract from a message depends on what they read before it, so two nodes that receive the same messages in a different order can build different pictures.
+\head{Problem.} Language-model assistants can turn text reports (messages, chat, intelligence summaries) into an event picture: who did what, where, and when. Over degraded links, the same reports arrive late, duplicated, out of order, or not at all, and each node's assistant extracts events from whatever it has seen. Nodes can disagree even after every report has arrived. A destroyer receives ``unidentified vessel loitering near the channel entrance as of 0600,'' then the update ``vessel departed the channel area at 0630.'' A shore node receives the update first and the delayed original second; if the latest arrival wins, its picture shows the vessel still loitering. Event extraction typically assumes one central collection, and data-synchronization methods assume clean symbolic records; neither handles knowledge that uncertain models extract from text.
 
-\head{Central question.} How can distributed nodes build, merge, and share consistent, queryable event knowledge from text when messages are delayed, reordered, or lost and bandwidth is scarce? We hypothesize that representing extraction results as \emph{mergeable updates} with explicit uncertainty, rather than as a single overwritten state, lets nodes converge to the same picture regardless of arrival order, at a fraction of the communication needed to share raw text.
+\head{Central hypothesis.} Representing extracted events as small, source-stamped updates with an order-independent merge (commutative, associative, and idempotent) will make nodes that hold the same extracted updates converge to the same picture in any arrival order, and will limit divergence when extraction is uncertain. \emph{Question-directed sharing}, which sends first the updates that change answers to the commander's standing information requirements, will deliver correct answers sooner under bandwidth limits than periodic synchronization.
 
 \head{Research thrusts.}
 \begin{itemize}
-\item \textbf{Event knowledge with explicit uncertainty and provenance.} Extract events, participants, times, locations, and temporal and causal relations from each node's messages using open-schema, question-answer-based extraction. Record source and confidence for every attribute, and keep unresolved attributes as explicit alternatives rather than guesses.
-\item \textbf{Order-invariant fusion across nodes.} Design update operations and merge rules that are commutative, associative, and idempotent, so nodes that receive the same information in any order converge to the same picture. Resolve cross-node coreference of events and entities, retain conflicts subject to temporal and causal consistency constraints, and measure and reduce the order sensitivity of LLM-based extraction itself.
-\item \textbf{Question-driven sharing under bandwidth limits.} Express the commander's critical information requirements (CCIRs) as standing questions, and transmit first the updates that would change their answers. Answer queries at each node with multi-hop, event-centric reasoning that cites supporting messages and flags what remains unconfirmed.
+\item \textbf{Mergeable event updates from text.} Extract each report into updates that record the actor, action, time, place, source, and claim status. Represent corrections and retractions as explicit relations rather than overwrites, and represent uncertain coreference and time normalization as revisable links that keep alternatives until evidence resolves them.
+\item \textbf{Order-independent fusion under extraction uncertainty.} Design merge rules with these three properties for the symbolic event layer, then measure where model ambiguity (coreference, time expressions, paraphrase) breaks convergence. Because a model's reading of a report depends on what it has already read, two nodes can extract the same report differently; we will compare context-independent extraction with reconciliation at merge time and bound the remaining divergence.
+\item \textbf{Question-directed sharing under limited bandwidth.} Express commander's critical information requirements (CCIRs) as standing questions over the event graph. Send pending updates in order of how much they change an answer or its uncertainty. Each answer cites its supporting reports and what may still be missing. Our question-answering formulation of event extraction suggests that one model could both read reports and answer these questions.
 \end{itemize}
 
-\head{What is new.} Event-extraction and knowledge-graph research, including our own, assumes a single node with a complete, ordered view of the documents. We treat event knowledge as distributed, incrementally updated state, bring convergence properties from distributed systems to LLM-based extraction, and prioritize sharing by its effect on decision-relevant questions.
+\head{What is new.} We make language-derived event knowledge mergeable, measure how far extraction uncertainty keeps nodes apart, and decide what to send first.
 
-\head{Evaluation.} Multi-node simulations built from public multi-document event collections (e.g., maritime incidents, disaster response), with messages split across nodes and subjected to delay, reordering, duplication, and loss. Measures: event-graph accuracy and cross-node agreement, sensitivity to arrival order, answer accuracy on requirement-style multi-hop questions versus bandwidth, and time until each node's answers become correct. Baselines: centralized processing of all messages, last-writer-wins merging, and standard retrieval-augmented generation at each node.
+\head{Evaluation.} Event-annotated documents (MAVEN-ERE) and our MEQA questions, replayed across simulated nodes with message delay, loss, duplication, and reordering. Measures: cross-node agreement of event graphs, answer accuracy over time, bytes transmitted, and time to convergence after a link is restored. Baselines: centralized extraction (an upper bound), last-writer-wins updates, periodic full synchronization, and retrieval-augmented generation over each node's local messages.
 
-\head{Naval relevance.} Distributed maritime operations depend on a common operational picture across platforms that are frequently disconnected. Consistent, bandwidth-aware fusion of text-derived event knowledge would complement track fusion in maritime operations centers and afloat staffs. The project addresses the program's interests in a common tactical picture, automated information integration across information stores, and decisions based on uncertain or out-of-sequence information.
+\head{Naval relevance.} Distributed maritime operations must maintain a common tactical picture across ships, aircraft, and shore commands whose links are often disconnected, intermittent, or bandwidth-limited. When links return, nodes should agree without re-sending everything; over a narrow link, the report that changes a CCIR answer should go first. The topic addresses the program's interests in developing a common tactical picture, automated information integration across sensors and information stores, and decision making with uncertain and out-of-sequence information.
 
-\head{PI foundation.} QA-based event extraction (EMNLP 2020) and schema-free QA-pair event representations (QAEvent, EACL Findings 2024); document-level event and argument extraction (ACL 2020; NAACL 2021; ACL 2022); event-centric multi-hop QA with explanations (MEQA, NeurIPS 2024); and explainable multi-hop reasoning over structured information (EMNLP Findings 2023). As a postdoc, the PI led system integration for the RESIN team's DARPA KAIROS delivery system, which achieved top performance among participating teams; the PI holds a 2024 NSF CAREER award on consistent event graphs from long documents; this project addresses the new distributed, communication-limited setting.
+\head{PI foundation.} \href{https://doi.org/10.18653/v1/2020.emnlp-main.49}{Event extraction by answering questions} (EMNLP 2020); \href{https://doi.org/10.18653/v1/2021.naacl-main.70}{template filling with generative transformers} (NAACL 2021); \href{https://doi.org/10.18653/v1/2023.matching-1.3}{consistent event--event temporal relation extraction} (MATCHING 2023); \href{https://proceedings.neurips.cc/paper_files/paper/2024/hash/e560a0b22e4432003d0dba63ff8dc457-Abstract.html}{MEQA}, multi-hop event-centric question answering (NeurIPS 2024). The PI's \href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=2340435}{NSF CAREER} award (2024) studies extracting consistent event graphs from long, complex documents; the distributed, order-independent setting here is new. As a postdoc, the PI led system integration for the RESIN team in DARPA KAIROS (\href{https://doi.org/10.18653/v1/2022.naacl-demo.7}{\mbox{RESIN-11}}, NAACL 2022 Demo, first author).
 
 \end{document}
