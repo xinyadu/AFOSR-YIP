@@ -1,5 +1,5 @@
 \documentclass[10pt,letterpaper]{article}
-\usepackage[margin=0.83in]{geometry}
+\usepackage[margin=0.80in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
@@ -7,26 +7,25 @@
 \usepackage{titlesec}
 \pagestyle{empty}
 \setlength{\parindent}{1em}
-\setlength{\parskip}{3pt}
-\setlist[itemize]{leftmargin=1.25em,topsep=2pt,itemsep=3pt,parsep=0pt}
-\titlespacing*{\section}{0pt}{5pt}{2pt}
+\setlength{\parskip}{2.2pt}
+\setlist[itemize]{leftmargin=1.35em,topsep=3pt,itemsep=4pt,parsep=0pt}
+\titlespacing*{\section}{0pt}{4pt}{1pt}
 \titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
 \begin{document}
 \begin{center}
-{\large\bfseries Reliable Knowledge-Grounded AI Copilots for Dynamic Information Synthesis\par}
-\vspace{2pt}
-{\small Xinya Du, University of Texas at Dallas \quad | \quad ONR FY27 YIP Brief Topic Description\par}
-{\small Prospective Program Officer: Dr. Rebecca Goolsby}
+{\normalsize\bfseries Reliable Knowledge-Grounded AI Copilots for Dynamic Information Synthesis\par}
 \end{center}
-\section*{Overview}
-Retrieval-augmented copilots promise rapid synthesis of heterogeneous reports, but retrieving relevant passages does not ensure that a generated conclusion is correct. A system may merge obsolete and current statements, confuse entities or events, overlook qualifications, or combine individually true facts into an unsupported claim. These failures worsen as information is updated.
-\par\noindent\textbf{Central research question:} How can an AI copilot synthesize dynamic information, verify each substantive claim, and repair errors without introducing new unsupported conclusions?
-\par We propose three connected research thrusts:
+\noindent\textbf{Overview}\quad AI copilots based on retrieval-augmented generation can help synthesize information from large collections of reports, but retrieving apparently relevant documents does not guarantee a sound synthesis. A copilot may conflate similarly named entities, combine obsolete and current observations, omit a critical qualification, or infer a conclusion that does not follow from individually accurate facts. These errors are especially difficult to detect when information sources are heterogeneous, partially contradictory, and continuously updated. Standard self-critique often produces another fluent answer without establishing which claims are supported.
+
+\par
+We propose grounded AI copilots that build structured knowledge from changing information, decompose generated conclusions into verifiable assertions, and selectively repair unsupported claims. The project targets three methodological challenges: (1) reconciling evidence from heterogeneous sources while retaining temporal and provenance information; (2) determining which verification operations and scientific or logical rules apply to each synthesized claim; and (3) using fine-grained feedback to correct an output without damaging its already supported components.
+\par\noindent We will pursue three interrelated research threads:
 \begin{itemize}
-\item \textbf{Structured integration of changing information.} We will extract entities, attributes, events, temporal relations, and evidence provenance from heterogeneous documents into updateable knowledge representations. The system will identify duplicated, conflicting, and superseded statements while retaining the context necessary for downstream reasoning.
-\item \textbf{Multi-step knowledge-grounded verification.} We will decompose synthesized outputs into checkable claims and determine which facts, relations, rules, and assumptions each requires. A verification planner will combine retrieval, knowledge-graph queries, and logical or numerical checks to classify claims as supported, contradicted, or unresolved.
-\item \textbf{Localized feedback and selective repair.} We will develop fine-grained feedback for entity, attribute, relation, factual, and logical consistency. Rather than regenerate the entire response, a copilot will seek missing evidence, revise affected claims, preserve supported content, and recheck downstream dependencies.
+\item \textbf{Structured integration of heterogeneous evidence:} We will extract entities, attributes, events, relations, and source-level provenance from long and evolving documents. Building on our research in consistent event-graph learning, we will investigate representations that connect reports across time and explicitly track duplicate, contradictory, and superseded assertions. The copilot will update these representations as new documents arrive rather than repeatedly synthesize from an unstructured collection.
+\item \textbf{Multi-step claim verification with domain knowledge:} We will decompose a generated synthesis into atomic claims and infer the prerequisites needed to justify each claim: evidence passages, graph relations, numerical constraints, or domain principles. A verification planner will select among retrieval, knowledge-graph queries, symbolic checks, and external tools. Following our FAIGEN approach, a rule will be considered applicable only when its conditions are satisfied; the copilot will report supported, contradicted, and unresolved claims separately.
+\item \textbf{Fine-grained feedback and selective self-correction:} We will develop error feedback over entities, attributes, relations, factual grounding, and logical consistency. Synthetic perturbations and independently checked examples will provide supervision for diagnosing unsupported reasoning steps. A revision policy will request missing evidence and modify only the affected portions of the synthesis, followed by checks for unintended downstream inconsistencies and regressions.
 \end{itemize}
-\noindent\textbf{Evaluation.} We will benchmark multi-report synthesis under stale evidence, contradictory updates, source duplication, and topic shifts. Metrics include claim support, logical consistency, robustness to updates, harmful corrections, and computation. Baselines include standard RAG, self-critique, iterative retrieval, and unstructured verification.
-\par\noindent\textbf{Naval relevance and potential impact.} The research could support future information-analysis copilots for logistics, maintenance, and situation reports, where decision-makers must identify what is supported, what has changed, and which conclusions still require investigation.
+\noindent\textbf{Keywords:} AI copilots, Information synthesis, Retrieval augmentation, Fine-grained verification.
+\par\noindent\textbf{Intellectual Merit}\quad The project will advance structured dynamic retrieval, rule-aware verification, and localized correction rather than treating synthesis as unconstrained text generation. We will benchmark factual support, consistency, update sensitivity, selective-repair accuracy, and computational cost under controlled stale and conflicting reports. Comparisons include conventional RAG, iterative retrieval, and LLM self-critique.
+\par\noindent\textbf{Naval Relevance and Broader Impact}\quad Potential Naval applications include trustworthy assistance for logistics, maintenance, and situation-report synthesis, where users must distinguish current evidence from superseded or unresolved information. Research artifacts will use public or synthetic records, avoiding any assumption of privileged operational datasets.
 \end{document}
