@@ -68,3 +68,29 @@ Revised on `main` (2026-10-12). This response covers the common critiques (revie
 4. Does the DARPA KAIROS performance characterization match an approved, publicly shareable source or team statement?
 5. Does the current appointment meet ONR's full-time tenure-track eligibility requirement? Resolve with UTD OSP and ONR before the Oct 16 questions deadline.
 6. For Neskovic, would you be comfortable developing a formal statistical error guarantee with appropriate expertise? This is the most ambitious theoretical component and should not be oversold.
+
+
+## 2026-10-12 round-two review (commit 003e2ce): decisions and corrections
+
+This section supersedes conflicting descriptions of the earlier versions above. The latest revisions use the 14:59 source revisions (`b297fd5` Neskovic, `1a3a166` Kamgar-Parsi, `f9416b8` Goolsby, `285ca2f` distributed-event note), with selective improvements; **no `claude_*` source or PDF was edited**.
+
+| Reviewer comment | Response |
+| --- | --- |
+| Two invalid paper links | **Applied:** FaithScore now points to ACL Anthology `2024.findings-emnlp.290`, and FGAIF to OpenReview `Qhfw5CUVd7`, in the applicable `main.tex` sources and `references.bib` files. In-text citations remain blue clickable author-year links, without a final references block. |
+| The 15:11 drafts became generic | **Applied:** Restored the sharper compute--accuracy statistical framing (Neskovic), typed self-assessment and targeted action (Kamgar-Parsi), order-independent distributed event fusion (Krebs), and deception-resilient regional RAG (Goolsby). This is for scientific fit and precision, not because different POs require mutually exclusive topics. |
+| Morrison officer is not confirmed | **Applied:** Retargeted the fourth note to **Dr. William Krebs, Code 311, Command and Control**; retained the existing repository folder `ONR/morrison/` for link stability. The header and Naval relevance now target C2. Rename the folder if preferred. |
+| KAIROS competitive ranking lacks independently published evidence | **Applied the conservative option:** state the PI's RESIN/DARPA KAIROS system-integration role without claiming a ranking. If the PI chooses the self-reported homepage wording and can substantiate it, this can be revisited. |
+| Similar port/reopened-route/time-zone examples across notes | **Applied:** Neskovic uses dependent fuel-estimation traces; Kamgar-Parsi an erroneous row selection in a photographed packing list; Krebs an out-of-order loitering-vessel status report; Goolsby a false water-contamination rumor after a typhoon. |
+| 2023 Amazon Research Award missing | **Applied:** added to Neskovic and Kamgar-Parsi as research-track-record evidence. |
+| Empty lower page region | **Partially applied:** prioritized clear, readable 11-pt typography and intact single-page summaries over padding. The precise vertical occupancy can be adjusted after rendering; no invented fourth aim. |
+| READMEs refer to 10-pt text | **To update:** READMEs should reflect current 11-pt body type and the descriptive PDF filenames. |
+| Homepage, PI and NOFO header, focus areas, informal brief descriptions | **Kept:** unchanged structural strengths of the reviewed notes. |
+| Neskovic: statistics rather than evaluator panels | **Applied:** the research object is correlated samples/verifier traces *inside one system*, with latent validity modeling, sequential compute allocation, and the question of which risk controls hold under dependence. Retained calibrated abstention and risk at comparable coverage. |
+| Kamgar-Parsi: self-assessment and selective action | **Applied:** the restored three aims couple process-grounded observation, typed error diagnosis, and choosing the next action conditional on the error type. ScienceQA is described as image-evidence question answering, not generic scene understanding. Tool-use trajectories with injected errors and unseen tools will be constructed, not presented as an existing benchmark. |
+| Krebs: source-level convergence and communication limits | **Applied:** the restored aims study commutative/associative/idempotent event update rules, uncertain cross-node identity resolution, and prioritizing standing command information requirements over degraded links. Convergence is studied under stated conditions, not claimed universally. |
+| Goolsby: keep adversarial contested-information RAG central | **Applied:** source dependence, corrections, contested claims and synthetic adversarial information streams returned to the main hypothesis and aims. The deception metric is now explicit: fraction of planted false claims represented as supported. FaithScore/FGAIF are a proposed adaptation from vision-language work, not existing text-RAG results. |
+| Disclosure overlap and strategic ranking | **Not used to artificially separate these notes:** the final ONR application should be selected based on fit and documented against actual funded/pending projects. Only one ONR YIP application will be submitted. |
+| Section 5 Claude alternatives | Read as references; the restored drafts keep independently worded explanations and user-preferred headings rather than replacing files with Claude versions. |
+| NOFO and outreach deadline reminders | No emails or applications were sent. Verify S&T Focus Area, eligibility, current-and-pending support, and grants details before submission. |
+
+**Open questions for PI:** Is the Krebs/C2 contact preferred to an ONR-confirmed Command Decision Making officer? Should the directory remain named `morrison` or become `krebs`? Would you prefer the self-reported KAIROS ranking phrasing, which currently has no independent public corroboration? Please verify eligibility and disclosure status with your institution and ONR by the applicable deadline.
