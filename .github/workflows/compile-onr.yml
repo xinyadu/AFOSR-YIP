@@ -4,7 +4,6 @@ on:
     branches: [main]
     paths:
       - 'ONR/*/main.tex'
-      - 'ONR/*/references.bib'
       - '.github/workflows/compile-onr.yml'
   workflow_dispatch:
 
@@ -29,9 +28,6 @@ jobs:
           set -e
           for d in predrag behzad morrison goolsby; do
             cd "ONR/$d"
-            pdflatex -interaction=nonstopmode -halt-on-error main.tex
-            bibtex main
-            pdflatex -interaction=nonstopmode -halt-on-error main.tex
             pdflatex -interaction=nonstopmode -halt-on-error main.tex
             pdfinfo main.pdf | grep -q 'Pages: *1' || { echo "$d must fit one page"; exit 1; }
             mv main.pdf "white_paper_${d}.pdf"
