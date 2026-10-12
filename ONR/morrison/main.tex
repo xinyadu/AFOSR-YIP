@@ -6,9 +6,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
-\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage[authoryear,round]{natbib}
 \usepackage{xcolor}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=black,urlcolor=blue]{hyperref}
 \definecolor{accent}{HTML}{233D57}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
@@ -43,7 +43,7 @@
 \par\head{Prior work and PI qualifications.} Our QA-based event extraction \citep{du2020event} and MEQA benchmark \citep{li2024meqa} support the text-to-event foundation. The PI holds a 2024 NSF CAREER award on consistent event graphs and led the RESIN team's DARPA KAIROS delivery-system integration as a postdoc; the team achieved top performance among participants.
 \vspace{-2pt}
 {\fontsize{7.1}{7.5}\selectfont\noindent\textbf{References}\par\vspace{-8pt}
-\bibliographystyle{unsrtnat}
+\bibliographystyle{abbrvnat}
 \bibliography{references}
 }
 \end{document}
