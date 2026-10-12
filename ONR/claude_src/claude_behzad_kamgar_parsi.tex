@@ -1,0 +1,62 @@
+% One-page brief topic description for ONR Program Officer discussion (FY27 ONR YIP).
+% Compile with XeLaTeX from this folder or the repository root:
+%   latexmk -xelatex -cd -interaction=nonstopmode ONR/claude_src/claude_behzad_kamgar_parsi.tex
+\documentclass[11pt]{article}
+\usepackage[letterpaper,top=0.55in,bottom=0.5in,left=0.72in,right=0.72in]{geometry}
+\usepackage{fontspec}
+\IfFileExists{ben/fonts/EBGaramond-Regular.ttf}{\def\cnfont{ben/fonts/}}{%
+  \IfFileExists{../../ben/fonts/EBGaramond-Regular.ttf}{\def\cnfont{../../ben/fonts/}}{\def\cnfont{../ben/fonts/}}}
+\setmainfont{EBGaramond-Regular.ttf}[Path=\cnfont,BoldFont=EBGaramond-Bold.ttf,
+  ItalicFont=EBGaramond-Italic.ttf,BoldItalicFont=EBGaramond-BoldItalic.ttf,Numbers=Lining]
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\definecolor{navy}{HTML}{1F3A5F}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\emergencystretch=2em
+\newcommand{\head}[1]{{\color{navy}\textbf{#1}}\enspace}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,topsep=1pt,parsep=0pt}
+\hypersetup{pdftitle={Self-Assessing AI Agents},pdfauthor={Xinya Du}}
+
+% ---- Edit the Program Officer block here --------------------------------------
+\newcommand{\POline}{Dr.\ Behzad Kamgar-Parsi, ONR Code 311, Artificial Intelligence (Machine Learning, Reasoning and Intelligence)}
+\newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Machine Learning; Intelligent and Collaborative Agents}
+% -------------------------------------------------------------------------------
+
+\begin{document}
+\begin{center}
+{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} Self-Assessing AI Agents: Learning to Detect, Localize, and\\[1pt] Repair Their Own Reasoning Errors over Uncertain Knowledge\par}
+\vspace{3pt}
+{\small\itshape Brief topic description for Program Officer discussion \,·\, FY27 ONR Young Investigator Program (N0001426SF004)\par}
+\end{center}
+\vspace{-2pt}
+{\small
+\textbf{PI:} Xinya Du, Assistant Professor of Computer Science, The University of Texas at Dallas \,·\, \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu} \,·\, \href{https://xinyadu.github.io}{xinyadu.github.io}\\
+\textbf{Program Officer:} \POline\\
+\textbf{Proposed S\&T Focus Area:} \FocusArea\par}
+\vspace{-3pt}
+{\color{navy}\rule{\linewidth}{0.6pt}}
+
+\head{Problem.} AI agents built on large language models (LLMs) now retrieve documents, query knowledge bases, read images, call tools, and plan multi-step actions with little human supervision. Yet they are still trained mainly on outcomes: a trajectory is rewarded if the final answer is right. Such an agent cannot tell \emph{which} step failed---a misread report, an unsupported inference, a wrong object in an image, or a plan step whose precondition never held---so it cannot judge its own reliability or repair the step that matters. An agent planning a port visit may read the right tide table yet pass the wrong time zone to a calculation; outcome feedback says only that the schedule failed.
+
+\head{Central hypothesis.} Agents can learn \emph{self-assessment}: calibrated, step-level judgments of which of their own steps are supported, by what evidence, and how they fail. We hypothesize that verifiers trained on \emph{typed, evidence-linked} process feedback---synthesized cheaply by injecting controlled errors into correct trajectories---will localize agent errors better than outcome rewards or untyped step scores, and that planning with these verifiers will raise success per unit of computation on unseen task compositions.
+
+\head{Research thrusts.}
+\begin{itemize}
+\item \textbf{Checkable steps over heterogeneous knowledge.} Represent each agent step as a claim, the evidence it uses (passage, knowledge-base fact, image region, or tool output), and its preconditions. Build these records from unlabeled sources by entity, event, and relation extraction, and synthesize multi-step tasks and trajectories from knowledge bases (extending our process-guided fine-tuning).
+\item \textbf{Typed process verifiers learned from synthetic errors.} Generalize our FG-PRM error-injection method from mathematical reasoning to agent trajectories: insert errors of known type (fabricated or misread evidence, invalid inference, violated precondition, visual entity, attribute, and relation errors) and train verifiers to detect, type, and localize them. Study which synthetic error distributions transfer to natural agent errors and how to keep verifier confidence calibrated under shift.
+\item \textbf{Self-assessment for planning and repair.} Use verifier outputs at inference time to choose the next action (continue, retrieve, re-examine, backtrack, or abstain) and in training as dense rewards for reinforcement learning (RL), extending our hierarchical process rewards for agentic search (HiPRAG). Characterize when self-assessment helps planning in large action spaces and when it induces over-caution.
+\end{itemize}
+
+\head{What is new.} Process reward models are trained mostly on mathematics with untyped labels, and agents mostly on outcome rewards. We study typed, evidence-linked self-assessment for agents acting over text, knowledge bases, and images, coupled to planning and repair.
+
+\head{Evaluation.} Entity- and event-centric multi-hop question answering (QA; MEQA, MuSiQue), agentic retrieval and tool-use benchmarks, and image-grounded QA, with held-out knowledge compositions. Measures: typed error detection and localization, calibration of self-assessed confidence, task success at matched computation, unnecessary tool calls, and repair success. Baselines: outcome-reward RL, untyped process reward models, and LLM self-critique.
+
+\head{Naval relevance.} Navy autonomous and decision-support agents must work with minimal supervision on unfamiliar planning, logistics, and ISR tasks, where an undetected wrong step is costly. An agent that can report ``step 4 converted the tide time without a confirmed time zone'' can request a targeted check or hand off to an operator instead of failing silently. The project addresses the program's interests in reasoning with uncertain information and self-assessment, and in integrating knowledge, learning, reasoning, and planning.
+
+\head{PI foundation.} FG-PRM, process reward models trained on synthetic hallucinations (EMNLP Findings 2025); HiPRAG, hierarchical process rewards for agentic retrieval (ICLR 2026); process-guided fine-tuning for complex QA (Amazon Research Award); MEQA, event-centric multi-hop QA (NeurIPS 2024); FaithScore and FGAIF, fine-grained vision-language hallucination evaluation and feedback (EMNLP Findings 2024; TMLR 2025). The PI holds a 2024 NSF CAREER award and, as a postdoc, led system integration for the RESIN team's DARPA KAIROS delivery system, which achieved top performance among participating teams.
+
+\end{document}

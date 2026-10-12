@@ -1,0 +1,62 @@
+% One-page brief topic description for ONR Program Officer discussion (FY27 ONR YIP).
+% Compile with XeLaTeX from this folder or the repository root:
+%   latexmk -xelatex -cd -interaction=nonstopmode ONR/claude_src/claude_rebecca_goolsby.tex
+\documentclass[11pt]{article}
+\usepackage[letterpaper,top=0.55in,bottom=0.5in,left=0.72in,right=0.72in]{geometry}
+\usepackage{fontspec}
+\IfFileExists{ben/fonts/EBGaramond-Regular.ttf}{\def\cnfont{ben/fonts/}}{%
+  \IfFileExists{../../ben/fonts/EBGaramond-Regular.ttf}{\def\cnfont{../../ben/fonts/}}{\def\cnfont{../ben/fonts/}}}
+\setmainfont{EBGaramond-Regular.ttf}[Path=\cnfont,BoldFont=EBGaramond-Bold.ttf,
+  ItalicFont=EBGaramond-Italic.ttf,BoldItalicFont=EBGaramond-BoldItalic.ttf,Numbers=Lining]
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\definecolor{navy}{HTML}{1F3A5F}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\emergencystretch=2em
+\newcommand{\head}[1]{{\color{navy}\textbf{#1}}\enspace}
+\setlist[itemize]{leftmargin=1.1em,itemsep=1.5pt,topsep=1pt,parsep=0pt}
+\hypersetup{pdftitle={Event-Grounded, Manipulation-Aware RAG},pdfauthor={Xinya Du}}
+
+% ---- Edit the Program Officer block here --------------------------------------
+\newcommand{\POline}{Dr.\ Rebecca Goolsby, ONR Code 341, Analytics, Modeling and Simulation}
+\newcommand{\FocusArea}{Human and Biological Systems --- Warfighter Decision Superiority and Readiness}
+% -------------------------------------------------------------------------------
+
+\begin{document}
+\begin{center}
+{\fontsize{15.5}{18.5}\selectfont\bfseries\color{navy} Event-Grounded, Manipulation-Aware Retrieval-Augmented\\[1pt] Generation for Regional Situation Awareness\par}
+\vspace{3pt}
+{\small\itshape Brief topic description for Program Officer discussion \,·\, FY27 ONR Young Investigator Program (N0001426SF004)\par}
+\end{center}
+\vspace{-2pt}
+{\small
+\textbf{PI:} Xinya Du, Assistant Professor of Computer Science, The University of Texas at Dallas \,·\, \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu} \,·\, \href{https://xinyadu.github.io}{xinyadu.github.io}\\
+\textbf{Program Officer:} \POline\\
+\textbf{Proposed S\&T Focus Area:} \FocusArea\par}
+\vspace{-3pt}
+{\color{navy}\rule{\linewidth}{0.6pt}}
+
+\head{Problem.} Local and regional situation awareness depends on synthesizing a fast-moving stream of news, official statements, social media, and reports that are incomplete, out of date, contradictory, and sometimes deliberately misleading. Retrieval-augmented generation (RAG) can summarize such streams, but it retrieves isolated passages. It merges stale and current statements, treats a claim as well supported because many outlets copied it, and cannot say which conclusions rest on a single unverified source. Adversaries exploit exactly these weaknesses through deception, coordinated amplification, and obfuscation.
+
+\head{Central hypothesis.} Grounding retrieval and generation in an explicit, incrementally updated \emph{event graph}---who did what, when, and where, linked by temporal and causal relations and annotated with provenance---will reduce unsupported and stale claims in generated situation reports. It will also make manipulation detectable as structural anomalies: many reports that trace to one origin, or timelines that cannot all be true.
+
+\head{Research thrusts.}
+\begin{itemize}
+\item \textbf{Contest-aware event graphs.} Building on our event-graph extraction, add what contested reporting requires: provenance, timestamp, and confidence for every attribute; explicit handling of corrections and retractions; and source-dependence links recording which reports derive from which. Update the graph incrementally as reports arrive.
+\item \textbf{Graph-grounded generation with claim-level verification.} Generate reports in which every claim links to event-graph nodes and is labeled supported, contested, or unverified. Detect manipulation signals---copied or coordinated reports, temporal and causal inconsistencies, implausible departures from typical event patterns---and train generators with fine-grained, claim-level feedback that penalizes unsupported, stale, or over-certain statements.
+\item \textbf{Ground-truthed synthetic information environments.} Use event schemas learned from historical timelines to generate controllable report streams with known ground truth, including delays, contradictions, and planted deceptive reports. These streams serve as a data reservoir for training and stress-testing the first two thrusts, and as inject material for exercises and wargames in the information environment; varying scenario parameters supports what-if exploration.
+\end{itemize}
+
+\head{What is new.} Graph-based RAG organizes retrieved text but rarely tracks provenance, currency, or dependence among sources, and manipulation detection is mostly studied apart from generation. We build these signals into generation itself and provide ground-truthed environments that measure robustness to deception.
+
+\head{Evaluation.} Public multi-source timelines (e.g., natural disasters, maritime and port incidents) with annotated event graphs, plus synthetic streams with known manipulation. Measures: claim support and currency, detection of planted and coordinated reports, timeline accuracy, and expert ratings of report usefulness. Baselines: standard and iterative RAG, LLM self-critique, and claim-level fact-checking pipelines.
+
+\head{Naval relevance.} Fleet and Marine Corps staffs need regional situation awareness for humanitarian assistance and disaster relief, port and littoral operations, and operations in the information environment, where adversaries contest the information itself. The project addresses the program's interests in AI-enhanced RAG for warfighter performance, decision tools for the information environment, information reservoirs, and wargaming and exercise simulation.
+
+\head{PI foundation.} QA-based event extraction (EMNLP 2020; QAEvent, EACL Findings 2024); document-level event and argument extraction (ACL 2020; NAACL 2021; ACL 2022); document-level causal relation extraction (EMNLP Findings 2024); MEQA, event-centric multi-hop QA (NeurIPS 2024); and schema-guided event prediction in the DARPA KAIROS RESIN system (NAACL Demo 2022), which achieved top performance among participating teams. FG-PRM and FGAIF supply fine-grained feedback methods. The PI's 2024 NSF CAREER award studies consistent event graphs from long documents; this project addresses new questions: contested and manipulated sources, claim-level verification in generation, and synthetic information environments.
+
+\end{document}
