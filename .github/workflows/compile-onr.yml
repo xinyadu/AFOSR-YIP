@@ -39,5 +39,6 @@ jobs:
           git add ONR/predrag/main.pdf ONR/behzad/main.pdf ONR/morrison/main.pdf ONR/goolsby/main.pdf
           if ! git diff --cached --quiet; then
             git commit -m "Compile ONR YIP one-page PDFs"
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
