@@ -1,5 +1,5 @@
 \documentclass[10pt,letterpaper]{article}
-\usepackage[margin=0.83in]{geometry}
+\usepackage[margin=0.80in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
@@ -7,26 +7,25 @@
 \usepackage{titlesec}
 \pagestyle{empty}
 \setlength{\parindent}{1em}
-\setlength{\parskip}{3pt}
-\setlist[itemize]{leftmargin=1.25em,topsep=2pt,itemsep=3pt,parsep=0pt}
-\titlespacing*{\section}{0pt}{5pt}{2pt}
+\setlength{\parskip}{2.2pt}
+\setlist[itemize]{leftmargin=1.35em,topsep=3pt,itemsep=4pt,parsep=0pt}
+\titlespacing*{\section}{0pt}{4pt}{1pt}
 \titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
 \begin{document}
 \begin{center}
-{\large\bfseries Knowledge-Grounded Reasoning and Self-Improvement for Autonomous AI Agents\par}
-\vspace{2pt}
-{\small Xinya Du, University of Texas at Dallas \quad | \quad ONR FY27 YIP Brief Topic Description\par}
-{\small Prospective Program Officer: Dr. Behzad Kamgar-Parsi}
+{\normalsize\bfseries Knowledge-Grounded Reasoning and Self-Improvement for Autonomous AI Agents\par}
 \end{center}
-\section*{Overview}
-Autonomous agents must learn unfamiliar facts, plan multi-step investigations, use tools, and revise conclusions as new observations arrive. Language models may complete a task with invalid intermediate steps or apply a correct rule under the wrong conditions. Training on final outcomes alone provides limited information about which reasoning behaviors are trustworthy and transferable.
-\par\noindent\textbf{Central research question:} How can agents acquire unfamiliar external knowledge, learn checkable reasoning processes, and autonomously verify and revise conclusions?
-\par We propose three connected research thrusts:
+\noindent\textbf{Overview}\quad Autonomous AI agents must reason about unfamiliar situations, retrieve relevant knowledge, use external tools, and update decisions as evidence changes. Although large language models can generate sophisticated solution traces, their intermediate steps may rely on invented facts, ignore critical conditions, or use valid scientific rules in inappropriate settings. An agent can even reach a correct final answer through invalid reasoning. Because outcome-based learning primarily rewards the final result, it offers little guidance about which steps are reliable or how agents should recover from a failure.
+
+\par
+We propose knowledge-grounded, self-improving reasoning agents that explicitly connect intermediate inferences to observations, structured relations, and verifiable rules. Our central hypothesis is that external knowledge representations and fine-grained process feedback, combined with tool-based checking, can improve transfer to unfamiliar tasks beyond outcome supervision alone. Three interrelated challenges motivate the project: (1) organizing heterogeneous knowledge and applicability conditions for compositional reasoning; (2) generating scalable, trustworthy process-level learning signals; and (3) deciding when and how to verify and repair an agent's intermediate assumptions.
+\par\noindent We will pursue three interrelated research threads:
 \begin{itemize}
-\item \textbf{Structured knowledge for open-world reasoning.} We will retrieve and extract entities, events, relations, scientific principles, and contextual constraints from heterogeneous sources. Compact evidence records will distinguish observations, inferred relations, unresolved assumptions, and the conditions under which a scientific or logical rule applies.
-\item \textbf{Scalable process-guided learning.} We will synthesize multi-hop reasoning tasks and intermediate trajectories from structured knowledge, including controlled reasoning errors. Fine-grained evaluators will identify factual, contextual, and logical failures. Process rewards will guide candidate-step selection and iterative training; we will test transfer to held-out knowledge compositions.
-\item \textbf{Verification-driven autonomous reasoning.} Agents will form hypotheses or plans, expose required assumptions, select evidence-retrieval and symbolic or executable tools, and use diagnostic feedback to repair unsupported steps. Scientific hypothesis discovery, spanning literature retrieval and executable validation, will provide a challenging testbed for open-world generalization.
+\item \textbf{Knowledge acquisition and structured grounding:} We will retrieve and extract entities, events, relations, scientific principles, and contextual constraints from diverse texts. Lightweight evidence structures will preserve source provenance and distinguish reported facts from inferred links. In particular, the system will represent the conditions under which a principle or computational procedure is applicable, enabling agents to identify missing prerequisites before drawing conclusions.
+\item \textbf{Synthetic reasoning trajectories and process-guided learning:} We will synthesize multihop questions and reasoning sequences from structured knowledge, then generate controlled erroneous variants involving fabrication, context mismatch, invalid logic, and rule misuse. Fine-grained process reward models will classify errors at intermediate steps and provide feedback for candidate-step selection, iterative distillation, and policy improvement. We will study how reliably synthetic supervision transfers beyond the relations and domains used to construct training problems.
+\item \textbf{Verification-driven autonomous inquiry and revision:} Agents will formulate candidate conclusions or hypotheses, retrieve missing facts, select symbolic or executable checks, and diagnose failures. Rather than restarting after every failed attempt, an agent will update the affected assumption and propagate corrections through subsequent reasoning. Scientific hypothesis discovery provides an especially demanding testbed: the agent must retrieve unfamiliar literature, propose a plausible novelty, and test claims through executable or structured validation.
 \end{itemize}
-\noindent\textbf{Evaluation.} Evaluation will measure reasoning-step validity, outcome accuracy, error localization, repair success, transfer across conditions, and computational cost. Baselines will include retrieval-augmented agents, outcome-only learning, conventional process reward models, and tool-using agents without explicit condition tracking.
-\par\noindent\textbf{Naval relevance and potential impact.} The project develops foundational methods for intelligent autonomous agents capable of reasoning under incomplete information and checking why a proposed action or conclusion is justified, with potential long-term relevance to Naval autonomy and planning.
+\noindent\textbf{Keywords:} Autonomous agents, Knowledge grounding, Process reward models, Verifiable reasoning.
+\par\noindent\textbf{Intellectual Merit}\quad The research will advance compositional generalization, synthetic process supervision, and tool-aware reasoning under explicit constraints. We will measure intermediate-step validity, held-out knowledge transfer, successful error repair, final-task performance, and verification cost, comparing against retrieval-only agents, outcome-based training, conventional reward models, and unstructured tool use.
+\par\noindent\textbf{Naval Relevance and Broader Impact}\quad These foundational methods may improve the reliability of future Naval autonomous information-analysis and planning systems that must operate on incomplete knowledge and explain why an action is warranted. We will use public knowledge-intensive tasks and reproducible agent environments to support broader research reuse.
 \end{document}
