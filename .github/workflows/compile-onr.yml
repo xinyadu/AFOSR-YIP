@@ -38,7 +38,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add ONR/predrag/main.pdf ONR/behzad/main.pdf ONR/morrison/main.pdf ONR/goolsby/main.pdf
           if ! git diff --cached --quiet; then
-            git commit -m "Compile ONR YIP one-page PDFs"
-            git pull --rebase origin main
-            git push origin HEAD:main
+            git fetch origin main
+            git reset --mixed origin/main
+            git add ONR/predrag/main.pdf ONR/behzad/main.pdf ONR/morrison/main.pdf ONR/goolsby/main.pdf
+            if ! git diff --cached --quiet; then
+              git commit -m "Compile ONR YIP one-page PDFs"
+              git push origin HEAD:main
+            fi
           fi
