@@ -1,0 +1,32 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.83in]{geometry}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\pagestyle{empty}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.25em,topsep=2pt,itemsep=3pt,parsep=0pt}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\begin{document}
+\begin{center}
+{\large\bfseries Evidence-Grounded Reasoning Agents for Human-AI Decision Support\par}
+\vspace{2pt}
+{\small Xinya Du, University of Texas at Dallas \quad | \quad ONR FY27 YIP Brief Topic Description\par}
+{\small Prospective Program Officer: Dr. Jeffrey Morrison}
+\end{center}
+\section*{Overview}
+Human decisions often depend on information distributed across lengthy reports and changing document collections. Sources can describe different aspects of an event, contradict one another, or become obsolete as conditions change. A fluent summary does not necessarily reveal the provenance, uncertainty, and event relationships needed for a reliable decision.
+\par\noindent\textbf{Central research question:} How can AI agents maintain consistent knowledge of evolving events and help people make verifiable, evidence-supported decisions?
+\par We propose three connected research thrusts:
+\begin{itemize}
+\item \textbf{Construct consistent dynamic event knowledge.} Building on our work on long-document event extraction, we will identify events, participants, attributes, and temporal or causal relations across documents. Open-schema question-answer representations will preserve source provenance, handle new information incrementally, and detect global logical or temporal conflicts.
+\item \textbf{Reason over evidence with explicit uncertainty.} We will connect multi-hop inferences to structured event knowledge and supporting passages, distinguishing reported observations from inferred relationships and unresolved assumptions. Reasoning checks will localize contradictions and prevent an uncertain chain from being presented as a verified conclusion.
+\item \textbf{Support human-directed verification.} People will be able to inspect the evidence behind an assessment, question a disputed inference, and request a targeted follow-up check. We will study how evidence displays and explanations affect decision accuracy, harmful adoption of incorrect advice, and appropriate use of correct advice.
+\end{itemize}
+\noindent\textbf{Evaluation.} We will evaluate event-knowledge completeness and consistency, provenance quality, temporal updates, and reasoning faithfulness. Human studies will assess decision quality, verification effort, and appropriate reliance, compared with document summarization, conventional retrieval-augmented assistance, and agents without structured event records.
+\par\noindent\textbf{Naval relevance and potential impact.} The proposed methods may inform information-intensive command decision support and collaborative situation understanding, in which incoming reports change the evidential basis for an assessment and users need inspectable reasoning rather than unsupported certainty.
+\end{document}
