@@ -1,32 +1,42 @@
+% FY27 ONR YIP informal brief topic description. Compile using pdflatex.
+% Scientific framing tailored for morrison. Morrison PO line deliberately configurable.
 \documentclass[10pt,letterpaper]{article}
-\usepackage[margin=0.80in]{geometry}
+\usepackage[letterpaper,top=0.60in,bottom=0.60in,left=0.76in,right=0.76in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
-\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\definecolor{accent}{HTML}{233D57}
 \pagestyle{empty}
-\setlength{\parindent}{1em}
-\setlength{\parskip}{2.2pt}
-\setlist[itemize]{leftmargin=1.35em,topsep=3pt,itemsep=4pt,parsep=0pt}
-\titlespacing*{\section}{0pt}{4pt}{1pt}
-\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.16em,topsep=2pt,itemsep=2pt,parsep=0pt}
+\emergencystretch=1.5em
+\newcommand{\head}[1]{\textcolor{accent}{\textbf{#1}}\enspace}
+\newcommand{\POline}{Dr. Jeffrey Morrison (assignment to verify) --- Command Decision Making}
+\newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Intelligent and Collaborative Agents}
 \begin{document}
 \begin{center}
-{\normalsize\bfseries Evidence-Grounded Reasoning Agents for Human-AI Decision Support\par}
+{\fontsize{13.2}{15}\selectfont\bfseries\color{accent} Keeping a Common Event Picture from Out-of-Order Reports\par}
+\vspace{2pt}
+{\small Brief topic description for Program Officer discussion --- ONR FY27 YIP (N0001426SF004)}
 \end{center}
-\noindent\textbf{Overview}\quad Decision makers often need to reconcile long reports, partial observations, and successive updates describing the same evolving situation. Different sources may emphasize different events, report inconsistent times, or supersede an earlier account. Generative AI can summarize these materials, but a concise narrative may hide missing evidence, temporal inconsistencies, or unsupported inferences. Moreover, a seemingly clear explanation can encourage excessive reliance on an incorrect AI assessment. Trustworthy human-AI decision support requires both an accurate internal representation of events and a means for people to inspect and challenge the evidence behind conclusions.
-
-\par
-We propose evidence-grounded reasoning agents that maintain structured representations of evolving reports and support interactive verification. The main challenges are: (1) extracting and updating consistent event knowledge across long and heterogeneous documents; (2) reasoning over temporal, causal, and provenance relations while preserving uncertainty; and (3) designing interactions that improve decision quality rather than simply increasing confidence in an AI adviser. Our NSF CAREER work on event-graph extraction and our research on faithful reasoning provide the methodological foundation.
-\par\noindent We will pursue three interrelated research threads:
+\vspace{-2pt}
+{\small \textbf{Xinya Du}, Assistant Professor, Computer Science, The University of Texas at Dallas \quad \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu}\par
+\textbf{Program Officer:} \POline\par
+\textbf{Proposed ONR S\&T Focus Area:} \FocusArea\par}
+\vspace{2pt}\hrule\vspace{5pt}
+\head{Problem.} Command staff may receive the same event reports in different orders, with duplicate, delayed, or missing messages. One ship hears that a harbor has reopened; another receives only yesterday's closure notice; a shore node receives a correction first. Conventional retrieval-augmented assistants process whatever each node has seen, so they can build inconsistent narratives even after the same reports eventually arrive. Event extraction from a centralized collection does not solve the additional problem of synchronizing evolving text-derived knowledge across disconnected nodes.
+\par\head{Central hypothesis.} Representing extracted events as mergeable updates with explicit uncertainty and source identity will make distributed information fusion less sensitive to arrival order and improve the answers delivered under communication limits. Unlike our NSF CAREER work on extracting consistent event graphs from a collection, the new problem is convergence and bandwidth-aware sharing across nodes.
+\par\head{Research plan.}
 \begin{itemize}
-\item \textbf{Dynamic and consistent event knowledge:} We will extract events, participants, attributes, and temporal or causal links from long document collections using open-schema, question-answer-based representations. We will connect related observations across documents, preserve provenance and conflicting descriptions, and develop incremental update methods that distinguish genuine changes from inconsistent reports. Global constraints will flag impossible sequences and relationships without silently deleting uncertain information.
-\item \textbf{Multi-step inference grounded in changing evidence:} We will integrate event knowledge with retrieved passages to answer questions requiring reasoning across sources and time. Each inference will carry its evidential dependencies, distinguishing direct observations, derived relationships, and assumptions. Stepwise verification will identify contradictions and missing support; when reports conflict, the agent will represent alternative explanations rather than force an unjustified single answer.
-\item \textbf{Interactive evidence inspection for better human decisions:} We will enable users to query why a conclusion was reached, inspect relevant passages, challenge a specific step, and request additional verification. Agents will revise their assessments when updates arrive or a user reveals a missing constraint. We will investigate presentation strategies for provenance and uncertainty, explicitly testing whether they decrease harmful reliance on incorrect recommendations while preserving appropriate reliance on correct ones.
+\item \textbf{Extract updateable event facts, not overwritten summaries.} Turn messages into small event updates recording actors, places, times, relationships, corrections, and the underlying source. Maintain explicit alternatives when accounts conflict. Event identities and links will be revised conservatively as additional evidence arrives, so a late message does not silently erase a newer correction.
+\item \textbf{Fuse reports independently of arrival order.} Design associative, commutative, and idempotent update rules for the symbolic event records, while studying the harder cases introduced by uncertain entity coreference and LLM extraction. We will measure when nodes receiving identical evidence converge and identify the conditions in which extraction ambiguity prevents convergence.
+\item \textbf{Share information by its effect on live questions.} Express critical information requirements as standing queries over event knowledge. Under a limited channel, prioritize updates that change the answer, remove a high-impact contradiction, or narrow uncertainty. Each node will answer with traceable supporting reports and an indication of what it has not yet received.
 \end{itemize}
-\par A motivating scenario involves multiple successive reports of an evolving event: an initial report gives a provisional time, a later source corrects it, and another document refers to a related consequence. A trustworthy agent must preserve the chronology, retain both statements with provenance, and explain what changed and why. We will construct such controlled information-update scenarios and measure whether the agent distinguishes revised observations from contradictory evidence. In human studies, participants will answer decision-relevant questions with and without evidence inspection to identify which explanations genuinely improve performance.
-\par\noindent\textbf{Keywords:} Human-AI decision support, Event graphs, Evidence provenance, Temporal reasoning.
-\par\noindent\textbf{Intellectual Merit}\quad The project will combine consistent event representation, provenance-preserving reasoning, and human-centered verification into a coherent decision-support framework. Evaluation will cover event-graph accuracy, temporal consistency, update robustness, faithfulness of explanations, and the quality and cost of decisions in controlled user studies, with flat summarization and standard retrieval-augmented assistants as baselines.
-\par\noindent\textbf{Naval Relevance and Broader Impact}\quad The work is relevant to Naval command decision making and situation understanding when reports arrive over time and users must evaluate the evidential basis for an assessment. We will use unclassified document collections and controlled information-update scenarios and disseminate reusable evaluation resources.
+\head{Evaluation and expected outcomes.} Multi-document event corpora built from KAIROS-style scenarios and MAVEN-ERE, plus MEQA questions, will be partitioned across simulated nodes with message delay, duplication, loss, and reordering. We will compare graph agreement, query accuracy, delivery latency, and bandwidth against centralized extraction and last-writer-wins fusion.
+\par\head{Naval relevance.} During distributed maritime operations, an afloat unit and a shore command may have different reports of a port closure or a changing local security incident. Updating the shared event picture using small, question-relevant messages would support a common tactical picture even across intermittent links. The framing aligns with the Command and Control portfolio's interests in uncertain, out-of-sequence information and automated integration across information stores.
+\par\head{Prior work and PI qualifications.} QA-based event extraction (EMNLP 2020) and MEQA (NeurIPS 2024) provide foundations for converting reports into events and questions. The PI holds a 2024 NSF CAREER award on consistent event graphs and, as a postdoc, led the RESIN team's DARPA KAIROS delivery-system integration, which achieved top performance among participating teams.
 \end{document}
