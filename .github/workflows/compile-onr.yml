@@ -7,6 +7,10 @@ on:
       - '.github/workflows/compile-onr.yml'
   workflow_dispatch:
 
+concurrency:
+  group: compile-onr-main
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
