@@ -40,7 +40,7 @@ jobs:
           git fetch origin main
           git reset --mixed origin/main
           for d in predrag behzad morrison goolsby; do
-            git add -A -- "ONR/$d/main.pdf" "ONR/$d/white_paper_${d}.pdf"
+            git add -A -- "ONR/$d/white_paper_${d}.pdf"
           done
           if ! git diff --cached --quiet; then
             git commit -m "Build named ONR YIP one-page PDFs"
