@@ -1,21 +1,19 @@
 % FY27 ONR YIP informal brief topic description. Compile using pdflatex.
 % Scientific framing tailored for predrag. Morrison PO line deliberately configurable.
 \documentclass[11pt,letterpaper]{article}
-\usepackage[letterpaper,top=0.47in,bottom=0.43in,left=0.67in,right=0.67in]{geometry}
+\usepackage[letterpaper,top=0.60in,bottom=0.58in,left=0.72in,right=0.72in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
-\usepackage[authoryear,round]{natbib}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=black,urlcolor=blue]{hyperref}
 \definecolor{accent}{HTML}{233D57}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{1.3pt}
-\setlist[itemize]{leftmargin=1.13em,topsep=0.5pt,itemsep=0.5pt,parsep=0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.13em,topsep=2pt,itemsep=2pt,parsep=0pt}
 \emergencystretch=1.5em
-\setlength{\bibsep}{0pt}
 \newcommand{\head}[1]{\textbf{#1}\enspace}
 \newcommand{\POline}{Dr. Predrag Neskovic, Code 311 --- Mathematical Data Science}
 \newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Machine Learning}
@@ -40,10 +38,6 @@
 \end{itemize}
 \head{Evaluation and expected outcomes.} MEQA (NeurIPS 2024), MuSiQue, and MATH will test multihop and quantitative reasoning; synthetic shared-prefix and shared-source perturbations will reveal known dependencies. We will report risk--coverage and accuracy--compute curves, calibration, and error control under held-out domains. Baselines include self-consistency and fixed-budget PRM best-of-N search.
 \par\head{Naval relevance.} On a bandwidth-limited shipboard planning assistant, a question about safe passage may be answerable after one verified check or may need escalation because every candidate draws from the same stale source. The system will decide whether another local computation or external evidence request is worth its power, time, and connectivity cost. This addresses Mathematical Data Science priorities in principled information integration and the inference--computation trade-off.
-\par\head{Prior work and PI qualifications.} Our synthetic-error verifier FG-PRM \citep{li2025fgprm}, peer-judgment framework PRD \citep{li2024prd}, and hierarchical process rewards for retrieval, HiPRAG \citep{wu2026hiprag}, provide the starting point. The PI holds a 2024 NSF CAREER award and led RESIN's DARPA KAIROS delivery-system integration as a postdoc; the team achieved top performance among participants.
-\vspace{-2pt}
-{\fontsize{7.1}{7.5}\selectfont\noindent\textbf{References}\par\vspace{-8pt}
-\bibliographystyle{abbrvnat}
-\bibliography{references}
-}
+\par\head{Prior work and PI qualifications.} Our synthetic-error verifier FG-PRM (\href{https://doi.org/10.18653/v1/2025.findings-emnlp.228}{\textcolor{blue}{Li et al., 2025}}), peer-judgment framework PRD (\href{https://arxiv.org/abs/2307.02762}{\textcolor{blue}{Li et al., 2024}}), and hierarchical process rewards for retrieval, HiPRAG (\href{https://arxiv.org/abs/2510.07794}{\textcolor{blue}{Wu et al., 2026}}), provide the starting point. The PI holds a 2024 NSF CAREER award and led RESIN's DARPA KAIROS delivery-system integration as a postdoc; the team achieved top performance among participants.
+
 \end{document}
