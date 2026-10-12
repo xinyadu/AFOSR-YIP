@@ -18,7 +18,7 @@ jobs:
       - name: Install LaTeX
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends texlive-latex-base texlive-latex-recommended
+          sudo apt-get install -y --no-install-recommends texlive-latex-base texlive-latex-recommended texlive-fonts-recommended poppler-utils
       - name: Compile four one-page concepts
         run: |
           set -e
