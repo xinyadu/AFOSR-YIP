@@ -1,32 +1,42 @@
+% FY27 ONR YIP informal brief topic description. Compile using pdflatex.
+% Scientific framing tailored for behzad. Morrison PO line deliberately configurable.
 \documentclass[10pt,letterpaper]{article}
-\usepackage[margin=0.80in]{geometry}
+\usepackage[letterpaper,top=0.60in,bottom=0.60in,left=0.76in,right=0.76in]{geometry}
 \usepackage{mathptmx}
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage{enumitem}
-\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\definecolor{accent}{HTML}{233D57}
 \pagestyle{empty}
-\setlength{\parindent}{1em}
-\setlength{\parskip}{2.2pt}
-\setlist[itemize]{leftmargin=1.35em,topsep=3pt,itemsep=4pt,parsep=0pt}
-\titlespacing*{\section}{0pt}{4pt}{1pt}
-\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[itemize]{leftmargin=1.16em,topsep=2pt,itemsep=2pt,parsep=0pt}
+\emergencystretch=1.5em
+\newcommand{\head}[1]{\textcolor{accent}{\textbf{#1}}\enspace}
+\newcommand{\POline}{Dr. Behzad Kamgar-Parsi, Code 311 --- Artificial Intelligence / Machine Learning, Reasoning and Intelligence}
+\newcommand{\FocusArea}{Artificial Intelligence and Autonomy --- Intelligent and Collaborative Agents}
 \begin{document}
 \begin{center}
-{\normalsize\bfseries Knowledge-Grounded Reasoning and Self-Improvement for Autonomous AI Agents\par}
+{\fontsize{13.2}{15}\selectfont\bfseries\color{accent} Agents That Know When They Are Wrong: Typed Self-Assessment for Autonomous Reasoning\par}
+\vspace{2pt}
+{\small Brief topic description for Program Officer discussion --- ONR FY27 YIP (N0001426SF004)}
 \end{center}
-\noindent\textbf{Overview}\quad Autonomous AI agents must reason about unfamiliar situations, retrieve relevant knowledge, use external tools, and update decisions as evidence changes. Although large language models can generate sophisticated solution traces, their intermediate steps may rely on invented facts, ignore critical conditions, or use valid scientific rules in inappropriate settings. An agent can even reach a correct final answer through invalid reasoning. Because outcome-based learning primarily rewards the final result, it offers little guidance about which steps are reliable or how agents should recover from a failure.
-
-\par
-We propose knowledge-grounded, self-improving reasoning agents that explicitly connect intermediate inferences to observations, structured relations, and verifiable rules. Our central hypothesis is that external knowledge representations and fine-grained process feedback, combined with tool-based checking, can improve transfer to unfamiliar tasks beyond outcome supervision alone. Three interrelated challenges motivate the project: (1) organizing heterogeneous knowledge and applicability conditions for compositional reasoning; (2) generating scalable, trustworthy process-level learning signals; and (3) deciding when and how to verify and repair an agent's intermediate assumptions.
-\par\noindent We will pursue three interrelated research threads:
+\vspace{-2pt}
+{\small \textbf{Xinya Du}, Assistant Professor, Computer Science, The University of Texas at Dallas \quad \href{mailto:xinya.du@utdallas.edu}{xinya.du@utdallas.edu}\par
+\textbf{Program Officer:} \POline\par
+\textbf{Proposed ONR S\&T Focus Area:} \FocusArea\par}
+\vspace{2pt}\hrule\vspace{5pt}
+\head{Problem.} A tool-using AI agent can follow a plausible plan while making a single consequential mistake: it misreads an image, selects a wrong entity in a database, or passes a time in the wrong time zone to a navigation calculation. Outcome-based training reveals only that the final plan failed. Generic self-critique often cannot pinpoint the first unsupported step or tell what evidence would resolve it. Consider a port-entry assistant that reads the right tide table but uses local time as UTC; the error is neither a missing fact nor a defective calculator, but a violated precondition.
+\par\head{Central hypothesis.} Agents trained to identify the type, location, and evidence behind their own mistakes will make better next-action decisions than agents trained only on final outcomes or an undifferentiated process score. The new object is learned self-assessment across tool calls and multimodal observations, rather than static claim checking or scientific-rule applicability.
+\par\head{Research plan.}
 \begin{itemize}
-\item \textbf{Knowledge acquisition and structured grounding:} We will retrieve and extract entities, events, relations, scientific principles, and contextual constraints from diverse texts. Lightweight evidence structures will preserve source provenance and distinguish reported facts from inferred links. In particular, the system will represent the conditions under which a principle or computational procedure is applicable, enabling agents to identify missing prerequisites before drawing conclusions.
-\item \textbf{Synthetic reasoning trajectories and process-guided learning:} We will synthesize multihop questions and reasoning sequences from structured knowledge, then generate controlled erroneous variants involving fabrication, context mismatch, invalid logic, and rule misuse. Fine-grained process reward models will classify errors at intermediate steps and provide feedback for candidate-step selection, iterative distillation, and policy improvement. We will study how reliably synthetic supervision transfers beyond the relations and domains used to construct training problems.
-\item \textbf{Verification-driven autonomous inquiry and revision:} Agents will formulate candidate conclusions or hypotheses, retrieve missing facts, select symbolic or executable checks, and diagnose failures. Rather than restarting after every failed attempt, an agent will update the affected assumption and propagate corrections through subsequent reasoning. Scientific hypothesis discovery provides an especially demanding testbed: the agent must retrieve unfamiliar literature, propose a plausible novelty, and test claims through executable or structured validation.
+\item \textbf{Build checkable records of agent actions.} Represent each step as an action or claim paired with its evidence, preconditions, and observed result. Text passages, structured knowledge, tool outputs, and image regions will have distinct evidence types. Synthetic multistep examples from entity and event relations will provide controlled training cases, while unlabeled trajectories will expose diverse natural behaviors.
+\item \textbf{Learn typed self-assessment from synthetic errors.} Inject controlled fabrication, entity mismatch, invalid inference, wrong-tool-argument, visual-attribute, and relational errors into otherwise plausible trajectories. Train a verifier to classify the failure type and localize the earliest consequential error. We will test transfer from synthetic to natural errors and calibration when a new visual scene or tool is encountered, adapting the fine-grained feedback of our vision-language work.
+\item \textbf{Turn self-assessment into selective action.} Use the agent's diagnosis to decide whether to re-read evidence, inspect an image crop, fix a tool input, backtrack, or ask for help. Process rewards can guide trajectory improvement, but we will penalize unnecessary retries and missed deadlines. This makes self-assessment a component of planning, not merely an explanation produced after the answer.
 \end{itemize}
-\par We will construct controlled task families in which familiar rules must be recombined under unfamiliar constraints and in which a previously useful scientific assumption is no longer valid. These cases will test whether improvements reflect genuine compositional reasoning or memorization of synthetic examples. We will separately measure the accuracy of the agent's stated assumptions, its choice of verification tool, and its ability to revise a partially correct trajectory while preserving valid reasoning steps. We will also study how the value of process feedback changes with limited data, noisy verification tools, and increasing task complexity.
-\par\noindent\textbf{Keywords:} Autonomous agents, Knowledge grounding, Process reward models, Verifiable reasoning.
-\par\noindent\textbf{Intellectual Merit}\quad The research will advance compositional generalization, synthetic process supervision, and tool-aware reasoning under explicit constraints. We will measure intermediate-step validity, held-out knowledge transfer, successful error repair, final-task performance, and verification cost, comparing against retrieval-only agents, outcome-based training, conventional reward models, and unstructured tool use.
-\par\noindent\textbf{Naval Relevance and Broader Impact}\quad These foundational methods may improve the reliability of future Naval autonomous information-analysis and planning systems that must operate on incomplete knowledge and explain why an action is warranted. We will use public knowledge-intensive tasks and reproducible agent environments to support broader research reuse.
+\head{Evaluation and expected outcomes.} MEQA and MuSiQue will test text/knowledge composition, while ScienceQA and a tool-use testbed with controlled argument errors will test multimodal grounding and corrective actions. We will measure typed-error localization, calibrated self-assessment, repair success, and task success per tool call against outcome-only training and untyped PRMs.
+\par\head{Naval relevance.} A maritime support agent combining chart imagery, arrival notices, and a tide calculation must be able to notice a wrong image reference or time conversion before recommending an action. Typed self-assessment can trigger the particular recheck required instead of either trusting a bad plan or restarting everything. The work matches this portfolio's explicit interests in reasoning under uncertainty, self-assessment, visual understanding, and integration of knowledge with planning.
+\par\head{Prior work and PI qualifications.} FG-PRM (Findings of EMNLP 2025) develops synthetic process errors; HiPRAG (ICLR 2026) studies process rewards in agentic retrieval; FaithScore (Findings of EMNLP 2024) and FGAIF (TMLR 2025) study visual-language grounding and feedback. The PI holds a 2024 NSF CAREER award and led system integration for the RESIN team's high-performing DARPA KAIROS delivery system as a postdoc.
 \end{document}
