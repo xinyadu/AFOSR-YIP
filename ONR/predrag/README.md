@@ -6,4 +6,4 @@
 
 The LaTeX uses 11pt Times-style type, letter-sized paper, and compact headings, modeled on the PI's NSF one-page summary. This is an *informal brief topic description*, not a formal ONR white paper.
 
-Build locally: `pdflatex -interaction=nonstopmode -halt-on-error main.tex` inside this folder. The repository workflow also verifies `pdfinfo white_paper_predrag.pdf` reports one page.
+Build locally: `pdflatex -interaction=nonstopmode -halt-on-error main.tex` produces `main.pdf` inside this folder. The GitHub workflow checks that it is exactly one page, then publishes it under the descriptive `white_paper_*.pdf` filename.
