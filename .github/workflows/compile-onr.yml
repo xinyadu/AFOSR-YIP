@@ -23,10 +23,10 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends texlive-latex-base texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra poppler-utils
-      - name: Compile Predrag one-page concept
+      - name: Compile Behzad one-page concept
         run: |
           set -e
-          for d in predrag; do
+          for d in behzad; do
             cd "ONR/$d"
             pdflatex -interaction=nonstopmode -halt-on-error main.tex
             if grep -Fq 'Overfull \hbox' main.log; then
@@ -45,7 +45,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main
           git reset --mixed origin/main
-          for d in predrag; do
+          for d in behzad; do
             git add -A -- "ONR/$d/white_paper_${d}.pdf"
           done
           if ! git diff --cached --quiet; then
