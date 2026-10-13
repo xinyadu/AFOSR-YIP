@@ -1,0 +1,11 @@
+# LaTeX build products; reviewed PDFs are tracked explicitly.
+**/build/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.xdv
