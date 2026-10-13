@@ -94,3 +94,15 @@ This section supersedes conflicting descriptions of the earlier versions above. 
 | NOFO and outreach deadline reminders | No emails or applications were sent. Verify S&T Focus Area, eligibility, current-and-pending support, and grants details before submission. |
 
 **Open questions for PI:** Is the Krebs/C2 contact preferred to an ONR-confirmed Command Decision Making officer? Should the directory remain named `morrison` or become `krebs`? Would you prefer the self-reported KAIROS ranking phrasing, which currently has no independent public corroboration? Please verify eligibility and disclosure status with your institution and ONR by the applicable deadline.
+
+
+## Final pre-send quality-control pass — October 12, 2026
+
+- **Verified sources against official sites:** Neskovic / Mathematical Data Science, Kamgar-Parsi / Machine Learning, Reasoning and Intelligence, Krebs / Command and Control, and Goolsby / Analytics, Modeling and Simulation; checked the S&T Focus Area terminology against FY27 NOFO N0001426SF004.
+- **Verified links and records:** FG-PRM (Findings of EMNLP 2025), QA-based event extraction (EMNLP 2020), FaithScore (Findings of EMNLP 2024, ACL Anthology paper 290), FGAIF (TMLR 2025, OpenReview `Qhfw5CUVd7`), RESIN-11 (NAACL 2022 Demo), and the 2023 Amazon Research Award. Where a performance ranking was not independently documented, the one-pagers state only the PI's KAIROS role.
+- **Scientific clarity:** Neskovic's central object is information from dependent reasoning traces and the computation--accuracy frontier; Kamgar-Parsi ties typed diagnosis to both inference-time repair and policy improvement; Krebs studies the conditions for order-invariant distributed fusion and decision-relevant sharing; Goolsby explicitly tests deception without rewarding blanket abstention, using GDELT, TREC CrisisFACTS, and controlled scenarios.
+- **Layout problem detected:** prior builds had an overfull PI/contact header on every page (about 26 points beyond the text width). Split it into separate affiliation and contact lines and introduced an overfull-box check in the PDF workflow.
+- **Repository navigation:** updated the ONR index to link the actual current PDFs rather than obsolete Markdown concepts. Updated the legacy `morrison/` README to identify the intended recipient as William Krebs; preserved filenames and paths for continuity.
+- **Unchanged by design:** all concepts remain informal **brief topic descriptions**, with 11-point Times-style body text, black titles, blue clickable author-year links, and no bibliography block in the PDFs. No `claude_*` files were altered.
+
+Before externally circulating the fourth note, consider whether to rename the exported attachment `Du_UTD_ONR-YIP_Krebs.pdf` (strongly advised) and whether to rename the legacy source folder later. Also confirm appointment eligibility and disclose the relevant funded/pending work in the single submitted YIP application.
