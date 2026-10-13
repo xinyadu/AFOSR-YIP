@@ -106,3 +106,14 @@ This section supersedes conflicting descriptions of the earlier versions above. 
 - **Unchanged by design:** all concepts remain informal **brief topic descriptions**, with 11-point Times-style body text, black titles, blue clickable author-year links, and no bibliography block in the PDFs. No `claude_*` files were altered.
 
 Before externally circulating the fourth note, consider whether to rename the exported attachment `Du_UTD_ONR-YIP_Krebs.pdf` (strongly advised) and whether to rename the legacy source folder later. Also confirm appointment eligibility and disclose the relevant funded/pending work in the single submitted YIP application.
+
+
+## Revised Neskovic positioning — collective reasoning and evaluation (October 12, 2026)
+
+**Current version supersedes the earlier Neskovic framing and overlap-driven rationale above.** The PI chose to frame the ONR concept around *Trustworthy Collective Reasoning and Evaluation for AI Agents*, not chiefly statistical analysis of one model's reasoning traces or inference-time compute constraints. The ONR portfolio's explicit interests in large-scale information evaluation (including peer review and deliberation), collaborative problem solving, and expertise assessment provide a direct scientific bridge. Diyi Yang's 2024 ONR YIP project, *Optimizing Collaborative and Trustworthy Interaction between Humans and AI Agents*, under Predrag Neskovic is a framing precedent, not evidence that the two projects share detailed aims.
+
+The three research aims now are (1) **reliable peer evaluation** across imperfect judges, sparse labels, task difficulty, self-preference, and shared-source errors; (2) **productive reasoning through structured disagreement**, including independent evidence checks, minority-view recovery, and detection of harmful consensus; and (3) **agent improvement from collective feedback**, where verified critiques guide future policy improvement and decisions to revise, escalate, or abstain. Statistical identifiability and uncertainty remain essential methods. Compute and interaction cost are evaluation metrics, not the central scientific objective.
+
+The user explicitly does **not** want artificial differentiation from AFOSR or between notes sent to different POs. Conceptual overlap may be appropriate when a project is genuinely relevant to multiple portfolios. This does not remove normal disclosure or non-duplication requirements for any eventual formal submission.
+
+The Neskovic one-pager keeps a specific logistics-record example, independent performance measures and failure-mode baselines, 11-point type, clickable citations, and the label *brief topic description*. Other ONR notes are unchanged by this positioning decision.
