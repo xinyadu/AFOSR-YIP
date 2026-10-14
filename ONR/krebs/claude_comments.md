@@ -1,4 +1,4 @@
-# Claude comments: Krebs note (`morrison/` folder)
+# Claude comments: William Krebs concept note (historically in `morrison/`)
 
 Reviewer: Claude · 2026-10-13 · Scope: `ONR/morrison/main.tex` on `main` at `08ae8ff`; the text last changed in `e7f2146` (Oct 13, 02:15 PT). Checked against Dr. Krebs's Command and Control program page, the FY27 NOFO focus-area list, and every linked paper and dataset. *(judgment)* marks my opinion; everything else is checked.
 
