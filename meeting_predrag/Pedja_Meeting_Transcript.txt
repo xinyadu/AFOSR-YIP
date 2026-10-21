@@ -1,0 +1,421 @@
+MEETING WITH PEDJA — TIMESTAMPED TRANSCRIPT
+
+Source: chat with Pedja(1).m4a
+Recording length: 31:46
+Language: English
+
+AUTOMATED DRAFT
+This transcript was produced by speech recognition and has not been verified
+word for word against the audio. Timestamps are approximate. Speakers are not
+individually labeled, and a timestamped paragraph may contain more than one
+speaker. A few obvious technical terms have been corrected using context.
+Inferred names and selected uncertain phrases are marked in brackets; other
+recognition errors may remain. The transcript covers the uploaded recording,
+which opens during a discussion.
+
+[00:00–00:21]
+I see. Yeah, that's a great judgment. And I think we were going to mention this both from the
+test time, I mean, prompting perspective, and also we will conduct training to discourage such
+phenomena during this training process.
+
+[00:24–00:35]
+Some agents might gain to win and persuade the other agents to take the final solution. And
+that is a problem I was...
+
+[00:35–01:04]
+Discussing with another senior colleague, and she works on persuasion and collusion. Yeah, and
+sometimes the agent might collude to come up with a final decision. And so we are taking
+insights from the persuasion and collusion community and detect such agents with bad intents
+and to make sure that we can achieve at a better collective level.
+
+[01:06–01:22]
+Well, you're right, if you want to, if all those agents are trustworthy and reliable and all
+that, of course you want to share as much information and feedback with all of them. But
+sometimes we don't know if you should. So there's a balance, really.
+
+[01:23–01:41]
+Yeah, that's right. So I plan to add in this proposal, both on detecting such agents with
+malicious persuasion and collusion, and also how we can train this collective of agents to
+discourage such behaviors.
+
+[01:43–02:03]
+Yeah, I was discussing with the potential senior personnel on how to tackle this. I think the
+program allows senior personnel, but it doesn't allow co-PIs, it allows senior personnel. So
+I'll probably ask a question by the end of this presentation about senior personnel.
+
+[02:06–02:31]
+Yeah, so basically there are three research goals or three thrusts. And the first, as I
+mentioned, at the first step we want to learn whom to trust for each task, which involves, for
+example, detecting the malicious agents who are persuading or who are colluding with other
+agents.
+
+[02:31–02:56]
+And then we compare the independent judgments and we estimate each agent's strengths and its
+honesty and whether it is colluding with other agents. And we also account for the shared
+mistakes across the agents. So, for example, the three agents used us.
+
+[02:56–03:18]
+The same outdated information and should not give us three independent reasons to trust an
+answer. Well, it depends. The fact that they use the same information doesn't necessarily mean
+that they would come to the same conclusion. It depends on the way they reason about sources,
+really.
+
+[03:18–03:48]
+Yeah, that's right. So we are requiring the agents to provide with us the reasoning trace and
+explanations. And we are also trying to, we are deriving or we are explaining, we are inducing
+basically based on both the reasoning trace and over the thinking process and also the final
+outcome. So how can you, in some situation you can...
+
+[03:48–04:20]
+Identify mistakes. But sometimes you can't because sometimes you don't have ground truth. Yeah,
+that's right. So we are proposing how we can fix them. We might use majority vote and sometimes
+we might use human curations. And sometimes we also consider that we will probably test such
+
+[04:20–04:45]
+A search collective of agents on a small subset of human curated documents with certain
+determined outcomes. And we are probably also training the collective of agents on a set of
+labeled documents with true outcomes. Okay.
+
+[04:51–05:05]
+For the second thrust, we focus on one disputed claim and then the agents check it with
+independent evidence and keep the answer and revise it or flag the uncertainty.
+
+[05:06–05:21]
+And if the evidence is still insufficient, they ask for [unclear; possibly 'review']. And the
+goal is to let the correct minority or the correct subset of agents help the group without
+forcing the agreements.
+
+[05:25–05:48]
+Yes, so a more concrete explanation for Thrust 2 would be we basically ask when the
+disagreement actually improves the reasoning. We will align the intermediate claims in the
+dependent-generated solutions and then we locate such disagreements that could change the
+answer and then we choose a targeted check.
+
+[05:49–06:01]
+And the check might retrieve an independent record and test a counterexample or use
+verification tool. So to answer your question,
+
+[06:02–06:30]
+Previously, we might also use like counter-example where we explicitly label data from human to
+verify whether to get the information whether they are honest or correct. And also at inference
+time, we might also use like verification tool or retrieval augmented generation tool or
+reference-free evaluations for testing whether the outputs are correct.
+
+[06:33–06:54]
+For the reference-free evaluation, we don't really need the label data to detect the
+correctness. And sometimes people also use LLM as a judge for providing the unlabeled
+evaluations. So we will also leverage limited human audits or human curations or labels to
+check the correctness.
+
+[06:55–07:19]
+To go back to this slide, we will then decide whether to revise or abstain the original answer.
+The goal is to recover correct minority or subset challenges while limiting harmful changes to
+initially correct answers.
+
+[07:20–07:44]
+For example, the initial correct answers, the answers might be correct, so it's not being
+influenced. But after the process, we might detect that the initial answer is incorrect or
+imperfect. So the disagreement resolving process helps improve the answer's quality. And
+finally, different agent profiles are empirical questions.
+
+[07:45–08:00]
+And because a simulated diversity might still produce correlated critiques. So what do you mean
+limiting harmful answer flips? What do you mean flips?
+
+[08:02–08:24]
+You say key test to recover correct minority answers by limiting harmful answer flips. What do
+you mean by flips? Yeah, flips is like during this agent discussion process, some agents might
+change their decisions. For example, we propose a peer discussion.
+
+[08:25–08:50]
+Paradigm in a previous work. So it's like multiple agents debate with others and then come up
+with a decision. And so after this process, suppose we detect that some of the agents are
+convinced by the dishonest or incorrect agent's decisions, and these types of phenomena are
+called flips. But sometimes flips can be good.
+
+[08:50–09:18]
+For example, you have the agent that was incorrect and then it flips you to correct. Yeah,
+that's right. So here we are trying to detect the harmful answer flips, a flip especially from
+when the honest agent is being, a decision is being affected by the dishonest or incorrect
+subset of agents. So we will discuss more details here in the [unclear; possibly 'full
+proposal'].
+
+[09:19–09:24]
+And we...
+
+[09:24–09:52]
+And thirdly, we want the group of agents to learn from the corrections and the debating or the
+discussion process. And we will save the verified feedback and use it to choose the better
+peers or better checks and also the better conclusion or final collective decision for certain
+complicated tasks. And then we use the final conclusion and to train the agents on both
+
+[09:53–10:17]
+On both evaluations and decision-making process and also its general capabilities. So such type
+of corrections or collective decision-making results help future decisions as well as the
+answer in front of us.
+
+[10:19–10:50]
+So finally, the decision is being utilized. Apart from being utilized, we also use such signals
+to retrain the model potentially with reinforcement learning and improve this collective
+decision-making process and also the general capabilities of the agents. So we have some
+previous work on agent peer discussion, peer ranking, and
+
+[10:51–11:12]
+We also released a leaderboard based on agents' capabilities based on the collective evaluation
+of a set of agents. For example, we might have top 10 large language models on the leaderboard.
+
+[11:17–11:42]
+With the most capable agent, we find that it's usually self-favoring its own answers or
+decisions. So we designed this Peer Rank framework and formed a large language model judge
+panel and used that panel for evaluating the answers, and we created a leaderboard across the
+10 large language models.
+
+[11:43–12:12]
+And we also have done work in interactive question-answering evaluations. So basically, from
+that work, we designed personalized agents and assigned the agents with different personalities
+or personas of the crowd. So this work can help us basically simulating this multi-agent
+
+[12:13–12:22]
+Multi-agent settings where we can assign different personas of the crowd to our AI agents.
+
+[12:23–12:49]
+And for the final work, we propose how to enable the language model agents to learn from the
+process-level feedback. For example, after the collective decisions, we might have this
+transcript or the record or reasoning process on how the collective agents have arrived at the
+final decision.
+
+[12:50–13:14]
+And using this process-guided reward or process-guided learning, we can better instruct the
+models to come up with better decision strategies and improve each agent's general
+capabilities. Yes, so we also have some evaluation plans. I'll probably skip this part. Yes,
+so...
+
+[13:16–13:47]
+So that's a very rough idea of the proposal, and I still have some questions. So before that,
+you might have more questions. No, it's fine. It's an important topic. I'll send you a few
+questions, if you can answer them. In the next few days, they'll be great. Because there are so
+many problems that you're addressing here.
+
+[13:49–14:19]
+One is how to design the way or protocol mechanism for agent interaction, collaboration, how to
+detect agents that are dishonest, how to evaluate expertise. And there's so many problems
+there. But I'll send you a list of questions so you can...
+
+[14:19–14:48]
+Try to narrow it down on the top level. What is the main problem to try to solve? And then what
+are the other problems? So it can be a little bit structured. The other thing is there's a lot
+of work done in the area of computational social choice. Ariel Procaccia [name spelling
+inferred] has done a lot of work in that area. I don't know if you're familiar with his work.
+
+[14:50–15:21]
+I can look up the name. Okay. I just sent it to you in the chat. Okay. Sure. I'll check that
+later. Yes. And the question is, how do you assign weights to each reviewer or contributor? How
+do you combine, integrate voting or contribution from each agent or person?
+
+[15:21–15:47]
+Whatever you're analyzing. Because that can be done in many ways, really. It can be majority.
+Yeah, yeah, that's right. So he did some very interesting work recently about panel selection.
+Basically, first, how do you select those? Yeah, I remember his work in game theory, I think.
+Yes, but he moved from game theory into social choice and then into...
+
+[15:48–16:11]
+Peer review, kind of, etc. So, take a look. Very, very nice ideas that are related to what
+you're doing. It would be good to see how your approach differs from his approach. He's in my
+program. Now, I saw that at one slide you had Diyi Yang [name spelling inferred] from Stanford.
+
+[16:12–16:38]
+She's also in my program, and I assume that you wanted to include her as a senior, whatever,
+collaborator or something like that? Yeah, yeah, I asked for her opinions, and she was very
+interested in dishonesty and collusion part. And I was, I was thinking that if, probably I can
+include her as the senior personnel and mentioning this in the proposal. And so the question
+would be, will it exist at...
+
+[16:44–17:03]
+I'm not sure they would add value and I'm not sure that you're even allowed to do that because
+this type of proposal for YIP, it's your work and it's about what you propose.
+
+[17:04–17:33]
+For the regular proposals and grants, it would add value. But for this, I really don't know.
+But you are going to be evaluated. You can put a Nobel laureate as a collaborator. That would
+not change, probably, the evaluation. Because we evaluate you, your past work and your proposed
+work. That's what we evaluate, true. So anything else, collaborators?
+
+[17:34–18:01]
+We don't, we don't evaluate that at all. I see. I see. Yeah, it makes sense. I understand the
+priority now. So the, uh, I think the BAA or the call for proposal [wording uncertain], they
+discard, uh, they disallow co-PIs, but they allow senior personnel. Well, you could probably,
+but, uh, we never really evaluate, well, when we evaluate your proposals, it's a panel.
+
+[18:01–18:22]
+And I've never heard that anyone is really mentioning senior advisors. I see. Because that way,
+really, it's about you and young investigators. If you want to include really some smart people
+to help you, it's basically...
+
+[18:23–18:42]
+It's defeating the purpose, really. If you're from good school or you have your wealth
+connected, then you would have an advantage. We don't want that. We want to evaluate each of
+you independently. Yeah, yeah, that's right. I see. But you can continue to work with [name
+unclear; likely Diyi]. It's fine. It doesn't.
+
+[18:43–19:10]
+But it wouldn't matter really for the proposal. But I can still talk to her and draw some
+insights from our conversation. And you can publish papers with her and based on the ONR grant
+or whatever if you get it. It doesn't matter really. But it wouldn't really help add value at
+all. And in this case it might actually not only not help but...
+
+[19:11–19:35]
+The opposite, because she's already funded by ONR. So why should we fund another person that is
+including her when she's already funded? It doesn't make sense. It's great to know this.
+Because for that part, they usually value the senior people.
+
+[19:37–20:03]
+To be included because they can provide more connections and more expertise. Is it for young
+investigators who are DARPA? For DARPA, it's a general program. But I've never applied to it.
+Yeah, for general program in our case it's also valuable. But for YIP program it doesn't. Yeah,
+I understand.
+
+[20:04–20:22]
+So the three thrusts and the topics you mentioned are very interesting. So you mentioned this.
+So you will send me a few topics that you are more interested in, right? No, I'll send you
+three questions and if you can rewrite this.
+
+[20:23–20:48]
+These slides that you showed me and answer those questions. Basically, I'll ask you a few
+questions and you can answer them. It could be like a white paper, whatever you can think of
+it. But it can be one page or four pages max or whatever. But that's what I'm going to send
+you, the list of questions. I see. Great. So you are interested in...
+
+[20:49–21:03]
+In most of the parts that I introduced. For example, peer evaluation and collective learning,
+decision-making. Did you do any work in peer evaluation for...
+
+[21:06–21:32]
+Evaluation of papers, conference papers, journal papers, because this could be used for that as
+well. Yeah, that's right. I have some scientific discovery work, and we published the survey on
+this topic. And we are, and yeah, we are, I'm having some collaborations with a professor from
+Penn State on peer evaluations using language model agents.
+
+[21:34–21:55]
+For peer review? For the peer review process. So the survey is called... You can send me the
+draft or whatever. So who's the person from Penn State? Wenpeng Yin [name spelling inferred].
+He's also a junior professor.
+
+[22:02–22:29]
+survey work on how do we use language model for scientific discovery, experiments,
+implementation, paper writing, and finally peer reviewing. So we do have some research. We are
+also having some more concrete research work on this. So I'm very interested. Great. Thank you
+for the draft. Great. Okay. Yeah, it's interesting. It's important work.
+
+[22:31–22:59]
+I'll send you the list of questions, and we'll go from there. Yeah, and the final question is,
+I asked another program manager, and he mentions that the CV is very important. So now you know
+my CV, and also you know the major topics, and I'm going to answer your questions. And I would
+like to know if possible my possibility of winning the grants. Winning the YIP award? Yes.
+
+[23:00–23:25]
+Very small. I see. It's very competitive. I see. We receive many, many proposals and we can
+distribute only a few awards. NSF has more awards than us, so they can distribute more. It's
+easier to NSF. Each agency is given a...
+
+[23:26–23:55]
+It's a limited and specific number of awards. DARPA is given set of awards, NSF, ARO, AFOSR,
+ONR. It just happened that ONR is given, I think, [unclear] awards. So it makes it much more
+difficult to get ONR YIP award than NSF. That doesn't mean that you cannot win it, but it's
+extremely competitive. I see. But it's not just you, it's for everyone.
+
+[23:55–24:20]
+So the first round is comparing the CV and then decide whether to move forward, right? No,
+there's no first and second round. It's just one round. So you send your proposal and then you
+get nominated or not. And then the panel is going through.
+
+[24:21–24:48]
+Those nominated proposals and looking at your CV, your proposal and everything and deciding
+which ones to award and everyone votes. So it's hard to predict how panel members will think of
+your proposed work because you'll be competing with other people that are, I don't know.
+
+[24:49–25:18]
+Different schools from, you know, addressing different problems, have different number of
+papers, citations, whether they have paper in NeurIPS or science or who knows. So it's very
+hard to predict who you would be competing with. I see. But everyone votes and then the top
+whatever, I don't know how many, four or five for the whole department wins. For example...
+
+[25:18–25:41]
+A few years ago, maybe two years ago, something like that, [Name unclear; likely Diyi] was
+competing with other qualified assistant professors, and she was able to win. But in some other
+years, you know, people from, I don't know, your area might not win.
+
+[25:42–26:11]
+So who knows? It's really hard to predict. I see. So there might be no awarded proposals for
+certain areas because the decision is a joint decision across areas. Yeah. I see. So the panel
+is a very research from engineering, physics, math, machine learning, computer vision, all
+kinds of things.
+
+[26:13–26:39]
+How much is the CV deciding during this process? A lot, really a lot. For the CV, what we look
+at is the awards that you received so far, and you did receive some nice awards, which is good.
+The number of publications, citations, you have about almost 5,000.
+
+[26:40–27:07]
+There are people that get 30,000, but that doesn't mean that you have to have 30,000, 20,000.
+There are people that get 3,000 and they award it. What's really important is what is your past
+achievement? What is the impact of your work in the past? Did you have a single or few
+publications that made an impact in your field? And what was the problem that you solved?
+
+[27:08–27:28]
+And that's really important. And how, what was your contribution? Because some people publish
+those important papers with their advisors. And for us, it's difficult to disentangle that to
+say, okay, it's his work or it was his work, but really heavily influenced by the advisor.
+
+[27:29–27:57]
+So that's why we prefer to have you show that after you finish your PhD, you manage to
+independently of your advisor made publications and significant publications. I see. I see. But
+how do I denote this in my CV? You are not requiring the recommendation letters, right? Yeah,
+you don't denote that in your CV. You denote that in a...
+
+[27:58–28:26]
+In a summary that you sent me. So you can send me two paragraphs, half a page of your previous
+work and you tell me, okay, this is what I did in my previous work and this is the significant
+discovery or paper or research or log algorithm, proof, whatever. And you say, why is this
+significant and how that changed the field, you can change it in any way.
+
+[28:28–28:59]
+So that you send to me. And then I can provide that to the panel and say, look, this guy did
+this in the past and this is really significant or not. So that's why you have to align with
+one program officer's program. Because that program officer will speak for you. In that case,
+if you go through me, then you send me that page. You argue why you're one of the best people,
+you know,
+
+[29:00–29:27]
+And then you tell me why the research that you did in the past is really significant and
+important. Then you also send me one paragraph to say, half a page, why do you think that what
+you're proposing is really important and that you're the only one that can really solve that
+problem and that it will have an impact in the scientific field and how is that relevant to
+Navy.
+
+[29:28–29:54]
+And then again, I argue there in front of the panel, okay, this guy applied through my program,
+and this is the importance of his future work. I see, I see. And that is after the application?
+No, this is before you submit, so you submit your proposal to ONR official site.
+
+[29:54–30:21]
+You send me that information that I told you about previous work, importance, impact of the
+future work. You send it to me, to my email at ONR. And then I go through your description and
+I go to the paper that you cited that you did in the past that was very important. I read it
+and try to understand what's going on, et cetera, so I can present it.
+
+[30:22–30:49]
+I see. I see. And yeah, that makes sense. So that is after submitting my package and I will
+send it to you directly. You can just send it to me before you. It doesn't matter really. But
+it should be around that time. I see. So I have time to prepare to argue about you. I mean, to
+explain what you did and what you're planning to do, etc.
+
+[30:50–31:21]
+Each program manager has their own field. You can't send it to someone who's funding physics
+because they have no clue what you did. They don't do machine learning. Yeah. Yeah, these are
+my questions. And do you have any other suggestions? No, that's all. No, that's all. And if you
+have other questions, you're always free to email me.
+
+[31:22–31:41]
+Yeah, sure. Please send me the questions that you mentioned. Yeah, yeah. Okay, great. Thank you
+for doing this work. It's important, and good luck. Thanks. Okay, bye-bye. Yeah, great. That's
+very important.
