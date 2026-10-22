@@ -72,7 +72,7 @@ Our approach rests on one idea: use checks to decide whom to trust, to settle di
 \draw[arr] (ck.west) -- (ck.west -| r3.east);
 \draw[arr] (r3) -- node[lab, right]{training} (ag);
 \end{tikzpicture}
-\caption{Overview. Debate finds the step on which agents disagree; an automatic check settles it when possible, otherwise a costly one (RG2). Checks also build track records (RG1) and training rewards (RG3).}
+\caption{Overview. RG1 weighs agents by their checked record; RG2 settles disputes by checking the step on which agents differ, automatically when possible; RG3 rewards messages that checks confirm.}
 \label{fig:overview}
 \end{figure}
 
