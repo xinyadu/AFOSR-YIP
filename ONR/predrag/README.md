@@ -14,14 +14,16 @@
 - Citations are blue author-year, e.g. (Li et al., 2024a).
 - Each task now has one core method, following the structure of the PI's NSF proposals and the Joshi and Chen ONR YIPs. Extra components from v3 move to the full proposal as sub-directions.
 - The central problem no longer mentions the checking budget. Checks are the approach, not part of the problem.
-- A one-figure overview shows how the checks feed the three research goals.
+- Section 1 explains why not every claim is checked: trusted checks cannot come from the agents themselves, and the costly ones (an expert, a replication, a direct observation) do not get faster as agents do. Cheap automatic checks, such as matching a quotation to its source, run on every claim.
+- Debate settles disputes when one side's evidence passes an automatic check; only claims it cannot settle go to a costly check.
+- A one-figure overview shows how the checks feed the three research goals. The word "crux" is not used.
 
 | Task | Core method | Builds on |
 | --- | --- | --- |
 | 1.1 Weights that count shared mistakes once | Dawid–Skene rater model with shared error factors, fitted on checked claims | PRD (replaces peer-rated weights) |
 | 1.2 Impartial peer ratings | Partition mechanism (Alon et al. 2011; Kurokawa et al. 2015): groups by base model, fixed quota per group, rater weights from checks | PRD, PeerEval |
-| 2.1 Debate that finds the crux | One representative per answer; step-by-step comparison to the first disputed claim, which is checked (extends Jiang et al. 2026 to many agents) | PRD peer discussion, FG-PRM |
-| 2.2 Random checks against collusion | Fixed share of random checks; game analysis of how many checks expose a colluding group | none (theory) |
+| 2.1 Debate settled by evidence | One representative per answer; step-by-step comparison to the first disputed claim; settled if one side's evidence passes an automatic check, otherwise that claim gets a costly check (extends Jiang et al. 2026 to many agents) | PRD peer discussion, FG-PRM |
+| 2.2 Planted tests against collusion | Known-answer cases mixed into real work (as in peer-review studies with inserted errors); agents that fail the same tests are flagged as a group; planted collusion examples test a judge model (AI-control honeypots); random real checks confirm agents behave the same on planted and real work | none |
 | 3 Rewards for verified contributions | RL reward for each message's verified effect on the group's answer | FG-PRM, HiPRAG |
 | Evaluation | Testbeds A–C (math/code, MEQA documents with maritime scenarios, scientific claims) and an AI-control red-team test | MEQA |
 
