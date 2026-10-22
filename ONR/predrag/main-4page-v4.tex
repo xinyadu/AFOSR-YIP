@@ -1,0 +1,155 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage[authoryear,round]{natbib}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage[font=small,labelfont=bf,skip=5pt]{caption}
+\usepackage{needspace}
+\usepackage{flafter}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=black,urlcolor=black]{hyperref}
+\usepackage{titlesec}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\titleformat{\section}{\normalfont\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{10pt}{3pt}
+\newcommand{\rg}[1]{\par\needspace{4\baselineskip}\vspace{3pt}{\normalfont\bfseries\itshape #1}\par\nopagebreak}
+\newcommand{\task}[1]{\textbf{#1}\hspace{0.4em}}
+\hypersetup{pdftitle={Trustworthy Collective Reasoning and Evaluation for AI Agents},pdfauthor={Xinya Du}}
+\begin{document}
+\begin{center}
+{\large\bfseries Trustworthy Collective Reasoning and Evaluation for AI Agents\par}
+\vspace{3pt}
+Xinya Du, The University of Texas at Dallas (xinya.du@utdallas.edu)\par
+ONR FY27 YIP white paper for Dr.\ Predrag Neskovic, Code 311, Mathematical Data Science\par
+\end{center}
+
+\section*{1\quad The problem}
+Five AI agents read shipping reports and are asked whether a cargo vessel has left port. Three say yes and two say no, but the vessel is still in port. Two of the yes answers rest on the same outdated schedule, and the third comes from a compromised agent that argues confidently for yes. Nobody knows in advance which agents to trust. A majority vote picks the wrong answer, and open discussion may do no better, because the compromised agent is persuasive and the two agents with the same source back each other up.
+
+\textbf{The central problem of this project is how a group of AI agents of unknown and correlated reliability, some possibly dishonest, can reach trustworthy decisions.}
+
+The example shows three ways collective judgment fails. Agents that share a mistake are counted as independent votes. A dishonest agent can rate or argue strategically. And discussion rewards confidence and persistence, whether or not they come with evidence.
+
+\section*{2\quad Why it matters}
+AI models now routinely grade one another's work, and multi-agent systems increasingly decide by vote or discussion \citep{zheng2023judging,verga2024juries}. Their agreement is weaker evidence than it looks, because their errors are correlated, and more so as models improve \citep{kim2025correlated,goel2025great}. In one study, nine AI judges carried the information of about two independent judges, and items on which all nine agreed were still wrong 9.1\% of the time \citep{kohli2026nine}. Discussion makes agreement even less informative: one round of debate raised a panel's unanimity from 39.5\% to 95.2\% with almost no change in accuracy \citep{shu2026unanimity}. Agents can also collude. When breaking a checking rule paid more than following it, pairs of agents colluded in 94\% of runs across ten models \citep{shi2026collusion}.
+
+Navy decisions face these problems together. AI tools differ in reliability that is rarely known in advance, the true answer often arrives late, an adversary may compromise an agent or plant false reports, and checking is costly or impossible when connectivity is limited. A commander must still decide whether to act on what the agents agree on.
+
+\section*{3\quad How it is solved today, and the limitations}
+Statistical methods estimate each rater's accuracy without an answer key \citep{dawid1979maximum,whitehill2009whose} and detect sources that copy one another \citep{dong2009dependence}, but they assume that raters err independently or in simple patterns \citep{jaffe2016dependent} and never change their minds. Two recent preprints estimate the accuracy and shared mistakes of AI judges from small trusted sets \citep{hossain2026agreement,zhu2026stopping}, treating the judges as honest and as never talking to one another.
+
+Computational social choice designs mechanisms in which a participant's ratings of others cannot change its own chance of selection, as in impartial peer review \citep{kurokawa2015impartial,alon2011sum}, along with fair panel selection \citep{flanigan2021fair} and robust ranking of AI models \citep{khalaf2026maximal}. \citet{lev2023peernomination} added reliability weights to impartial selection, but their weights reward agreeing with the majority, and the authors note that accurate reviewers can no longer be identified once they are half or fewer. These mechanisms take opinions as given. In our setting there is a correct answer, some claims can be checked, and opinions change as agents talk.
+
+Letting models debate can help \citep{du2024debate}, but majority voting explains most of the gain \citep{choi2025debate}, and a single persuasive adversary can cut a group's accuracy by 10\% to 40\% \citep{amayuelas2024attack}. AI safety research studies debate between two models before a judge \citep{irving2018debate,khan2024debating}. In a recent collaborative version, two models examine the evidence for their conflicting claims until they agree or isolate the crux of their disagreement; this raised weak-judge accuracy to 62.1\%, compared with 49.2\% for debate, but the judges accepted the models' consensus almost every time, even when both were wrong, and the method assumes honest models \citep{jiang2026disagreement}. No existing approach learns whom to trust from checked outcomes while keeping dishonest or colluding agents from steering the decision.
+
+\section*{4\quad Our approach: what is new, and why it will succeed}
+Our approach rests on one idea: check a few claims, partly at random, and use the checks to decide whom to trust, to settle disputes, and to reward good behavior. A check is any trusted way to confirm a claim, such as looking up a record, running code, or matching a quotation to its source. As with random tax audits, no agent knows which claims will be checked, so dishonesty is risky, and the checked claims show whose reports can be trusted. Each agent first answers on its own, as a list of claims that can be checked. Figure~\ref{fig:overview} shows how the three research goals (RGs) use the checks.
+
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}[font=\small,
+  box/.style={draw=black!65, rounded corners=3pt, align=center, inner sep=4pt},
+  top/.style={box, minimum height=1.45cm},
+  bot/.style={box, minimum height=1.0cm},
+  arr/.style={-{Stealth[length=5pt]}, semithick, black!75},
+  lab/.style={font=\footnotesize, text=black!75}]
+\node[top, text width=3.2cm] (ag) {\textbf{AI agents}\\unknown skill, some dishonest};
+\node[top, text width=3.75cm, fill=blue!6, right=0.65cm of ag] (r1) {\textbf{RG1: Weigh}\\trust by checked record};
+\node[top, text width=3.75cm, fill=blue!6, right=0.65cm of r1] (r2) {\textbf{RG2: Resolve}\\debate finds the crux};
+\node[top, text width=2.4cm, right=0.65cm of r2] (dec) {\textbf{Decision}\\with reasons};
+\node[bot, text width=8.15cm, fill=orange!12, anchor=north west] (ck) at ([yshift=-0.7cm]r1.south west) {\textbf{A few checks}: mostly on cruxes, partly at random};
+\node[bot, text width=3.6cm, fill=blue!6, anchor=north] (r3) at ([yshift=-0.7cm]ag.south) {\textbf{RG3: Improve}\\rewards from checks};
+\draw[arr] (ag) -- (r1);
+\draw[arr] (r1) -- (r2);
+\draw[arr] (r2) -- (dec);
+\draw[arr] (r1.south |- ck.north) -- node[lab, right]{records} (r1.south);
+\draw[arr] ([xshift=-5mm]r2.south) -- node[lab, left]{crux} ([xshift=-5mm]r2.south |- ck.north);
+\draw[arr] ([xshift=5mm]r2.south |- ck.north) -- node[lab, right]{verdict} ([xshift=5mm]r2.south);
+\draw[arr] (ck.west) -- (ck.west -| r3.east);
+\draw[arr] (r3) -- node[lab, right]{training} (ag);
+\end{tikzpicture}
+\caption{Overview. A few checks, partly random, give each agent a track record (RG1), settle the crux of each dispute (RG2), and supply the reward for training better agents (RG3).}
+\label{fig:overview}
+\end{figure}
+
+\rg{RG1. Weigh agents by their checked track record}
+Agents differ in skill, often by topic, and agents built on similar models make the same mistakes.
+
+\task{Task 1.1: Weights that count shared mistakes once.} We will estimate each agent's accuracy, and which agents tend to be wrong together, from the claims that were checked. The core method extends the classic rater model of \citet{dawid1979maximum} with shared error factors: agents that keep failing on the same checked claims share a factor, and agreement within a factor adds little evidence. In the vessel example, the two agents that used the same outdated schedule would count about once. Our PRD method weighted each AI judge by how its peers rated its answers \citep{li2024prd}; here the weights come from checks instead.
+
+\task{Task 1.2: Impartial peer ratings.} When agents also rate one another, as on our PeerEval leaderboard, an agent could raise its own standing by downgrading rivals; in PRD, a lower score for a rival also lowered that rival's weight as a judge. We adapt impartial peer review \citep{kurokawa2015impartial} using the partition idea of \citet{alon2011sum}: agents are split into groups, with agents built on the same base model in the same group, and each group fills a fixed number of top places with the members rated highest by agents outside it. An agent's ratings therefore never change its own outcome. \citet{lev2023peernomination} weight raters by agreement with the majority; we weight them by their checked records from Task 1.1.
+
+\rg{RG2. Settle disputes and catch wrong agreement}
+Open discussion rewards persistence, and agreement can hide shared mistakes or collusion.
+
+\task{Task 2.1: Debate that finds the crux.} When weighted agents still disagree, agents with the same answer send one representative, the one with the best checked record, and the representatives compare their arguments step by step until they reach the first claim on which they differ. That claim, the crux, is then checked. Debate theory supports this design: two sides that disagree about a long argument can narrow the dispute to a single step that a judge can check \citep{irving2018debate}. We will extend collaborative disagreement resolution \citep{jiang2026disagreement} from two honest models to many agents, some dishonest, building on the peer discussion in PRD and on FG-PRM, which locates the faulty step in a chain of reasoning \citep{li2025fgprm}. In the vessel example, the crux is whether the port log records a departure.
+
+\task{Task 2.2: Random checks against collusion.} Debate starts only when agents disagree, and agents that share a mistake, or that collude, simply agree, so no crux ever appears. We therefore keep a fixed share of checks for claims drawn at random, so that no claim is ever safe from checking. We will treat this as a game against a dishonest group that knows our policy but not the random draws, and derive how many checks it takes to expose the group before it causes a given number of wrong decisions.
+
+\rg{RG3. Train agents that contribute evidence}
+Rewarding persuasion has produced agents that fabricate quotations \citep{kenton2026debate} and mislead human evaluators \citep{wen2025mislead}.
+
+\task{Task 3: Rewards for verified contributions.} We will train agents with reinforcement learning, rewarding each message by its verified effect: an agent earns reward when its message moves the group toward an answer that a check confirms, and loses reward when it moves the group toward an answer that a check refutes. This extends the PI's process reward models, FG-PRM and HiPRAG \citep{li2025fgprm,wu2026hiprag}, which already give credit to individual steps of reasoning and search, from the steps of one agent to the messages of many. The main experiment compares agents trained to contribute with agents trained to win debates \citep{arnesen2024selfplay}.
+
+\rg{Evaluation: testbeds and a red-team test}
+All data are synthetic or public. We will use (A) math and code problems solved by agents of known skill, some given the same flawed hint; (B) questions over many documents, built with our MEQA pipeline \citep{li2024meqa} and including synthetic maritime scenarios; and (C) scientific claims and peer review, with reproducibility studies as checks. Following the AI control methodology \citep{greenblatt2024control}, a red team will train agents to collude and to cheat only when they expect no check, and we will measure how many wrong decisions get through as the checking budget varies. Baselines are majority vote, standard rater weighting, our PRD, and the closest recent methods \citep{hossain2026agreement,zhu2026stopping,lev2023peernomination,jiang2026disagreement}.
+
+\textbf{What is new.} (i) Trust is learned from checks that agents cannot predict, and agents that share mistakes count once. (ii) Debate serves to find the one claim worth checking, and the check settles the dispute. (iii) Agents are rewarded for evidence that checks confirm, instead of for winning arguments.
+
+\textbf{Why it will succeed.} Theory backs the central idea. Without trusted checks, dishonest raters who imitate honest ones cannot be told apart from them, while a number of checks that does not grow with the number of items suffices even when honest raters are a minority \citep{steinhardt2016avoiding}; occasional spot checks also motivate honest effort better than many schemes that only compare agents with one another \citep{gao2019incentivizing}. Each task starts from a tool the PI's group has built: PRD, the PeerEval leaderboard (peereval-ai.github.io), FG-PRM, or HiPRAG. PRD agrees better with human judgments than the strongest single AI judge \citep{li2024prd}, and HiPRAG cuts unnecessary searches to 2.3\% \citep{wu2026hiprag}. The PI co-led one of five red teams in the Amazon Nova AI Challenge, holds a 2024 NSF CAREER award and a 2023 Amazon Research Award, and as a postdoctoral researcher led system integration for RESIN-11 in DARPA KAIROS.
+
+\section*{5\quad Limitations of our approach}
+If a dispute never reaches a claim that can be checked, or if every agent shares the same misconception, no method can recover the truth; ours then reports the claim as unresolved. Checks can themselves be wrong, so we will measure how sensitive the methods are to faulty checks. A group that cheats only once, on a single high-stakes claim, may succeed before it is caught; we can bound such losses but not rule them out. Agents may also coordinate through hidden signals that monitoring does not catch \citep{mathew2025hidden}, so robustness is shown only for the behaviors we test. Operational Navy use would require Navy data and expert validation.
+
+\section*{6\quad Impact if successful}
+The project will show when agreement among AI agents counts as evidence, and how few checks it takes to make it count. A Navy analyst using several AI tools would get a decision together with its reasons: which tools' judgments carried weight and why, which claim is still disputed, and when a person should look. RG1 handles tools of unknown reliability, RG2 catches wrong answers with few checks, and RG3 yields agents that report evidence instead of arguing to win; all three guard against compromised agents. The same methods would let conferences and funding agencies test impartial, audited peer review with AI reviewers. We will release code, testbeds, and protocols.
+
+\clearpage
+\begingroup
+\small
+\setlength{\bibsep}{3pt}
+\begin{thebibliography}{}
+\setlength{\itemsep}{2.5pt}
+\bibitem[{Alon et~al.(2011)}]{alon2011sum} N. Alon, F. Fischer, A. D. Procaccia, and M. Tennenholtz (2011). \href{https://doi.org/10.1145/2000378.2000390}{Sum of Us: Strategyproof Selection from the Selectors}. TARK, pp. 101--110.
+\bibitem[{Amayuelas et~al.(2024)}]{amayuelas2024attack} A. Amayuelas, X. Yang, A. Antoniades, W. Hua, L. Pan, and W. Y. Wang (2024). \href{https://arxiv.org/abs/2406.14711}{MultiAgent Collaboration Attack: Investigating Adversarial Attacks in Large Language Model Collaborations via Debate}. Findings of EMNLP, pp. 6929--6948.
+\bibitem[{Arnesen et~al.(2024)}]{arnesen2024selfplay} S. Arnesen, D. Rein, and J. Michael (2024). \href{https://arxiv.org/abs/2409.16636}{Training Language Models to Win Debates with Self-Play Improves Judge Accuracy}. arXiv:2409.16636.
+\bibitem[{Choi et~al.(2025)}]{choi2025debate} H. K. Choi, X. Zhu, and S. Li (2025). \href{https://arxiv.org/abs/2508.17536}{Debate or Vote: Which Yields Better Decisions in Multi-Agent Large Language Models?} NeurIPS.
+\bibitem[{Dawid and Skene(1979)}]{dawid1979maximum} A. P. Dawid and A. M. Skene (1979). \href{https://doi.org/10.2307/2346806}{Maximum Likelihood Estimation of Observer Error-Rates Using the EM Algorithm}. Journal of the Royal Statistical Society, Series C (Applied Statistics) 28(1):20--28.
+\bibitem[{Dong et~al.(2009)}]{dong2009dependence} X. L. Dong, L. Berti-Equille, and D. Srivastava (2009). \href{https://doi.org/10.14778/1687627.1687689}{Integrating Conflicting Data: The Role of Source Dependence}. PVLDB 2(1):550--561.
+\bibitem[{Du et~al.(2024)}]{du2024debate} Y. Du, S. Li, A. Torralba, J. B. Tenenbaum, and I. Mordatch (2024). \href{https://proceedings.mlr.press/v235/du24e.html}{Improving Factuality and Reasoning in Language Models through Multiagent Debate}. ICML, PMLR 235:11733--11763.
+\bibitem[{Flanigan et~al.(2021)}]{flanigan2021fair} B. Flanigan, P. G\"olz, A. Gupta, B. Hennig, and A. D. Procaccia (2021). \href{https://doi.org/10.1038/s41586-021-03788-6}{Fair Algorithms for Selecting Citizens' Assemblies}. Nature 596:548--552.
+\bibitem[{Gao et~al.(2019)}]{gao2019incentivizing} A. Gao, J. R. Wright, and K. Leyton-Brown (2019). \href{https://doi.org/10.1016/j.artint.2019.03.004}{Incentivizing Evaluation with Peer Prediction and Limited Access to Ground Truth}. Artificial Intelligence.
+\bibitem[{Goel et~al.(2025)}]{goel2025great} S. Goel, J. Str\"uber, I. A. Auzina, K. K. Chandra, P. Kumaraguru, D. Kiela, A. Prabhu, M. Bethge, and J. Geiping (2025). \href{https://proceedings.mlr.press/v267/goel25b.html}{Great Models Think Alike and this Undermines AI Oversight}. ICML, PMLR 267:19621--19678.
+\bibitem[{Greenblatt et~al.(2024)}]{greenblatt2024control} R. Greenblatt, B. Shlegeris, K. Sachan, and F. Roger (2024). \href{https://arxiv.org/abs/2312.06942}{AI Control: Improving Safety Despite Intentional Subversion}. ICML, PMLR 235:16295--16336.
+\bibitem[{Hossain et~al.(2026)}]{hossain2026agreement} E. Hossain, N. Yousefi, and S.-N. Lim (2026). \href{https://arxiv.org/abs/2609.22512}{Agreement Overstates Evidence: Error Dependence in LLM Judge Consensus}. arXiv:2609.22512.
+\bibitem[{Irving et~al.(2018)}]{irving2018debate} G. Irving, P. Christiano, and D. Amodei (2018). \href{https://arxiv.org/abs/1805.00899}{AI Safety via Debate}. arXiv:1805.00899.
+\bibitem[{Jaffe et~al.(2016)}]{jaffe2016dependent} A. Jaffe, E. Fetaya, B. Nadler, T. Jiang, and Y. Kluger (2016). \href{https://proceedings.mlr.press/v51/jaffe16.html}{Unsupervised Ensemble Learning with Dependent Classifiers}. AISTATS, PMLR 51:351--360.
+\bibitem[{Jiang et~al.(2026)}]{jiang2026disagreement} Y. Jiang, C. Chen, T. Wu, L. Sun, H. Liu, S. Feng, and C. Tan (2026). \href{https://arxiv.org/abs/2607.01251}{Collaborative Disagreement Resolution for Scalable Oversight}. ICML.
+\bibitem[{Kenton et~al.(2026)}]{kenton2026debate} Z. Kenton, L. Janzer, R. Greig, T. H. Teh, K. Tyshchuk, J. Brown-Cohen, H. Edwards, S. Rajamanoharan, N. Y. Siegel, N. Jaques, and R. Shah (2026). \href{https://arxiv.org/abs/2608.17776}{Debate Training Reduces Reward Hacking in RLAIF}. arXiv:2608.17776.
+\bibitem[{Khalaf et~al.(2026)}]{khalaf2026maximal} H. Khalaf, S. L. Wang, D. Halpern, I. Shapira, F. P. Calmon, and A. D. Procaccia (2026). \href{https://arxiv.org/abs/2602.21297}{Robust AI Evaluation through Maximal Lotteries}. ICML.
+\bibitem[{Khan et~al.(2024)}]{khan2024debating} A. Khan et al. (2024). \href{https://proceedings.mlr.press/v235/khan24a.html}{Debating with More Persuasive LLMs Leads to More Truthful Answers}. ICML, PMLR 235:23662--23733.
+\bibitem[{Kim et~al.(2025)}]{kim2025correlated} E. M. Kim, A. Garg, K. Peng, and N. Garg (2025). \href{https://proceedings.mlr.press/v267/kim25e.html}{Correlated Errors in Large Language Models}. ICML, PMLR 267:30038--30066.
+\bibitem[{Kohli(2026)}]{kohli2026nine} G. Kohli (2026). \href{https://arxiv.org/abs/2605.29800}{Nine Judges, Two Effective Votes: Correlated Errors Undermine LLM Evaluation Panels}. arXiv:2605.29800.
+\bibitem[{Kurokawa et~al.(2015)}]{kurokawa2015impartial} D. Kurokawa, O. Lev, J. Morgenstern, and A. D. Procaccia (2015). \href{https://www.ijcai.org/Abstract/15/088}{Impartial Peer Review}. IJCAI, pp. 582--588.
+\bibitem[{Lev et~al.(2023)}]{lev2023peernomination} O. Lev, N. Mattei, P. Turrini, and S. Zhydkov (2023). \href{https://doi.org/10.1016/j.artint.2022.103843}{PeerNomination: A Novel Peer Selection Algorithm to Handle Strategic and Noisy Assessments}. Artificial Intelligence 316:103843.
+\bibitem[{Li et~al.(2024a)}]{li2024prd} R. Li, T. Patel, and X. Du (2024a). \href{https://openreview.net/forum?id=YVD1QqWRaj}{PRD: Peer Rank and Discussion Improve Large Language Model based Evaluations}. TMLR.
+\bibitem[{Li et~al.(2024b)}]{li2024meqa} R. Li, Z. Wang, S. Q. Tran, L. Xia, and X. Du (2024b). \href{https://proceedings.neurips.cc/paper_files/paper/2024/hash/e560a0b22e4432003d0dba63ff8dc457-Abstract.html}{MEQA: A Benchmark for Multi-hop Event-centric Question Answering with Explanations}. NeurIPS 37, Datasets and Benchmarks, pp. 126835--126862.
+\bibitem[{Li et~al.(2025)}]{li2025fgprm} R. Li, Z. Luo, and X. Du (2025). \href{https://aclanthology.org/2025.findings-emnlp.228/}{FG-PRM: Fine-grained Hallucination Detection and Mitigation in Language Model Mathematical Reasoning}. Findings of EMNLP, pp. 4247--4278.
+\bibitem[{Mathew et~al.(2025)}]{mathew2025hidden} Y. Mathew, O. Matthews, R. McCarthy, J. Velja, C. Schroeder de Witt, D. Cope, and N. Schoots (2025). \href{https://aclanthology.org/2025.ijcnlp-long.34/}{Hidden in Plain Text: Emergence and Mitigation of Steganographic Collusion in LLMs}. IJCNLP-AACL, pp. 585--624.
+\bibitem[{Shi et~al.(2026)}]{shi2026collusion} X. Shi, Y. Zhang, and D. Yang (2026). \href{https://arxiv.org/abs/2609.24967}{Emergent Collusion in Long-Horizon LLM Agent Interaction}. arXiv:2609.24967.
+\bibitem[{Shu(2026)}]{shu2026unanimity} Y. Shu (2026). \href{https://arxiv.org/abs/2609.26145}{Unanimity Without Persuasion: A Single Round of Debate Erases the Disagreement That Verification Needs}. arXiv:2609.26145.
+\bibitem[{Steinhardt et~al.(2016)}]{steinhardt2016avoiding} J. Steinhardt, G. Valiant, and M. Charikar (2016). \href{https://arxiv.org/abs/1606.05374}{Avoiding Imposters and Delinquents: Adversarial Crowdsourcing and Peer Prediction}. NeurIPS 29.
+\bibitem[{Verga et~al.(2024)}]{verga2024juries} P. Verga et al. (2024). \href{https://arxiv.org/abs/2404.18796}{Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models}. arXiv:2404.18796.
+\bibitem[{Wen et~al.(2025)}]{wen2025mislead} J. Wen, R. Zhong, A. Khan, E. Perez, J. Steinhardt, M. Huang, S. R. Bowman, H. He, and S. Feng (2025). \href{https://arxiv.org/abs/2409.12822}{Language Models Learn to Mislead Humans via RLHF}. ICLR.
+\bibitem[{Whitehill et~al.(2009)}]{whitehill2009whose} J. Whitehill, P. Ruvolo, T. Wu, J. Bergsma, and J. Movellan (2009). \href{https://proceedings.neurips.cc/paper/2009/hash/f899139df5e1059396431415e770c6dd-Abstract.html}{Whose Vote Should Count More: Optimal Integration of Labels from Labelers of Unknown Expertise}. NeurIPS 22, pp. 2035--2043.
+\bibitem[{Wu et~al.(2026)}]{wu2026hiprag} P. Wu, M. Zhang, K. Wan, W. Zhao, K. He, X. Du, and Z. Chen (2026). \href{https://proceedings.iclr.cc/paper_files/paper/2026/hash/85255cf8f2d2318cc7cffd0b1bc66625-Abstract-Conference.html}{HiPRAG: Hierarchical Process Rewards for Efficient Agentic Retrieval Augmented Generation}. ICLR.
+\bibitem[{Zheng et~al.(2023)}]{zheng2023judging} L. Zheng et al. (2023). \href{https://proceedings.neurips.cc/paper_files/paper/2023/hash/91f18a1287b398d378ef22505bf41832-Abstract.html}{Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena}. NeurIPS 36, Datasets and Benchmarks, pp. 46595--46623.
+\bibitem[{Zhu et~al.(2026)}]{zhu2026stopping} B. Zhu, Y. Xie, and Y. Rao (2026). \href{https://arxiv.org/abs/2608.19802}{Stopping and Routing LLM Judge Panels}. arXiv:2608.19802.
+\end{thebibliography}
+\endgroup
+\end{document}
