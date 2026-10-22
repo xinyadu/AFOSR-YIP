@@ -8,7 +8,6 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta}
 \usepackage[font=small,labelfont=bf,skip=5pt]{caption}
-\usepackage{needspace}
 \usepackage{flafter}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=black,urlcolor=black]{hyperref}
 \usepackage{titlesec}
@@ -17,7 +16,7 @@
 \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
 \titleformat{\section}{\normalfont\normalsize\bfseries}{}{0pt}{}
 \titlespacing*{\section}{0pt}{10pt}{3pt}
-\newcommand{\rg}[1]{\par\needspace{4\baselineskip}\vspace{3pt}{\normalfont\bfseries\itshape #1}\par\nopagebreak}
+\newcommand{\rg}[1]{\par\vspace{3pt}{\normalfont\bfseries\itshape #1}\par\nopagebreak}
 \newcommand{\task}[1]{\textbf{#1}\hspace{0.4em}}
 \hypersetup{pdftitle={Trustworthy Collective Reasoning and Evaluation for AI Agents},pdfauthor={Xinya Du}}
 \begin{document}
@@ -33,7 +32,7 @@ Five AI agents read shipping reports and are asked whether a cargo vessel has le
 
 \textbf{The central problem of this project is how a group of AI agents of unknown and correlated reliability, some possibly dishonest, can reach trustworthy decisions.}
 
-The example shows three ways collective judgment fails. Agents that share a mistake are counted as independent votes. A dishonest agent can rate or argue strategically. And discussion rewards confidence and persistence, whether or not they come with evidence.
+The example shows three ways collective judgment fails. Agents that share a mistake are counted as independent votes. A dishonest agent can rate or argue strategically. And discussion rewards confidence and persistence, whether or not they come with evidence. Checking every claim would prevent these failures, but the checks that can settle a question, such as an expert's review, a replication, or a query to an authoritative source, are slow and costly. AI agents are used precisely because they answer faster and at larger scale than such checks can be done.
 
 \section*{2\quad Why it matters}
 AI models now routinely grade one another's work, and multi-agent systems increasingly decide by vote or discussion \citep{zheng2023judging,verga2024juries}. Their agreement is weaker evidence than it looks, because their errors are correlated, and more so as models improve \citep{kim2025correlated,goel2025great}. In one study, nine AI judges carried the information of about two independent judges, and items on which all nine agreed were still wrong 9.1\% of the time \citep{kohli2026nine}. Discussion makes agreement even less informative: one round of debate raised a panel's unanimity from 39.5\% to 95.2\% with almost no change in accuracy \citep{shu2026unanimity}. Agents can also collude. When breaking a checking rule paid more than following it, pairs of agents colluded in 94\% of runs across ten models \citep{shi2026collusion}.
@@ -48,7 +47,7 @@ Computational social choice designs mechanisms in which a participant's ratings 
 Letting models debate can help \citep{du2024debate}, but majority voting explains most of the gain \citep{choi2025debate}, and a single persuasive adversary can cut a group's accuracy by 10\% to 40\% \citep{amayuelas2024attack}. AI safety research studies debate between two models before a judge \citep{irving2018debate,khan2024debating}. In a recent collaborative version, two models examine the evidence for their conflicting claims until they agree or isolate the crux of their disagreement; this raised weak-judge accuracy to 62.1\%, compared with 49.2\% for debate, but the judges accepted the models' consensus almost every time, even when both were wrong, and the method assumes honest models \citep{jiang2026disagreement}. No existing approach learns whom to trust from checked outcomes while keeping dishonest or colluding agents from steering the decision.
 
 \section*{4\quad Our approach: what is new, and why it will succeed}
-Our approach rests on one idea: check a few claims, partly at random, and use the checks to decide whom to trust, to settle disputes, and to reward good behavior. A check is any trusted way to confirm a claim, such as looking up a record, running code, or matching a quotation to its source. As with random tax audits, no agent knows which claims will be checked, so dishonesty is risky, and the checked claims show whose reports can be trusted. Each agent first answers on its own, as a list of claims that can be checked. Figure~\ref{fig:overview} shows how the three research goals (RGs) use the checks.
+Our approach rests on one idea: check a few claims, partly at random, and use the checks to decide whom to trust, to settle disputes, and to reward good behavior. A check is a trusted way to confirm a claim, such as an expert's review or a query to an authoritative record; cheap automatic tests, such as matching a quotation to its source, are simply run on every claim. As with random tax audits, no agent knows which claims will be checked, so dishonesty is risky, and the checked claims show whose reports can be trusted. Each agent first answers on its own, as a list of claims that can be checked. Figure~\ref{fig:overview} shows how the three research goals (RGs) use the checks.
 
 \begin{figure}[!t]
 \centering
