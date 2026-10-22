@@ -1,35 +1,39 @@
-# Predrag Neskovic — ONR FY27 YIP
+# Predrag Neskovic, ONR FY27 YIP
 
 | Version | LaTeX source | Compiled PDF |
 | --- | --- | --- |
+| **Four-page white paper v3 (current)** | [main-4page-v3.tex](main-4page-v3.tex) | [white_paper_predrag-4page-v3.pdf](white_paper_predrag-4page-v3.pdf) |
+| Four-page white paper v2 | [main-4page-v2.tex](main-4page-v2.tex) | [white_paper_predrag-4page-v2.pdf](white_paper_predrag-4page-v2.pdf) |
+| First four-page draft | [main-4page.tex](main-4page.tex) | [white_paper_predrag-4page.pdf](white_paper_predrag-4page.pdf) |
 | One-page discussion note | [main.tex](main.tex) | [white_paper_predrag.pdf](white_paper_predrag.pdf) |
-| Longer follow-up white paper | [main-4page.tex](main-4page.tex) | [white_paper_predrag-4page.pdf](white_paper_predrag-4page.pdf) |
-| **Four-page white paper v2 (current)** | [main-4page-v2.tex](main-4page-v2.tex) | [white_paper_predrag-4page-v2.pdf](white_paper_predrag-4page-v2.pdf) |
 
-**v2** reorganizes the paper around one central problem: how much a group of AI agents' agreement is worth as evidence, and how to obtain more evidence when agreement is not enough. It has three research goals and a shared testbed task:
-- RG1 covers dependence-aware reliability and impartial, skill-weighted aggregation, building on Kurokawa et al.'s impartial peer review.
-- RG2 resolves disagreements by checking, or by evidence-grounded debate among many agents when a check isn't possible.
-- RG3 learns from verified outcomes and trains agents to contribute rather than to win.
+## What v3 says
 
-It has four pages of main text plus references. All citations were verified. In Overleaf, select `ONR/predrag/main-4page-v2.tex` and compile with pdfLaTeX; no BibTeX is needed.
+The paper answers the six questions Pedja sent after the meeting (see `meeting_predrag/`). Its central problem is how a group of AI agents of unknown expertise, some possibly dishonest, should weight and combine their judgments, resolve their disagreements, and improve from the outcome. Every component is anchored in a small stream of verified checks that agents cannot predict.
 
-The longer white paper responds to the six questions Pedja sent after the meeting: the problem, importance, current approaches and limitations, proposed research, limitations of the proposed solution, and expected impact. It incorporates his feedback on scope, shared sources and reasoning diversity, and the connection to computational social choice. The compiled version has three pages of main text and one page of references, within his four-page limit excluding references.
+| Task | What it does |
+| --- | --- |
+| 1.1 Expertise- and dependence-aware weighting | Per-question-type skill, item difficulty, and shared error factors estimated from coinciding failures on audited claims (extends Dawid and Skene). |
+| 1.2 Impartial aggregation that resists coalitions | Weights only from audits; ratings flow only between groups (Lev et al. 2023; Alon et al. 2011); measures what a coalition can still gain. |
+| 2.1 Decide what to check | Audit allocation as a game against an adversary that knows the policy but not its random draws; mixes random, disagreement, suspicious-agreement, and dishonesty-flag checks. Replaces the earlier RAG-like checking task, which is now a baseline. |
+| 2.2 Debate among many agents, settled by evidence | Compares adversarial debate with collaborative disagreement resolution (Jiang et al. 2026), extended to many agents with one speaker per correlated group, verified quotations, a right to add context, and impartial judging. |
+| 3.1 Update trust without bias | Random audits for unbiased estimates (prediction-powered inference); debate outcomes never become audits; decaying trust. |
+| 3.2 Reward verified contributions | Per-message rewards for verified evidence, separate rewards per agent, random audits of training episodes; compared with training to win. |
+| 4 Testbeds and a red-team evaluation | Math/code, multi-document reports (MEQA pipeline, maritime scenarios), scientific claims and peer review; a control evaluation adapted from the PI's Open Philanthropy design. |
+
+The literature behind these choices is summarized in the project document `claude/literature-review.md`.
 
 ## Overleaf
 
-After syncing from GitHub, select **`ONR/predrag/main-4page.tex`** as the main document and use **pdfLaTeX** for the longer version. It contains its own bibliography and does not require BibTeX or changes to `references.bib`.
-
-Select **`ONR/predrag/main.tex`** to compile the original one-page discussion note.
+After syncing from GitHub, select `ONR/predrag/main-4page-v3.tex` as the main document and compile with pdfLaTeX. The file contains its own bibliography, so BibTeX is not needed.
 
 ## Build locally
 
-From this folder, compile the longer paper twice to resolve citations:
+From this folder, compile twice to resolve citations:
 
 ```bash
-pdflatex -interaction=nonstopmode -halt-on-error -jobname=white_paper_predrag-4page main-4page.tex
-pdflatex -interaction=nonstopmode -halt-on-error -jobname=white_paper_predrag-4page main-4page.tex
+pdflatex -interaction=nonstopmode -halt-on-error -jobname=white_paper_predrag-4page-v3 main-4page-v3.tex
+pdflatex -interaction=nonstopmode -halt-on-error -jobname=white_paper_predrag-4page-v3 main-4page-v3.tex
 ```
 
-The checked-in distribution PDF is `white_paper_predrag-4page.pdf`. Rebuild it after editing the LaTeX; the existing one-page workflow does not build this source.
-
-The research foundations are PRD peer evaluation, IQA-EVAL interactive evaluation, and FG-PRM reasoning feedback. Both versions are for Program Officer discussion and follow-up.
+Rebuild the checked-in PDF after editing the LaTeX.
