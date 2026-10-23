@@ -51,14 +51,15 @@ Navy decisions face these problems together. AI tools differ in reliability that
 \node[top, text width=3.75cm, fill=blue!6, right=0.65cm of ag] (r1) {\textbf{RG1: Weigh}\\trust by track record};
 \node[top, text width=3.75cm, fill=blue!15, draw=blue!55!black, line width=0.9pt, right=0.65cm of r1] (r2) {\textbf{RG2: Debate (core)}\\re-runnable evidence, collusion safeguards};
 \node[top, text width=2.4cm, right=0.65cm of r2] (dec) {\textbf{Decision}\\with reasons};
-\node[bot, text width=3.75cm, fill=green!8, anchor=north west] (pl) at ([yshift=-0.7cm]r1.south west) {\textbf{Planted cases}\\known answers};
-\node[bot, text width=7.08cm, fill=orange!12, anchor=north west] (au) at ([yshift=-0.7cm]r2.south west) {\textbf{Random audits} of a few real decisions, by a person or a measurement};
+\node[bot, text width=5.6cm, fill=green!8, anchor=north west] (pl) at ([yshift=-0.7cm]r1.south west) {\textbf{Planted cases}\\questions with known answers};
+\node[bot, text width=5.2cm, fill=orange!12, anchor=north east] (au) at ([yshift=-0.7cm]dec.south east) {\textbf{Random audits}\\of a few real decisions};
 \node[bot, text width=3.6cm, fill=blue!6, anchor=north] (r3) at ([yshift=-0.7cm]ag.south) {\textbf{RG3: Improve}\\train to contribute};
 \draw[arr] (ag) -- (r1);
 \draw[arr] (r1) -- (r2);
 \draw[arr] (r2) -- (dec);
-\draw[arr] (pl.north) -- node[lab, right]{track records} (r1.south);
-\draw[arr] (r2.south |- au.north) -- node[lab, right]{catch collusion} (r2.south);
+\draw[arr] (r1.south |- pl.north) -- node[lab, left]{track records} (r1.south);
+\draw[arr] ([xshift=0.6cm]r2.south west |- pl.north) -- node[lab, right]{planted debates} ([xshift=0.6cm]r2.south west);
+\draw[arr] ([xshift=-0.5cm]r2.south east |- au.north) -- node[lab, right]{catch collusion} ([xshift=-0.5cm]r2.south east);
 \draw[arr] (pl.west) -- (pl.west -| r3.east);
 \draw[arr] (r3) -- node[lab, right]{training} (ag);
 \end{tikzpicture}
