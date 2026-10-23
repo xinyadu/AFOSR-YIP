@@ -19,6 +19,7 @@
 \newcommand{\rg}[1]{\par\vspace{3pt}{\normalfont\bfseries\itshape #1}\par\nopagebreak}
 \newcommand{\task}[1]{\textbf{#1}\hspace{0.4em}}
 \hypersetup{pdftitle={Trustworthy Collective Reasoning and Evaluation for AI Agents},pdfauthor={Xinya Du}}
+\hyphenation{representative representatives}
 \begin{document}
 \begin{center}
 {\large\bfseries Trustworthy Collective Reasoning and Evaluation for AI Agents\par}
@@ -75,12 +76,12 @@ Multi-agent debate can help \citep{du2024debate}, but majority voting explains m
 Our approach centers on debate and guards it against all three failures (Figure~\ref{fig:overview}). Each agent first answers alone, with its evidence. Research goal 1 (RG1) weighs the answers by each agent's track record and picks debaters and judges impartially. If the weighted answers still disagree, the group does not discuss until it agrees: two representatives debate before a judge, and the judge's choice is the group's decision (RG2). Making this debate trustworthy is the core of the project: the judge has no stake in either side, any tool evidence must be re-runnable, and automatic audits (planted cases with known answers) and human audits (a few random decisions) catch debaters or judges who collude. RG3 trains agents on the group's final decisions, which needs no human labels.
 
 
-\rg{RG1. Weigh agents, and pick debaters and judges impartially}
-Agents differ in skill, often by topic, and agents built on similar models make the same mistakes.
+\rg{RG1. Decide what to debate, and pick debaters and judges impartially}
+A plain vote lets shared mistakes pile up, and agents choosing debaters can favor themselves.
 
-\task{Task 1.1: Deciding what to debate, counting shared mistakes once.} We will estimate each agent's track record from who agrees with whom across real questions, as one can grade an exam without the answer key. Agents flagged by audits (Task 2.2) lose weight. The core method extends the rater model of \citet{dawid1979maximum} with shared error factors: agents that keep giving the same unusual answers share a factor, and their agreement adds little evidence. Our PRD instead weighted judges by peer ratings \citep{li2024prd}. In the vessel example, the two agents sharing an outdated schedule count about once, so yes no longer leads and the question goes to debate.
+\task{Task 1.1: Deciding what to debate, counting shared mistakes once.} Each answer counts according to its agent's track record, estimated from who agrees with whom across real questions, as one can grade an exam without the answer key; agents flagged by audits (Task 2.2) count less. The core method extends the rater model of \citet{dawid1979maximum} with shared error factors: agents that keep giving the same unusual answers share a factor, and their agreement adds little evidence. In the vessel example, the two agents sharing an outdated schedule count about once, so yes no longer leads; with no clear leader, the question goes to debate.
 
-\task{Task 1.2: Impartial choice of debaters and judges.} A debate needs one representative per answer and a judge. As on our PeerEval leaderboard (\mbox{peereval-ai.github.io}), agents rate one another's arguments, but an agent could then win a role by downgrading rivals. We adapt the partition idea of impartial peer review \citep{alon2011sum,kurokawa2015impartial}: agents built on the same base model form a group, and each group's members are ranked only by agents outside it. Each answer's representative is the top-ranked member of a randomly drawn group that gave that answer, and the judge is an agent that did not answer and shares no base model with either side. An agent's ratings thus never change its own chance to debate. Raters are weighted by track record (Task 1.1).
+\task{Task 1.2: Impartial choice of debaters and judges.} A debate needs a judge and one representative per answer. Representatives are chosen by peer ratings of their arguments, with raters weighted by track record, as in our PeerEval leaderboard (\mbox{peereval-ai.github.io}) and PRD method \citep{li2024prd}. So that no agent can rate its way into a role, we adapt the partition idea of impartial peer review \citep{alon2011sum,kurokawa2015impartial}: agents sharing an underlying model form a group, rated only by outsiders. Each answer's representative is the top-rated member of a randomly drawn group that gave that answer; the judge is a random agent that did not answer and shares no model with either side. Ratings pick only who argues; the judge picks the answer.
 
 \rg{RG2. Settle disputes by agentic debate, and catch collusion}
 Open discussion erases disagreement and rewards persuasion, and debaters can collude.
